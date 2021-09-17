@@ -1,9 +1,10 @@
-#**Réponses aux questions des TDs**
+**Réponses aux questions des TDs**
 
-##TD1
+**TD1**
 
 
 Q1:
+
 	1. Les coordonnées du point crée (0,0) puis on va ajouter/déplacer ce point de 2 en x/y
 	   et réaffiché ses coordonnées (2,2)
 
@@ -13,6 +14,7 @@ Q1:
 	3. même erreur qu'au point précédent.
 	
 Q2:
+
 	1. L'attribut étant privé, on ne peut pas y avoir accès directement en dehors de la classe, il faut passer par une méthode de la classe 		   point pour y avoir accès.
 
 	2. (0.0, 0.0)méthode move(int, int)(2.0, 2.0)
@@ -28,6 +30,7 @@ Q3:
 	3. (10.0, 10.0) (12.0, 12.0)
 
 Q4:
+
 	1. Les coordonnées du centre du cercle ainsi que son rayon [(0.0, 0.0), 5.0],
 	   puis on va déplacer le cercle, réafficher ses infos [(2.0, 5.0), 5.0]   
 	   et finalement multiplié son rayon par 2 (doubler sa taille) [(2.0, 5.0), 10.0]
@@ -35,6 +38,7 @@ Q4:
 	2. Une seule instance Point p = new Point();
 
 Q5:
+
 	1. Les coordonnées et rayon initial du cercle (on déplace les coord du point p ce qui déplace le cercle vu mais on
 	   le redéplace à sa position d'origine gràce au point p2 qui fait référence à p)
 	   On obtient :
