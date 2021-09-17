@@ -3,9 +3,11 @@ TD01 : Orienté objet
 Répondes aux questions :
 
 Question 1 (Les classes):
-	1. Les coordonnées du point crée (0,0) puis on va ajouter/déplacer ce point de 2 en x/y et réaffiché ses coordonnées (2,2)
-	2. Le compilateur va nous dire de créer une nouvelle classe testPoint dans un fichier à part (pas dans la classe actuelle)
-	3. Si on laisse la visibilité de TestPoint en public même erreur qu'au point 2, sinon pas d'erreur.
+	1. Les coordonnées du point crée (0,0) puis on va ajouter/déplacer ce point de 2 en x/y
+	   et réaffiché ses coordonnées (2,2)
+	2. Le compilateur va nous dire que la class TestPoint ne devrait pas être public, et si on veut que ce soit le cas
+	   qu'il faut qu'elle soit déclarée dans un fichier du même nom (TestPoint.java)
+	3. même erreur qu'au point précédent.
 	
 Question 2 (Membres):
 	1. L'attribut étant privé, on ne peut pas y avoir accès directement en dehors de la classe, il faut passer par une méthode de la classe point pour y avoir accès
@@ -30,10 +32,9 @@ Question 5 (Copie défensive)
        Circle :[(0.0, 0.0), 5.0]
        Circle :[(2.0, 5.0), 5.0]
        Circle :[(0.0, 0.0), 5.0]
-	2. 2 instances de la classe point sont crées (p et p2) et une de la classe cercle
-	   p référence l'attribut center du cercle (modifier p = modifer le centre du coup) et p2 fait référence à p donc
-	   modifier p2 modife p qui modifie le centre du cercle
-	   P référence l'attribut center.
+	2. 1 instances de la classe point est crée et une de la classe cercle
+	   P est une instance créer et center fait référence à l'instance p (modifier p = modifer le centre du coup) et p2 fait référence à p
+	   L'attribut center du cercle référence l'instance p
 	3.Circle :[(0.0, 0.0), 5.0]
       Circle :[(0.0, 0.0), 5.0]
       Circle :[(-2.0, -5.0), 5.0]
@@ -43,3 +44,6 @@ Question 5 (Copie défensive)
       Circle :[(0.0, 0.0), 5.0]
       Circle :[(0.0, 0.0), 5.0]
       p2 ne fait plus référence au centre grace aux changement effectués
+    5. 1 instance de la classe cercle c, 2 instances de la classe point (p et p2)
+       0 instance sont référencés par p et p2 (ils sont tous les 2 un point distinct)
+       Aucune instance ne référence l'attribut center

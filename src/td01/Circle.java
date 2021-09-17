@@ -8,7 +8,7 @@ public class Circle {
             throw new IllegalArgumentException("radius must be positive" + ", received: " + radius);
         }
         this.radius = radius;
-        this.center = new Point(center.getX(), center.getY()); //copie défensive.
+        this.center = new Point(center); //copie défensive
     }
 
     public void move(double dx, double dy){
