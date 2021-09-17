@@ -13,7 +13,7 @@ Q1:
 	3. même erreur qu'au point précédent.
 	
 Q2:
-	1. L'attribut étant privé, on ne peut pas y avoir accès directement en dehors de la classe, il faut passer par une méthode de la classe 			point pour y avoir accès
+	1. L'attribut étant privé, on ne peut pas y avoir accès directement en dehors de la classe, il faut passer par une méthode de la classe 		   point pour y avoir accès.
 
 	2. (0.0, 0.0)méthode move(int, int)(2.0, 2.0)
 
