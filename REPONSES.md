@@ -15,7 +15,7 @@ Q1:
 	
 Q2:
 
-	1. L'attribut étant privé, on ne peut pas y avoir accès directement en dehors de la classe, il faut passer par une méthode de la classe 		   point pour y avoir accès.
+	1. L'attribut étant privé, on ne peut pas y avoir accès directement en dehors de la classe, il faut passer par une méthode de la classe   point pour y avoir accès.
 
 	2. (0.0, 0.0)méthode move(int, int)(2.0, 2.0)
 
@@ -23,6 +23,7 @@ Q2:
 	   move(double x, double y)
 	
 Q3:
+
 	1. il faut que this(0,0) soit la première ligne du constructeur.
 
 	2. Non plus d'erreur car un constructeur par défaut est fourni. Le programme affiche (0.0, 0.0) (2.0, 2.0)
