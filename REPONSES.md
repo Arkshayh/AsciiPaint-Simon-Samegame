@@ -17,7 +17,8 @@ Q2:
 
 	2. (0.0, 0.0)méthode move(int, int)(2.0, 2.0)
 
-	3. On ne peut pas l'ajouter car elle recoit un nombre identique de paramètre qui sont aussi de même type que ceux de la méthode move(double 		x, double y)
+	3. On ne peut pas l'ajouter car elle recoit un nombre identique de paramètre qui sont aussi de même type que ceux de la méthode 
+	   move(double x, double y)
 	
 Q3:
 	1. il faut que this(0,0) soit la première ligne du constructeur.
