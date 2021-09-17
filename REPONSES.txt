@@ -47,3 +47,5 @@ Question 5 (Copie défensive)
     5. 1 instance de la classe cercle c, 2 instances de la classe point (p et p2)
        0 instance sont référencés par p et p2 (ils sont tous les 2 un point distinct)
        Aucune instance ne référence l'attribut center
+
+       *
