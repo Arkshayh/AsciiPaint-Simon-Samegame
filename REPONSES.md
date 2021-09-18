@@ -66,3 +66,35 @@ Q5:
        0 instance sont référencés par p et p2 (ils sont tous les 2 un point distinct)
        Aucune instance ne référence l'attribut center
 
+Q6:
+
+    1. Rectangle : [(0.0, 0.0), (5.0, 3.0)]
+       Périmètre : 16.0
+       Rectangle : [(2.0, 5.0), (7.0, 8.0)]
+       Périmètre : 16.0
+       Les coordonnées du Point bl et ur sont affichées ainsi que le périmètre du reclangle.
+       Les points sont déplacés mais le périmètre du rectangle reste inchangé (comme prévu)
+       
+    2. br et ur sont 2 instances de la classe Point, r est une instance de classe rectangle dont ses 2 attributs
+       bottomLeft et upperRight référence les point br et ur.   
+
+    3. L'invariant n'est plus respecté car le point bl ne respecte plus les conditions que nous avion imposées dans le
+       le constructeur, ses attributs x et y doivent être strictement inférieur aux attribus du point ur or
+       ce n'est plus le cas.
+       Rectangle : [(10.0, 10.0), (5.0, 3.0)]
+       Périmètre : -24.0
+       Rectangle : [(12.0, 15.0), (7.0, 8.0)]
+       Périmètre :-24.0 
+       Le périmètre du rectangle est négatif ce qui n'est pas censé être possible.
+       Cette valeur s'affiche car car le point bl ne respecte plus les conditions que nous avion imposées dans le
+       le constructeur, ses attributs x et y doivent être strictement inférieur aux attribus du point ur or
+       ce n'est plus le cas. Pour éviter cela -> copie défensive ! 
+
+    4. Il faut modifier le constructeur pour qu'il fasse un copie défensive des points placé en paramètre : 
+       this.bl = new Point(bottomLeft.getX(), bottomLeft.getY());
+       this.ur = new Point(upperRight.getX(), upperRight.getY());
+       Le résultat affiché est désormais correct : 
+       Rectangle : [(0.0, 0.0), (5.0, 3.0)]
+       Périmètre : 16.0
+       Rectangle : [(2.0, 5.0), (7.0, 8.0)]
+       Périmètre :16.0
