@@ -98,3 +98,83 @@ Q6:
        Périmètre : 16.0
        Rectangle : [(2.0, 5.0), (7.0, 8.0)]
        Périmètre :16.0
+
+
+**TD2**
+
+Q1:
+
+    1.1 Le programme affiche : 
+          (2.0, 4.0) - FF0000FF
+          x : 2.0
+          color FF0000FF
+
+    1.2   Si on modifie la ligne : ColoredPoint p = new ColoredPoint(1,2,0xFF0000FF); on obtient une erreur 
+          incompatible type, parce qu'un objet Point n'a pas tous les attributs d'un coloredPont. On obtient donc une
+          à cette ligne et une autre à la ligne où l'on veut faire une getColor car un objet Point n'a pas d'attribut color
+
+          On ne peut pas faire Point = new ColoredPoint mais par contre on peut faire ColoredPoint = new Point 
+          car la classe ColoredPoint hérite de tous les attributs et des méthodes de Point.
+          Il faut donc remette le code dans son état de base supprimé la ligne qui appelle la méthode getColor
+          ne suffit pas.
+
+    1.3   Oui on peut rajouter la ligne ColoredPoint p2 = new Point(2, 4); parce que Colored point hérite de la classe
+          Point et de tous ses attributs et méthodes. 
+    
+    1.4   Non ne peut pas remplacer la méthode le code de la méthode toString() de ColoredPoint par :
+          return this.x +" - "+ this.y +" - "+ this.color; car les attributs de la classe héritée sont private, pour y 
+          avoir accès il faut donc faire appel aux méthodes de celles-ci (getter/toString() )
+        
+    1.5   Cyclic inheritance involving, 2 classes héritent l'une de l'autre, ça n'a pas de sens. 
+
+    1.6   Si on déclare notre class Point final, on obtient une erreur car une classe final ne peut être dérivée. 
+          L'erreur vient du fait que ColoredPoint hérite de celle-ci.  Une classee final ne peut pas être extend.
+
+    
+Q2 :
+
+
+    2.1  Oui car toutes les classes héritent de la classe Objet. 
+
+    2.2  Oui car toutes les classes héritent de la classe Objet, les classes qui héritent du classe hérite aussi de la
+         classe que leur parents héritent. 
+
+    2.3  Oui car la méthode hashcode est définie dans la classe Objet.
+         car coloredPoint hérite de la classe Objet. 
+
+Q3: 
+    
+    3.1  Super() doit être la 1ère ligne de notre constructeur, sinon notre compilateur pense qu'il n'y a pas de 
+         constructeur. 
+
+    3.2 super(x,y) fait appelle au constructeur de la classe parent. Si on l'enlève on n'a pas de constructeur pour nos 
+        attributs hérités. 
+
+    3.3 Non, car on définit un constructeur par défaut pour notre classe Point. 
+
+
+Q4: 
+
+    4.1 on obtient : 
+        constructor of A
+        constructor of B
+        constructor of C
+
+    4.2 : constructor of A
+          constructor of B
+
+    4.4 public Object(){};
+
+
+Q5:
+
+    5.1 (0.0, 0.0) - not pinned
+        (1.0, 1.0) - not pinned
+        (1.0, 1.0) - pinned
+
+    5.2 celle de PinnablePoint car l’objet référencé par la variable à ce moment-là est de type PinnablePoint.
+
+    5.3 Il faut que la méthode de classe parent déclare aussi dans son entête le fait que la méthode puisse renvoyer une
+        exception. 
+
+    5.4 Non
