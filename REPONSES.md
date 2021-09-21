@@ -177,4 +177,15 @@ Q5:
     5.3 Il faut que la méthode de classe parent déclare aussi dans son entête le fait que la méthode puisse renvoyer une
         exception. 
 
-    5.4 Non
+    5.4 Non, car ce n'est pas une exception qui n'est plus gérer par le compilateur.
+
+    5.5 Non pas d'erreur.
+
+    5.6 Non pas d'erreur. 
+
+    5.7 Oui, car Objet n'est pas un Point
+
+    5.8 Une erreur d'accès car on veut modifier l'accèssibilité de cette méthode, alors que celle-ci avait été définie 
+        comme public dans la classe parent
+
+    5.9 ça appel fait appel à la méthode move de la classe parent. 

@@ -13,7 +13,8 @@ public class PinnablePoint extends PointTd02 {
     }
 
     @Override
-    public PointTd02 move(double dx, double dy)  throws IllegalStateException {
+    public PointTd02 move(double dx, double dy){
+        super.move(dx, dy);
         if(!pinned){
             super.move(dx, dy);
         }
