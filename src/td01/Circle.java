@@ -2,13 +2,13 @@ package td01;
 
 public class Circle {
     private double radius;
-    private Point center;
-    public Circle (Point center , double radius){
+    private PointTD01 center;
+    public Circle (PointTD01 center , double radius){
         if(radius <= 0){
             throw new IllegalArgumentException("radius must be positive" + ", received: " + radius);
         }
         this.radius = radius;
-        this.center = new Point(center);
+        this.center = new PointTD01(center);
     }
 
     public void move(double dx, double dy){
@@ -20,8 +20,8 @@ public class Circle {
 
     }
 
-    public Point getCenter(){
-        return new Point(center);  //copie défensive
+    public PointTD01 getCenter(){
+        return new PointTD01(center);  //copie défensive
     }
 
     public void scale(double factor){
@@ -51,15 +51,3 @@ public class Circle {
  * }
  */
 
-class TestDefensiveCopy {
-    public static void main(String args[]) {
-        Point p = new Point();
-        Circle c = new Circle(p, 5);
-        System.out.println(c);
-        p.move(2, 5); //on bouge le point et non pas le cercle.
-        System.out.println(c);
-        Point p2 = c.getCenter();
-        p2.move(-2, -5);
-        System.out.println(c);
-    }
-}

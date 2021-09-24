@@ -1,21 +1,21 @@
 package td01;
 
-public class Point {
+public class PointTD01 {
 
     private double x;
     private double y;
 
-    public Point(double x,double y){
+    public PointTD01(double x,double y){
         this.x = x;
         this.y = y;
     }
 
-    public Point(){
+    public PointTD01(){
         this.x =0;
         this.y = 0;
     }
 
-    public Point(Point p) {
+    public PointTD01(PointTD01 p) {
         this(p.x, p.y);
     }
 
@@ -41,7 +41,7 @@ public class Point {
 }
 class TestPoint{
     public static void main(String[] args) {
-        Point p = new Point();
+        PointTD01 p = new PointTD01();
         System.out.println(p);
         p.move(2,2);
         System.out.println(p);

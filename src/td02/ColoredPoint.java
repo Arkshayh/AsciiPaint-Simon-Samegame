@@ -1,6 +1,6 @@
 package td02;
 
-import td01.Point;
+import td01.PointTD01;
 
 public class ColoredPoint extends PointTd02 {
 

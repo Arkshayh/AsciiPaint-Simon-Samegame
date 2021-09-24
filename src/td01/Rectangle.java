@@ -1,15 +1,15 @@
 package td01;
 
 public class Rectangle {
-    private Point bl; //bottom left corner
-    private Point ur; //upper right corner
+    private PointTD01 bl; //bottom left corner
+    private PointTD01 ur; //upper right corner
 
-    public Rectangle(Point bottomLeft, Point upperRight){
+    public Rectangle(PointTD01 bottomLeft, PointTD01 upperRight){
         if(bottomLeft.getX() >= upperRight.getX() || bottomLeft.getY() >= upperRight.getY()){
             throw new IllegalArgumentException("bottomLeft must be below and on the left of upperRight" +", received (bottomLeft - upperRight): " +bottomLeft+"-"+upperRight);
         }
-        this.bl = new Point(bottomLeft.getX(), bottomLeft.getY());
-        this.ur = new Point(upperRight.getX(), upperRight.getY());
+        this.bl = new PointTD01(bottomLeft.getX(), bottomLeft.getY());
+        this.ur = new PointTD01(upperRight.getX(), upperRight.getY());
     }
 
     public void move(double dx, double dy){
@@ -30,8 +30,8 @@ public class Rectangle {
 
 class TestRectangle{
     public static void main(String[] args) {
-        Point bl = new Point(0,0);
-        Point ur = new Point(5,3);
+        PointTD01 bl = new PointTD01(0,0);
+        PointTD01 ur = new PointTD01(5,3);
         Rectangle r = new Rectangle(bl,ur);
         bl.move(10,10);
         System.out.println(r);

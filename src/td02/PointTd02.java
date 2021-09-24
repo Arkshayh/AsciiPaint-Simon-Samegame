@@ -1,7 +1,5 @@
 package td02;
 
-import td01.Point;
-
 public class PointTd02 {
     private double x;
     private double y;
