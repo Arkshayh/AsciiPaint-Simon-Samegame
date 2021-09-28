@@ -24,21 +24,21 @@ public class AsciiPaint {
     }
 
     public String asAscii(){
-        String test = "";
-        test.concat("2");
+        String monstring = "";
+
         for (int i = drawing.getHeight(); i >= 0; i--) {
             for (int j = 0; j < drawing.getWidth(); j++) {
                 if(drawing.getShapeAt(new Point(j,i)) != null){
-                    test = test.concat(" "+ Character.toString(drawing.getShapeAt(new Point(j,i)).getColor()) + " ");
+                    monstring += (" "+ (drawing.getShapeAt(new Point(j,i)).getColor()) + " ");
                 }
                 else{
-                    test = test.concat(" . ");
+                    monstring += (" . ");
                 }
             }
-            test =test.concat("\n");
+            monstring += ("\n");
         }
 
-        return test;
+        return monstring;
     }
 }
 
