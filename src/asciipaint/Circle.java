@@ -21,9 +21,11 @@ public class Circle extends ColoredShape{
 
     @Override
     public boolean isInside(Point p) {
-        double distanceFromCenter = Math.sqrt( ((p.getX() - center.getX())*(p.getX() - center.getX())) +
-                (p.getY() - center.getY())*(p.getY() - center.getY()));
-        if(distanceFromCenter < radius){
+        /**
+         * double distanceFromCenter = Math.sqrt( ((p.getX() - center.getX())*(p.getX() - center.getX())) +
+         *                 (p.getY() - center.getY())*(p.getY() - center.getY()));
+         */
+        if(p.distanceTo(center) <= radius){
             return true;
         }
         return false;
