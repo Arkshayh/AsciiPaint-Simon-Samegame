@@ -15,17 +15,14 @@ public class Application {
         boolean fin = false;
         String rep;
 
-        Scanner clavier = new Scanner(System.in);
+        askDimension();
 
         while (!fin){
-            System.out.println("Entrer \"add\" pour ajouter un élément \nEntrer \"show\" pour afficher" +
+            rep = askAddShowEnd("Entrer \"add\" pour ajouter un élément \nEntrer \"show\" pour afficher" +
                     " le dessin \nEntrer \"end\" pour arrêter le programme");
-
-            //TODO méthode qui renvoie un string de manière sure + le string doit être add show, end
-            rep = clavier.nextLine().toUpperCase();
             switch (rep){
                 case "ADD":
-                    chooseForm(askForm());
+                    chooseForm(askForm("Quelle forme voulez-vous ajouter ? (c = cercle, r = rectangle, s = carré)"));
                     break;
                 case "SHOW":
                     show();
@@ -48,17 +45,6 @@ public class Application {
         }
 
         this.paint = new AsciiPaint(new Drawing(width,height));
-    }
-
-    private char askForm(){
-        System.out.println("Quelle forme voulez-vous ajouter ? (c = cercle, r = rectangle, s = carré");
-        Scanner clavier = new Scanner(System.in);
-        char form = clavier.next().toUpperCase().charAt(0);
-
-        if(form != 'C' || form != 'R' || form != 'S'){
-            throw new IllegalArgumentException("Erreur d'entrée : " + form);
-        }
-        return form;
     }
 
     private void chooseForm(char c){
@@ -86,8 +72,7 @@ public class Application {
 
         y = askInt("Entrer les coordonnées Y de son centre : ");
 
-        //TODO askDouble à faire
-        radius = clavier.nextDouble();
+        radius = askDouble("Entrer la taille du rayon du cercle");
 
         if(radius < 1){
             throw new IllegalArgumentException("Le rayon doit être >= 1 \n Rayon entré :" +radius);
@@ -111,9 +96,7 @@ public class Application {
 
         y = askInt("Entrer les coordonnées Y de son point (en haut à gauche) : ");
 
-        //TODO double
-        System.out.println("Entrer la largeur du rectangle :");
-        width = clavier.nextDouble();
+        width = askDouble("Entrer la largeur du rectangle :");
 
         System.out.println("Entrer la hauteur du rectangle :");
         height = clavier.nextDouble();
@@ -138,9 +121,7 @@ public class Application {
 
         y = askInt("Entrer les coordonnées Y de son point (en haut à gauche) : ");
 
-        //TODO Double
-        System.out.println("Entrer la longueur d'un côté");
-        side = clavier.nextDouble();
+        side = askDouble("Entrer la longueur d'un côté");
 
         if(side < 1){
             throw new IllegalArgumentException("Side doit être positif :" + side);
@@ -166,5 +147,46 @@ public class Application {
             clavier.next();
         }
         return clavier.nextInt();
+    }
+
+    private double askDouble(String message){
+        System.out.println(message);
+        double a;
+        Scanner clavier = new Scanner(System.in);
+
+        while (!clavier.hasNextDouble()){
+            System.out.println("Erreur, veuillez réessayer :");
+            clavier.next();
+        }
+        return clavier.nextDouble();
+    }
+
+    private static String askAddShowEnd(String message){
+        System.out.println(message);
+        Scanner clavier = new Scanner(System.in);
+        String msg = clavier.nextLine();
+        msg = msg.toUpperCase();
+
+        while (msg.equals("ADD") == false && msg.equals("SHOW") == false && msg.equals("END") == false){
+            System.out.println("Erreur, réessayer : ");
+            msg = clavier.nextLine();
+            msg = msg.toUpperCase();
+        }
+        return msg;
+
+    }
+
+    private char askForm(String message){
+        System.out.println(message);
+        Scanner clavier = new Scanner(System.in);
+        String chara = clavier.nextLine();
+        chara = chara.toUpperCase();
+        while (chara.equals("C") == false && chara.equals("R") == false && chara.equals("S") == false){
+            System.out.println("Erreur, réessayer : ");
+            chara = clavier.nextLine();
+            chara = chara.toUpperCase();
+        }
+
+        return chara.charAt(0);
     }
 }
