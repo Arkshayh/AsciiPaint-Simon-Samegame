@@ -28,10 +28,11 @@ public class Point {
     }
 
     public double distanceTo(Point b){
+        double distanceX = Math.pow(b.getX() - this.getX(),2);
+        double distanceY = Math.pow(b.getY() - this.getY(),2);
 
         //Formule distance entre 2 points : AB = racine carré de ((Bx - Ax)² + (By - Ay)²)
-        double distance = Math.sqrt( ((b.getX() - this.getX())*(b.getX() - this.getX())) +
-                ((b.getY() - this.getY())*(b.getY() - this.getY())) );
+        double distance = Math.sqrt(distanceX + distanceY);
 
         return distance;
     }
