@@ -29,10 +29,10 @@ public class AsciiPaint {
         for (int i = drawing.getHeight(); i >= 0; i--) {
             for (int j = 0; j < drawing.getWidth(); j++) {
                 if(drawing.getShapeAt(new Point(j,i)) != null){
-                    test = test.concat(Character.toString(drawing.getShapeAt(new Point(j,i)).getColor()));
+                    test = test.concat(" "+ Character.toString(drawing.getShapeAt(new Point(j,i)).getColor()) + " ");
                 }
                 else{
-                    test = test.concat(".");
+                    test = test.concat(" . ");
                 }
             }
             test =test.concat("\n");
@@ -42,17 +42,3 @@ public class AsciiPaint {
     }
 }
 
-/**
- * TODO: test avec différentes forme (Rectangle ok, carré à tester, circle à tester)
- */
-class test{
-    public static void main(String[] args) {
-        AsciiPaint test = new AsciiPaint(new Drawing(10,10));
-        //test.newSquare(0,0,2,'a');
-        test.newRectangle(3,3,2,3,'b');
-
-        String paint = test.asAscii();
-        System.out.println(paint);
-
-    }
-}
