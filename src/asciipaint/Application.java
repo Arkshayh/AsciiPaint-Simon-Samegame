@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Application {
     private AsciiPaint paint;
 
-    //TODO faire tous les tests
+    //TODO faire test Application/drawing/asciipaint
     public static void main(String[] args) {
         Application app = new Application();
         app.start();
