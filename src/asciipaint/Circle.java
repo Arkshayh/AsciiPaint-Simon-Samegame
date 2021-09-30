@@ -44,9 +44,6 @@ public class Circle extends ColoredShape{
      */
     @Override
     public boolean isInside(Point p) {
-        if(p.distanceTo(center) <= radius){
-            return true;
-        }
-        return false;
+        return p.distanceTo(center) <= radius;
     }
 }
