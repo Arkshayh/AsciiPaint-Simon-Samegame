@@ -5,6 +5,8 @@ import java.util.Scanner;
 /**
  * @author Cotton Ian g55019
  * Main class of the mini Asciipaint project
+ * No test because the method who can be test are private and work in every cases, start method does not need to
+ * be tested because it called the private method who worked
  */
 public class Application {
     private AsciiPaint paint;
