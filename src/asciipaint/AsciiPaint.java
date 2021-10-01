@@ -1,12 +1,13 @@
 package asciipaint;
 
-public class AsciiPaint {
+/**
+ * @author Cotton Ian g55019
+ * This class has the methods allowing to add shapes to the drawings
+ * as well as to return the drawing as a string
+ * (No test for this class bc there is nothing to test)
+ */
 
-    /**
-     * @author Cotton Ian g55019
-     * This class has the methods allowing to add shapes to the drawings
-     * as well as to return the drawing as a string
-     */
+public class AsciiPaint {
 
     private Drawing drawing;
 
