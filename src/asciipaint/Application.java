@@ -2,15 +2,26 @@ package asciipaint;
 
 import java.util.Scanner;
 
+/**
+ * @author Cotton Ian g55019
+ * Main class of the mini Asciipaint project
+ */
 public class Application {
     private AsciiPaint paint;
 
-    //TODO faire test Application/drawing/asciipaint
+    /**
+     * main methode
+     * @param args
+     */
     public static void main(String[] args) {
         Application app = new Application();
         app.start();
     }
 
+    /**
+     * start the program, this method will manage the input of the user (if he want to end the programm/add shape/show
+     * the drawing)
+     */
     public void start(){
         boolean fin = false;
         String rep;
@@ -34,6 +45,9 @@ public class Application {
         }
     }
 
+    /**
+     * ask to the user to input the dimension of the drawing
+     */
     private void askDimension(){
 
         int width = askInt("Entrer les dimensions, d'abord la largeur : ");
@@ -47,6 +61,10 @@ public class Application {
         this.paint = new AsciiPaint(new Drawing(width,height));
     }
 
+    /**
+     * will add a circle/square/rectangle to the drawing
+     * @param c char | the char will be choose by the user using the method askform
+     */
     private void chooseForm(char c){
         switch (c){
             case 'C':
@@ -60,6 +78,9 @@ public class Application {
         }
     }
 
+    /**
+     * add a circle to the drawing, the user must define the attributes of the circle
+     */
     private void addCircle(){
         int x,y;
         double radius;
@@ -84,6 +105,9 @@ public class Application {
         paint.newCircle(x,y,radius,couleur);
     }
 
+    /**
+     * add a rectangle to the drawing, the user must define the attributes of the rectangle
+     */
     private void addRectangle(){
         int x,y;
         double width, height;
@@ -111,6 +135,9 @@ public class Application {
         paint.newRectangle(x,y,width,height,color);
     }
 
+    /**
+     * add a square to the drawing, the user must define the attributes of the square
+     */
     private void addSquare(){
         int x,y;
         double side;
@@ -133,13 +160,20 @@ public class Application {
         paint.newSquare(x,y,side,color);
     }
 
+    /**
+     * print the drawing in the console
+     */
     private void show(){
         System.out.println(paint.asAscii());
     }
 
+    /**
+     * ask to the user an integer (int) he can't input something else
+     * @param message string
+     * @return int
+     */
     private int askInt(String message){
         System.out.println(message);
-        int a;
         Scanner clavier = new Scanner(System.in);
 
         while (!clavier.hasNextInt()){
@@ -149,9 +183,14 @@ public class Application {
         return clavier.nextInt();
     }
 
+    /**
+     * ask to the user a number (double) he can't input something else
+     * @param message string
+     * @return double
+     */
     private double askDouble(String message){
         System.out.println(message);
-        double a;
+
         Scanner clavier = new Scanner(System.in);
 
         while (!clavier.hasNextDouble()){
@@ -161,13 +200,19 @@ public class Application {
         return clavier.nextDouble();
     }
 
-    private static String askAddShowEnd(String message){
+    /**
+     * the user choose if he want to add a shape/show the drawing or end the programm. He must input ADD SHOW OR END
+     * his choose will be return
+     * @param message String
+     * @return String
+     */
+    private String askAddShowEnd(String message){
         System.out.println(message);
         Scanner clavier = new Scanner(System.in);
         String msg = clavier.nextLine();
         msg = msg.toUpperCase();
 
-        while (msg.equals("ADD") == false && msg.equals("SHOW") == false && msg.equals("END") == false){
+        while (!msg.equals("ADD") && !msg.equals("SHOW") && !msg.equals("END")){
             System.out.println("Erreur, réessayer : ");
             msg = clavier.nextLine();
             msg = msg.toUpperCase();
@@ -176,12 +221,17 @@ public class Application {
 
     }
 
+    /**
+     * The user choose a form to add, he must input C for a circle, R for a rectangle and S for a square
+     * @param message string
+     * @return char
+     */
     private char askForm(String message){
         System.out.println(message);
         Scanner clavier = new Scanner(System.in);
         String chara = clavier.nextLine();
         chara = chara.toUpperCase();
-        while (chara.equals("C") == false && chara.equals("R") == false && chara.equals("S") == false){
+        while (!chara.equals("C") && !chara.equals("R") && !chara.equals("S")){
             System.out.println("Erreur, réessayer : ");
             chara = clavier.nextLine();
             chara = chara.toUpperCase();
