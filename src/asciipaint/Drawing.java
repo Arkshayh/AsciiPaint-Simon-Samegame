@@ -49,9 +49,9 @@ public class Drawing {
      * @return Shape or null
      */
     public Shape getShapeAt(Point p){
-        for (int i = 0; i < shapes.size(); i++) {
-            if(shapes.get(i).isInside(p) == true){
-                return shapes.get(i);
+        for (Shape shape : shapes) {
+            if (shape.isInside(p)) {
+                return shape;
             }
         }
         return null;
