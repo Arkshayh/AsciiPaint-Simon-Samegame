@@ -204,4 +204,9 @@ Q1:
 
 Q2:
 
-   
+    2.1 la 1ère à comme état de base "Séléctionné" et celle-ci peut être désélectionnée.
+        la 2ème à comme état de base "indéterminé" et peut choisir peut être séléctionnée ou désélectionnée (une fois son état changer
+        impossible de revenir à l'état indéterminé)
+        la 3ème à comme état de base désélectionnée et peut choisir entre séléctionnée, indéterminée et désélectionnée
+
+    2.2 leur position est différente, elles ne sont plus centrées 
