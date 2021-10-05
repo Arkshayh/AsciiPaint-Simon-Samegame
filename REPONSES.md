@@ -195,12 +195,12 @@ Q5:
 
 Q1:
 
-   1.1 Les dimensions de la fenêtre de notre application 
+    1.1 Les dimensions de la fenêtre de notre application 
 
-   1.2 initStyle modifie visuellement la fenêtre de notre application.
+    1.2 initStyle modifie visuellement la fenêtre de notre application.
        Valeur possible : DECORATED, UNDECORATED, UTILITY, TRANSPARENT
 
-   1.3 Notre objet text sera affiché à une position différente. 
+    1.3 Notre objet text sera affiché à une position différente. 
 
 Q2:
 
