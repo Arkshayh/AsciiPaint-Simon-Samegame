@@ -201,3 +201,7 @@ Q1:
        Valeur possible : DECORATED, UNDECORATED, UTILITY, TRANSPARENT
 
    1.3 Notre objet text sera affiché à une position différente. 
+
+Q2:
+
+   
