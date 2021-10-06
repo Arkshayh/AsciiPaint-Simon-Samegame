@@ -210,3 +210,9 @@ Q2:
         la 3ème à comme état de base désélectionnée et peut choisir entre séléctionnée, indéterminée et désélectionnée
 
     2.2 leur position est différente, elles ne sont plus centrées 
+
+Q3:
+
+    3.1 Le texte entré est représenté par ******* (il est caché)
+
+    3.2 Le texte entré ne peut plus être modifer 
