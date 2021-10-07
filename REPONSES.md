@@ -216,3 +216,8 @@ Q3:
     3.1 Le texte entré est représenté par ******* (il est caché)
 
     3.2 Le texte entré ne peut plus être modifer 
+
+Q4:
+
+    Lorsque l'on appuye sur le bouton, le texte entré dans notre textaera sera affiché dans la console. (On a ajouté une action lorsque 
+    l'on appuye sur le bouton qui va chercher le texte entré dans textarea pour l'affiché dans la console)
