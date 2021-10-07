@@ -221,3 +221,8 @@ Q4:
 
     Lorsque l'on appuye sur le bouton, le texte entré dans notre textaera sera affiché dans la console. (On a ajouté une action lorsque 
     l'on appuye sur le bouton qui va chercher le texte entré dans textarea pour l'affiché dans la console)
+
+Q5:
+    
+    getChildren renvoie tous les éléments d'un conteneur. Par exemple si on crée une scene root et qu'on y ajoute un textarea et un bouton, la 
+    la méthode getChildren reverra une liste contenant ces 2 éléments 
