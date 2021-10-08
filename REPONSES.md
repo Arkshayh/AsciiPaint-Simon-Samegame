@@ -236,3 +236,11 @@ Q6:
 
     6.3 Des éléments peuvent être coupés de l'affichage, on ne les verra donc 
     pas complètement. fillWidthProperty()
+
+Q7:
+
+    7.1 ceux-ci sont superposé l'un sur l'autre 
+
+    7.2 Le texte est centré dans sa case
+
+    7.3 Le champ textefieldpassword remplit tout l'espace possible 
