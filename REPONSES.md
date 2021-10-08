@@ -224,5 +224,15 @@ Q4:
 
 Q5:
     
-    getChildren renvoie tous les éléments d'un conteneur. Par exemple si on crée une scene root et qu'on y ajoute un textarea et un bouton, la 
+    getChildren renvoie tous les éléments d'un conteneur. Par exemple si on crée 
+    une scene root et qu'on y ajoute un textarea et un bouton, la 
     la méthode getChildren reverra une liste contenant ces 2 éléments 
+
+Q6:
+
+    6.1 remplacer hbox par vbox
+
+    6.2 Oui
+
+    6.3 Des éléments peuvent être coupés de l'affichage, on ne les verra donc 
+    pas complètement. fillWidthProperty()
