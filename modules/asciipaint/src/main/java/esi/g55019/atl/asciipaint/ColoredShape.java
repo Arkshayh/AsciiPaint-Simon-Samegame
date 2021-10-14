@@ -1,5 +1,4 @@
-package asciipaint;
-
+package esi.g55019.atl.asciipaint;
 /**
  * @author Cotton Ian g55019
  * Abstract class that implements the shape interface.

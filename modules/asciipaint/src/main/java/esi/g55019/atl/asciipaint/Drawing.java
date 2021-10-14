@@ -1,4 +1,4 @@
-package asciipaint;
+package esi.g55019.atl.asciipaint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,9 @@ public class Drawing {
 
     /**
      * constructor
+     *
      * @param height int
-     * @param width int
+     * @param width  int
      */
     public Drawing(int height, int width) {
         this.height = height;
@@ -36,19 +37,21 @@ public class Drawing {
 
     /**
      * add to the drawing the given shape
+     *
      * @param shape Shape
      */
-    public void addShape(Shape shape){
+    public void addShape(Shape shape) {
         shapes.add(shape);
     }
 
     /**
      * Returns the first form containing the point given in parameter,
      * if no form contains this point then this method returns null
+     *
      * @param p Point
      * @return Shape or null
      */
-    public Shape getShapeAt(Point p){
+    public Shape getShapeAt(Point p) {
         for (Shape shape : shapes) {
             if (shape.isInside(p)) {
                 return shape;
@@ -59,6 +62,7 @@ public class Drawing {
 
     /**
      * getter height
+     *
      * @return int
      */
     public int getHeight() {
@@ -67,6 +71,7 @@ public class Drawing {
 
     /**
      * getter width
+     *
      * @return int
      */
     public int getWidth() {

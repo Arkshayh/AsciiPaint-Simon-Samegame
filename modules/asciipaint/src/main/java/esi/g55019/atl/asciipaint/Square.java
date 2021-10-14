@@ -1,4 +1,4 @@
-package asciipaint;
+package esi.g55019.atl.asciipaint;
 
 /**
  * @author g55019 / Cotton Ian
@@ -7,13 +7,14 @@ package asciipaint;
  * A square must have a Point, the size of one side (double) and a color (char) to be created.
  */
 
-public class Square extends Rectangle{
+public class Square extends Rectangle {
 
     /**
      * Constructor of a Square, The side of a square must be >= 0.
+     *
      * @param upperLeft Point
-     * @param side double
-     * @param color char
+     * @param side      double
+     * @param color     char
      */
 
     public Square(Point upperLeft, double side, char color) {

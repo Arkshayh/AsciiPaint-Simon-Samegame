@@ -1,7 +1,7 @@
-package test;
+package esi.g55019.atl.asciipaint;
 
-import asciipaint.Point;
-import asciipaint.Rectangle;
+import  esi.g55019.atl.asciipaint.Point;
+import  esi.g55019.atl.asciipaint.Rectangle;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;

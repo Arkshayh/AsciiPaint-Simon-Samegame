@@ -1,8 +1,8 @@
-package asciipaint;
+package esi.g55019.atl.asciipaint;
 
 /**
  * @author Cotton Ian, g55019
- *
+ * <p>
  * interface for implement by ColoredShape class
  */
 
@@ -10,6 +10,7 @@ public interface Shape {
 
     /**
      * move the shape.
+     *
      * @param dx double
      * @param dy double
      */
@@ -17,6 +18,7 @@ public interface Shape {
 
     /**
      * check if the given Point is inside the shape
+     *
      * @param p Point
      * @return boolean
      */
@@ -24,6 +26,7 @@ public interface Shape {
 
     /**
      * Return the color of the shape
+     *
      * @return char
      */
     char getColor();

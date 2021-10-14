@@ -1,6 +1,6 @@
-package test;
+package esi.g55019.atl.asciipaint;
 
-import asciipaint.*;
+import  esi.g55019.atl.asciipaint.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
