@@ -1,9 +1,9 @@
 package esi.g55019.atl.simon.View;
 
+import esi.g55019.atl.simon.util.Observer;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -13,14 +13,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import javax.sound.midi.MidiChannel;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Synthesizer;
 import java.util.List;
 
-public class View {
+public class View implements Observer {
     private Button boutonVert = new Button();
     private Button boutonRouge = new Button();
     private Button boutonJaune = new Button();
@@ -190,4 +189,8 @@ public class View {
         timeline.play();
     }
 
+    @Override
+    public void update() {
+
+    }
 }
