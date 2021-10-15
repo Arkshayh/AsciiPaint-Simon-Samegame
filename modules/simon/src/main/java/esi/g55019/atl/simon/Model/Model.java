@@ -2,10 +2,19 @@ package esi.g55019.atl.simon.Model;
 
 import esi.g55019.atl.simon.util.Observable;
 import esi.g55019.atl.simon.util.Observer;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Model implements Observable {
     private List<Observer> listObserver;
+
+    /**
+     * Constructor
+     */
+    public Model(){
+        listObserver = new ArrayList<>();
+    }
 
     @Override
     public void addObserver(Observer observer) {
