@@ -1,5 +1,7 @@
 package esi.g55019.atl.simon.View;
 
+import esi.g55019.atl.simon.Controller.Controller;
+import esi.g55019.atl.simon.Model.Model;
 import esi.g55019.atl.simon.util.Observer;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
@@ -28,13 +30,17 @@ public class View implements Observer {
     private MidiChannel channel;
     private PauseTransition pause;
     private StartMenu startMenu = new StartMenu();
-    private final Stage primaryStage;
+    private Controller controller;
+    private Model model;
 
-    public View(Stage stage) {
-        this.primaryStage = stage;
+
+    public View(Controller controller, Model model) {
+        this.controller = controller;
+        this.model = model;
+        model.addObserver(this);
     }
 
-    public void start(){
+    public void start(Stage primaryStage){
         primaryStage.setTitle("Projet Simon");
         GridPane root = new GridPane();
 
