@@ -2,6 +2,7 @@ package esi.g55019.atl.simon.View;
 
 import esi.g55019.atl.simon.Controller.Controller;
 import esi.g55019.atl.simon.Model.Model;
+import esi.g55019.atl.simon.Model.State;
 import esi.g55019.atl.simon.util.Observer;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
@@ -29,14 +30,16 @@ public class View implements Observer {
     private Synthesizer synth;
     private MidiChannel channel;
     private PauseTransition pause;
-    private StartMenu startMenu = new StartMenu();
+    private StartMenu startMenu;
     private Controller controller;
     private Model model;
+    private State stateOfModel;
 
 
     public View(Controller controller, Model model) {
         this.controller = controller;
         this.model = model;
+        startMenu  = new StartMenu(controller);
         model.addObserver(this);
     }
 
@@ -80,7 +83,9 @@ public class View implements Observer {
         boutonVert.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                onClickGreen();
+                if(stateOfModel == State.PLAYER_CHOOSE){
+                    onClickGreen();
+                }
             }
         });
 
@@ -89,7 +94,9 @@ public class View implements Observer {
         boutonRouge.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                onClickRed();
+                if(stateOfModel == State.PLAYER_CHOOSE){
+                    onClickRed();
+                }
             }
         });
 
@@ -98,7 +105,9 @@ public class View implements Observer {
         boutonJaune.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                onClickYellow();
+                if(stateOfModel == State.PLAYER_CHOOSE){
+                    onClickYellow();
+                }
             }
         });
 
@@ -107,7 +116,9 @@ public class View implements Observer {
         boutonBleu.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                onClickBlue();
+                if(stateOfModel == State.PLAYER_CHOOSE){
+                    onClickBlue();
+                }
             }
         });
     }
@@ -196,7 +207,7 @@ public class View implements Observer {
     }
 
     @Override
-    public void update() {
-
+    public void update(State state) {
+        this.stateOfModel = state;
     }
 }
