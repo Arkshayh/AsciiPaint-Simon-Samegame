@@ -1,5 +1,7 @@
 package esi.g55019.atl.simon.util;
 
+import esi.g55019.atl.simon.Model.State;
+
 /**
  * An Observer object in the Observer/Observable pattern.
  * Essentially presents an update method which permits the Observable
@@ -13,5 +15,5 @@ public interface Observer {
     /**
      * This method is called whenever the observed object has changed.
      */
-    void update();
+    void update(State state);
 }

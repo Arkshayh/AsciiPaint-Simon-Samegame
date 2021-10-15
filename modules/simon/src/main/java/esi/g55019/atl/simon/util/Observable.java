@@ -1,5 +1,7 @@
 package esi.g55019.atl.simon.util;
 
+import esi.g55019.atl.simon.Model.State;
+
 public interface Observable {
 
     /**
