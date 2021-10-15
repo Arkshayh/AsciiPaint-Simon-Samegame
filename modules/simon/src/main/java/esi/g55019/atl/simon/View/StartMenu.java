@@ -1,5 +1,6 @@
 package esi.g55019.atl.simon.View;
 
+import esi.g55019.atl.simon.Controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -25,7 +26,7 @@ public class StartMenu {
     private Button buttonLast = new Button("last");
 
 
-    public StartMenu() {
+    public StartMenu(Controller controller) {
         setUpLabel();
         setUpCheckBox();
         setUpHbox();
