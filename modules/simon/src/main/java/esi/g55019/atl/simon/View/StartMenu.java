@@ -1,19 +1,21 @@
 package esi.g55019.atl.simon.View;
 
 import esi.g55019.atl.simon.Controller.Controller;
+import esi.g55019.atl.simon.Model.Model;
+import esi.g55019.atl.simon.Model.State;
+import esi.g55019.atl.simon.util.Observer;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 
-public class StartMenu {
+public class StartMenu implements Observer {
     private VBox vbox = new VBox();
     private Label simon = new Label("Simon");
     private Slider slider = new Slider();
@@ -24,15 +26,32 @@ public class StartMenu {
     private Button buttonLongest = new Button("longest");
     private Button buttonStart = new Button("start");
     private Button buttonLast = new Button("last");
+    private Controller controller;
+    private State stateOfModel;
 
-
-    public StartMenu(Controller controller) {
+    public StartMenu(Controller controller, Model model) {
+        this.controller = controller;
+        model.addObserver(this);
         setUpLabel();
         setUpCheckBox();
         setUpHbox();
         setUpSlider();
         setUpVbox();
+        setUpButtonStart();
     }
+
+    private void setUpButtonStart(){
+        buttonStart.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(stateOfModel == State.ON_THE_MENU){
+                    controller.startOnClick();
+                }
+            }
+        });
+    }
+
+    //TODO: setup button longuest et lastlist
 
     private void setUpVbox(){
         vbox.setAlignment(Pos.CENTER);
@@ -81,5 +100,10 @@ public class StartMenu {
 
     public CheckBox getCheckBox(){
         return checkBox;
+    }
+
+    @Override
+    public void update(State state) {
+        this.stateOfModel = state;
     }
 }
