@@ -1,6 +1,7 @@
 package esi.g55019.atl.simon.View;
 
 import esi.g55019.atl.simon.Controller.Controller;
+import esi.g55019.atl.simon.Model.Color;
 import esi.g55019.atl.simon.Model.Model;
 import esi.g55019.atl.simon.Model.State;
 import esi.g55019.atl.simon.util.Observer;
@@ -13,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.sound.midi.MidiChannel;
@@ -39,7 +39,7 @@ public class View implements Observer {
     public View(Controller controller, Model model) {
         this.controller = controller;
         this.model = model;
-        startMenu  = new StartMenu(controller);
+        startMenu  = new StartMenu(controller, model);
         model.addObserver(this);
     }
 
@@ -126,7 +126,11 @@ public class View implements Observer {
 
 
     private void onClickGreen(){
-        boutonVert.setStyle("-fx-background-color: #19cf37; ");
+        boutonVert.setStyle("-fx-background-color: #25a73b; ");
+        if(stateOfModel == State.PLAYER_CHOOSE){
+            System.out.println("click vert");
+            controller.colorButtonOnClick(Color.GREEN);
+        }
         if(!startMenu.getCheckBox().isSelected()){
             playSound(channel, pause);
         }
@@ -135,6 +139,10 @@ public class View implements Observer {
 
     private void onClickRed(){
         boutonRouge.setStyle("-fx-background-color: #b50b21; ");
+        if(stateOfModel == State.PLAYER_CHOOSE){
+            System.out.println("click rouge");
+            controller.colorButtonOnClick(Color.RED);
+        }
         if(!startMenu.getCheckBox().isSelected()){
             playSound(channel, pause);
         }
@@ -143,6 +151,10 @@ public class View implements Observer {
 
     private void onClickYellow(){
         boutonJaune.setStyle("-fx-background-color: #f2de00; ");
+        if(stateOfModel == State.PLAYER_CHOOSE){
+            System.out.println("click jaune");
+            controller.colorButtonOnClick(Color.YELLOW);
+        }
         if(!startMenu.getCheckBox().isSelected()){
             playSound(channel, pause);
         }
@@ -150,6 +162,10 @@ public class View implements Observer {
     }
     private void onClickBlue(){
         boutonBleu.setStyle("-fx-background-color: #0091ff; ");
+        if(stateOfModel == State.PLAYER_CHOOSE){
+            System.out.println("click Blue");
+            controller.colorButtonOnClick(Color.BLUE);
+        }
         if(!startMenu.getCheckBox().isSelected()){
             playSound(channel, pause);
         }
@@ -181,19 +197,23 @@ public class View implements Observer {
         pause.play();
     }
 
-    private void playSequenceColor(List<Color> listeColor){
+    public void playSequenceColor(List<Color> listeColor){
+        if(stateOfModel != State.AFFICHAGE_START){
+            throw new IllegalStateException("State errorn you can only display the color on STATE_AFFICHAGE :" +
+                    stateOfModel);
+        }
         final int[] i = {0};
         var timeline = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                switch (listeColor.get(i[0]).toString()){
-                    case "0x008000ff":
+                switch (listeColor.get(i[0])){
+                    case GREEN:
                         onClickGreen();
                         break;
-                    case "0xff0000ff":
+                    case RED:
                         onClickRed();
                         break;
-                    case "0xffff00ff":
+                    case YELLOW:
                         onClickYellow();
                         break;
                     default:
@@ -204,10 +224,17 @@ public class View implements Observer {
         }));
         timeline.setCycleCount(listeColor.size());
         timeline.play();
+        timeline.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                model.setState(State.PLAYER_CHOOSE);
+            }
+        });
     }
 
     @Override
     public void update(State state) {
         this.stateOfModel = state;
+        System.out.println("update view : " + this.stateOfModel);
     }
 }
