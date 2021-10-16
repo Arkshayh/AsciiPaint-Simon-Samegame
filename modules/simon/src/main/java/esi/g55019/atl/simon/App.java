@@ -12,8 +12,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        var model  = new Model();
-        var controller = new Controller(model);
+        Model model  = new Model();
+        Controller controller = new Controller(model);
         controller.start(primaryStage);
     }
 }
