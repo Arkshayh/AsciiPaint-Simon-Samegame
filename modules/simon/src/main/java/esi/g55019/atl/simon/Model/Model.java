@@ -12,32 +12,49 @@ public class Model implements Observable {
     private List<Color> listStartColor;
     private List<Color> listLonguest;
     private List<Color> listLast;
+    private List<Color> listeActuelleJoueur;
+    private int index;
 
     /**
-     * Constructor
+     * Constructor for a Model, the default state is ON_THE_MENU
      */
     public Model(){
         listObserver = new ArrayList<>();
-        state = State.ON_THE_MENU;
+        this.state = State.ON_THE_MENU;
         listStartColor = new ArrayList<>();
         listLonguest = new ArrayList<>();
         listLast = new ArrayList<>();
-        notifyObservers();
+        listeActuelleJoueur = new ArrayList<>();
+
+        index = -1;
     }
 
-    public List<Color> getStartColor() {
+    /**
+     * Getter for the different list
+     * @return List Color
+     */
+    public List<Color> getListStartColor() {
         return listStartColor;
     }
-
     public List<Color> getListLonguest() {
         return listLonguest;
     }
-
     public List<Color> getListLast() {
         return listLast;
     }
+    public List<Color> getListeActuelle(){
+        return listeActuelleJoueur;
+    }
 
-    private Color addColor(){
+    public boolean checkCorrectColor(){
+        return listStartColor.get(index) == listeActuelleJoueur.get(index);
+    }
+
+    public boolean aRattraper(){
+        return listeActuelleJoueur.size() == listStartColor.size();
+    }
+
+    public Color addColor(){
         int random = 1 + (int)(Math.random() * ((4 - 1) + 1));
         switch (random){
             case 1:
@@ -51,32 +68,45 @@ public class Model implements Observable {
         }
     }
 
+    public void clearStartListAndPlayerList(){
+        listStartColor.clear();
+        clearListPlayer();
+        index = -1;
+    }
+
+    public void clearListPlayer(){
+        listeActuelleJoueur.clear();
+        index = - 1;
+    }
+
+    public void addListeActuelle(Color color){
+        listeActuelleJoueur.add(color);
+        index++;
+    }
+
     public void addToStartList(){
         listStartColor.add(addColor());
     }
 
-    public void updateLastList(List<Color>  liste){
+    public void updateLastList(){
         List<Color> nouvelleListe = new ArrayList<>();
-        for (int i = 0; i < liste.size(); i++) {
-            nouvelleListe.add(liste.get(i));
+        for (int i = 0; i < listStartColor.size(); i++) {
+            nouvelleListe.add(listStartColor.get(i));
         }
         listLast = nouvelleListe;
     }
 
-    public void listLonguest(List<Color>  liste){
+    public void setListLonguest(){
         List<Color> nouvelleListe = new ArrayList<>();
-        for (int i = 0; i < liste.size(); i++) {
-            nouvelleListe.add(liste.get(i));
+        for (int i = 0; i < listStartColor.size(); i++) {
+            nouvelleListe.add(listStartColor.get(i));
         }
         listLonguest = nouvelleListe;
     }
 
     public void setState(State state) {
         this.state = state;
-    }
-
-    public State getState() {
-        return state;
+        notifyObservers();
     }
 
     @Override
