@@ -62,7 +62,7 @@ public class StartMenu implements Observer {
         buttonLast.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(stateOfModel == State.AFFICHAGE_START){
+                if(stateOfModel == State.ON_THE_MENU){
                     controller.lastOnClick();
                 }
             }
@@ -73,7 +73,7 @@ public class StartMenu implements Observer {
         buttonLongest.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(stateOfModel == State.AFFICHAGE_START){
+                if(stateOfModel == State.ON_THE_MENU){
                     controller.longuestOnClick();
                 }
             }
