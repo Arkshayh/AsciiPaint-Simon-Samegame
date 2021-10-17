@@ -173,6 +173,10 @@ public class StartMenu implements Observer {
         return checkBox;
     }
 
+    /**
+     * implement the method of the observer interface
+     * @param state State
+     */
     @Override
     public void update(State state) {
         this.stateOfModel = state;
