@@ -88,6 +88,10 @@ public class Model implements Observable {
         listStartColor.add(addColor());
     }
 
+    public void addToStartListFromAnotherList(Color color){
+        listStartColor.add(color);
+    }
+
     public void updateLastList(){
         List<Color> nouvelleListe = new ArrayList<>();
         for (int i = 0; i < listStartColor.size(); i++) {
