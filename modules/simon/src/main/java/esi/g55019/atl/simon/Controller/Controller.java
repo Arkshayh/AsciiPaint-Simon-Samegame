@@ -64,6 +64,7 @@ public class Controller extends Application {
             }
         }
         else{
+            //TODO : popup perdu
             System.out.println("PERDU");
             model.setState(State.ON_THE_MENU);
             System.out.println("Controller fullcheck, UPDATE DE LASTLIST");
