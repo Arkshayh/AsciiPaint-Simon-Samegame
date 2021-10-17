@@ -29,6 +29,11 @@ public class StartMenu implements Observer {
     private Controller controller;
     private State stateOfModel;
 
+    //TODO : button longuest tester
+    //TODO : button last tester
+    //TODO : slider
+    //TODO : Son
+    //TODO : javadoc
     public StartMenu(Controller controller, Model model) {
         this.controller = controller;
         model.addObserver(this);
@@ -38,6 +43,8 @@ public class StartMenu implements Observer {
         setUpSlider();
         setUpVbox();
         setUpButtonStart();
+        setUpButtonLast();
+        setUpButtonLonguest();
     }
 
     private void setUpButtonStart(){
@@ -51,7 +58,27 @@ public class StartMenu implements Observer {
         });
     }
 
-    //TODO: setup button longuest et lastlist
+    private void setUpButtonLast(){
+        buttonLast.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(stateOfModel == State.AFFICHAGE_START){
+                    controller.lastOnClick();
+                }
+            }
+        });
+    }
+
+    private void setUpButtonLonguest(){
+        buttonLongest.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(stateOfModel == State.AFFICHAGE_START){
+                    controller.longuestOnClick();
+                }
+            }
+        });
+    }
 
     private void setUpVbox(){
         vbox.setAlignment(Pos.CENTER);
