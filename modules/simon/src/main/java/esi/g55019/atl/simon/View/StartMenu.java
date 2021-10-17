@@ -14,7 +14,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-
+/**
+ * This class contains the items from the start menu:
+ * 2 label, a slider, 3 buttons which are in an Hbox (start, longuest and last)
+ * and a checkbox to choose to play with or without sound.
+ * These item will be set up in this class.
+ */
 public class StartMenu implements Observer {
     private VBox vbox = new VBox();
     private Label simon = new Label("Simon");
@@ -34,6 +39,13 @@ public class StartMenu implements Observer {
     //TODO : slider
     //TODO : Son
     //TODO : javadoc
+
+    /**
+     * Constructor, we need the controller to setUp the buttons and the model to add this object as an observer.
+     * The constructor will setup each item of the start menu
+     * @param controller
+     * @param model
+     */
     public StartMenu(Controller controller, Model model) {
         this.controller = controller;
         model.addObserver(this);
@@ -47,6 +59,9 @@ public class StartMenu implements Observer {
         setUpButtonLonguest();
     }
 
+    /**
+     * add an action on the button start, the state of the game must be ON_THE_MENU
+     */
     private void setUpButtonStart(){
         buttonStart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -58,6 +73,9 @@ public class StartMenu implements Observer {
         });
     }
 
+    /**
+     * add an action on the button last, the state of the game must be ON_THE_MENU
+     */
     private void setUpButtonLast(){
         buttonLast.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -69,6 +87,9 @@ public class StartMenu implements Observer {
         });
     }
 
+    /**
+     * add an action on the button longuest, the state of the game must be ON_THE_MENU
+     */
     private void setUpButtonLonguest(){
         buttonLongest.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -80,6 +101,9 @@ public class StartMenu implements Observer {
         });
     }
 
+    /**
+     * Set up the position, style, size and the spacing of the Vbox and add the others item to it
+     */
     private void setUpVbox(){
         vbox.setAlignment(Pos.CENTER);
         vbox.setStyle("-fx-background-color: #ffffff; ");
@@ -94,15 +118,24 @@ public class StartMenu implements Observer {
         vbox.getChildren().add(checkBox);
     }
 
+    /**
+     * set the font of the label
+     */
     private void setUpLabel(){
         simon.setFont(Font.font("Helvetica", FontWeight.BOLD, 25));
     }
 
+    /**
+     * name the checkbox and set its position
+     */
     private void setUpCheckBox(){
         CheckBox checkBox = new CheckBox("Silent mode ");
         checkBox.setAlignment(Pos.CENTER);
     }
 
+    /**
+     * Set the alignement of the hbox, its size, padding, spacing and add the 3 buttons to it
+     */
     private void setUpHbox(){
         hbox.setAlignment(Pos.CENTER);
         hbox.setMaxSize(250, 100);
@@ -115,16 +148,27 @@ public class StartMenu implements Observer {
 
     }
 
+    /**
+     * set up the min and max value of the slider and its width
+     */
     private void setUpSlider(){
         slider.setMin(1);
         slider.setMax(10);
         slider.setMaxWidth(150);
     }
 
+    /**
+     * return the vbox (getter)
+     * @return Vbox vbox
+     */
     public VBox getMenu(){
         return vbox;
     }
 
+    /**
+     * getter for the checkbox
+     * @return Checkbox checkBox
+     */
     public CheckBox getCheckBox(){
         return checkBox;
     }
