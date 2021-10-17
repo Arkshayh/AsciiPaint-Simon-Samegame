@@ -22,6 +22,10 @@ import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Synthesizer;
 import java.util.List;
 
+/**
+ * the view of the game, the view is an observer and has as attributes every thing that is visible for the player.
+ * The player will called some method of the controller when the player will click on the buttons
+ */
 public class View implements Observer {
     private Button boutonVert = new Button();
     private Button boutonRouge = new Button();
@@ -35,7 +39,11 @@ public class View implements Observer {
     private Model model;
     private State stateOfModel;
 
-
+    /**
+     * Contrucotr of the view, create the start menu. Add itself to the observer list of the model
+     * @param controller Controller
+     * @param model Model
+     */
     public View(Controller controller, Model model) {
         this.controller = controller;
         this.model = model;
@@ -43,6 +51,11 @@ public class View implements Observer {
         model.addObserver(this);
     }
 
+    /**
+     * the method called by the controller to display the entire game,
+     * it will set up some attributes and add the 4 color button the the gridplane
+     * @param primaryStage
+     */
     public void start(Stage primaryStage){
         primaryStage.setTitle("Projet Simon");
         GridPane root = new GridPane();
@@ -71,11 +84,18 @@ public class View implements Observer {
         primaryStage.show();
     }
 
+    /**
+     * set yp the channel and the pause (for the sound when the player clicked on the button)
+     */
     private void setUpChannelandPause(){
         channel = synth.getChannels()[0];
         pause = new PauseTransition(Duration.seconds(1));
     }
 
+    /**
+     * set up each color button, their action when you clicked on them, their size and style (if the stateofmodel is
+     * not PLAYER_CHOOSE nothing will happen when you will clicked on one of the button)
+     */
     private void setUpColorButton(){
 
         boutonVert.setPrefSize(800,500);
@@ -124,11 +144,14 @@ public class View implements Observer {
     }
 
 
-
+    /**
+     * change the color of the button green if the state is PLAYER_CHOOSE the color of the button will change
+     * if the checkbox silentbox is not cheked a sound will be produce
+     * after one second change the color of the button
+     */
     private void onClickGreen(){
         boutonVert.setStyle("-fx-background-color: #25a73b; ");
         if(stateOfModel == State.PLAYER_CHOOSE){
-            System.out.println("click vert");
             controller.colorButtonOnClick(Color.GREEN);
         }
         if(!startMenu.getCheckBox().isSelected()){
@@ -137,6 +160,11 @@ public class View implements Observer {
         setTimeout(1000, "-fx-background-color: #007d15; ", boutonVert);
     }
 
+    /**
+     * change the color of the button red if the state is PLAYER_CHOOSE the color of the button will change
+     * if the checkbox silentbox is not cheked a sound will be produce
+     * after one second change the color of the button
+     */
     private void onClickRed(){
         boutonRouge.setStyle("-fx-background-color: #b50b21; ");
         if(stateOfModel == State.PLAYER_CHOOSE){
@@ -149,6 +177,11 @@ public class View implements Observer {
         setTimeout(1000, "-fx-background-color: #7a0010; ",boutonRouge);
     }
 
+    /**
+     * change the color of the button yellow if the state is PLAYER_CHOOSE the color of the button will change
+     * if the checkbox silentbox is not cheked a sound will be produce
+     * after one second change the color of the button
+     */
     private void onClickYellow(){
         boutonJaune.setStyle("-fx-background-color: #f2de00; ");
         if(stateOfModel == State.PLAYER_CHOOSE){
@@ -160,6 +193,12 @@ public class View implements Observer {
         }
         setTimeout(1000,"-fx-background-color: #c7b600; ", boutonJaune);
     }
+
+    /**
+     * change the color of the button blue if the state is PLAYER_CHOOSE the color of the button will change
+     * if the checkbox silentbox is not cheked a sound will be produce
+     * after one second change the color of the button
+     */
     private void onClickBlue(){
         boutonBleu.setStyle("-fx-background-color: #0091ff; ");
         if(stateOfModel == State.PLAYER_CHOOSE){
@@ -173,7 +212,13 @@ public class View implements Observer {
     }
 
 
-
+    /**
+     * create a new thread that will be asleep for the current delay then will change the color of the given button by
+     * the color given
+     * @param delay int
+     * @param color Color
+     * @param bouton Button
+     */
     private void setTimeout(int delay, String color, Button bouton){
         new Thread(() -> {
             try {
@@ -186,17 +231,31 @@ public class View implements Observer {
         }).start();
     }
 
+    /**
+     * set up the synthetizor
+     * @throws MidiUnavailableException
+     */
     private void setUpSynth() throws MidiUnavailableException {
         synth = MidiSystem.getSynthesizer();
         synth.open();
     }
 
+    /**
+     * play a sound
+     * @param channel MidiChannel
+     * @param pause PauseTransition
+     */
     private void playSound(MidiChannel channel, PauseTransition pause){
         channel.noteOn(69, 80);
         pause.setOnFinished(event -> channel.noteOff(69));
         pause.play();
     }
 
+    /**
+     * for each valeu on the given list, it will called the onclick function of the button of the same color
+     * @param listeColor List<Color>
+     * @throws IllegalStateException if the state if not AFFICHAGE_START
+     */
     public void playSequenceColor(List<Color> listeColor){
         if(stateOfModel != State.AFFICHAGE_START){
             throw new IllegalStateException("State errorn you can only display the color on STATE_AFFICHAGE :" +
@@ -232,6 +291,11 @@ public class View implements Observer {
         });
     }
 
+    /**
+     * this method is called when the state of the model change, it will modify the stateofmodel attribute by the
+     * given state
+     * @param state State
+     */
     @Override
     public void update(State state) {
         this.stateOfModel = state;

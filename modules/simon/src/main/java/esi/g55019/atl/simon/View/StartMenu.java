@@ -19,6 +19,7 @@ import javafx.scene.text.FontWeight;
  * 2 label, a slider, 3 buttons which are in an Hbox (start, longuest and last)
  * and a checkbox to choose to play with or without sound.
  * These item will be set up in this class.
+ * @author Ian cotton | g55019
  */
 public class StartMenu implements Observer {
     private VBox vbox = new VBox();
