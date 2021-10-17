@@ -22,6 +22,32 @@ public class Controller extends Application {
         playDisplayStartSequence();
     }
 
+    public void lastOnClick(){
+        if(model.getListLast().size() == 0){
+            //TODO : Popup pas de dernière liste
+        }
+        else{
+            model.setState(State.AFFICHAGE_START);
+            for (int i = 0; i < model.getListLast().size(); i++) {
+                model.addToStartListFromAnotherList(model.getListLast().get(i));
+            }
+            playDisplayStartSequence();
+        }
+    }
+
+    public void longuestOnClick(){
+        if(model.getListLonguest().size() == 0){
+            //TODO : Popup pas de longuest liste
+        }
+        else{
+            model.setState(State.AFFICHAGE_START);
+            for (int i = 0; i < model.getListLonguest().size(); i++) {
+                model.addToStartListFromAnotherList(model.getListLonguest().get(i));
+            }
+            playDisplayStartSequence();
+        }
+    }
+
     public void colorButtonOnClick(Color color){
         addOnListeActuelle(color);
         fullCheck();
