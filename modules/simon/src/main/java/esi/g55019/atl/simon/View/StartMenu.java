@@ -35,11 +35,6 @@ public class StartMenu implements Observer {
     private Controller controller;
     private State stateOfModel;
 
-    //TODO : button longuest tester
-    //TODO : button last tester
-    //TODO : slider
-    //TODO : Son
-
     /**
      * Constructor, we need the controller to setUp the buttons and the model to add this object as an observer.
      * The constructor will setup each item of the start menu
