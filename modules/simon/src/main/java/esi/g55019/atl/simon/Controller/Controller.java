@@ -5,6 +5,7 @@ import esi.g55019.atl.simon.Model.Model;
 import esi.g55019.atl.simon.Model.State;
 import esi.g55019.atl.simon.View.View;
 import javafx.application.Application;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 /**
@@ -46,7 +47,7 @@ public class Controller extends Application {
      */
     public void lastOnClick(){
         if(model.getListLast().size() == 0){
-            //TODO : Popup pas de dernière liste
+            displayAlert("Pas de dernière liste");
         }
         else{
             model.setState(State.AFFICHAGE_START);
@@ -56,6 +57,28 @@ public class Controller extends Application {
             playDisplayStartSequence();
         }
     }
+
+    /**
+     * Display a popup with the message given
+     * @param message String
+     */
+    private void displayAlert(String message){
+        Alert alertlast = new Alert(Alert.AlertType.ERROR);
+        alertlast.setTitle(message);
+        alertlast.setContentText(message);
+        alertlast.showAndWait();
+    }
+
+    /**
+     * Display a popup who say PERDU
+     */
+    private void displayLose(){
+        Alert alertlast = new Alert(Alert.AlertType.INFORMATION);
+        alertlast.setTitle("Perdu");
+        alertlast.setContentText("Perdu");
+        alertlast.showAndWait();
+    }
+
     /**
      * this function is call when the player click on the longuest button.
      * if there is no value in the longuest list a popup is display and nothing else append
@@ -65,7 +88,7 @@ public class Controller extends Application {
      */
     public void longuestOnClick(){
         if(model.getListLonguest().size() == 0){
-            //TODO : Popup pas de longuest liste
+            displayAlert("Pas de longuest liste");
         }
         else{
             model.setState(State.AFFICHAGE_START);
@@ -95,7 +118,6 @@ public class Controller extends Application {
      * the start list is clear. In the end, the state become ON_THE_MENU
      */
     private void fullCheck(){
-        //Si bon bouton choisi
         if(model.checkCorrectColor()){
             if(model.aRattraper()){
                 model.clearListPlayer();
@@ -105,13 +127,10 @@ public class Controller extends Application {
             }
         }
         else{
-            //TODO : popup perdu
-            System.out.println("PERDU");
+            displayLose();
             model.setState(State.ON_THE_MENU);
-            System.out.println("Controller fullcheck, UPDATE DE LASTLIST");
             model.updateLastList();
             if(model.getListStartColor().size() > model.getListLonguest().size()){
-                System.out.println("Controller fullcheck, UPDATE DE LONGUESTLIST");
                 model.setListLonguest();
             }
             model.clearStartListAndPlayerList();
