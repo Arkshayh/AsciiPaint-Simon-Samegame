@@ -39,7 +39,6 @@ public class StartMenu implements Observer {
     //TODO : button last tester
     //TODO : slider
     //TODO : Son
-    //TODO : javadoc
 
     /**
      * Constructor, we need the controller to setUp the buttons and the model to add this object as an observer.
@@ -156,6 +155,14 @@ public class StartMenu implements Observer {
         slider.setMin(1);
         slider.setMax(10);
         slider.setMaxWidth(150);
+    }
+
+    /**
+     * return the value of the slider (converted to int) multiply by 100
+     * @return int
+     */
+    public int getSliderValue(){
+        return ((int)slider.getValue())*100;
     }
 
     /**
