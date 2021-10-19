@@ -155,9 +155,9 @@ public class View implements Observer {
             controller.colorButtonOnClick(Color.GREEN);
         }
         if(!startMenu.getCheckBox().isSelected()){
-            playSound(channel, pause);
+            playSound(channel, pause,69);
         }
-        setTimeout(1000, "-fx-background-color: #007d15; ", boutonVert);
+        setTimeout((startMenu.getSliderValue() - startMenu.getSliderValue()/5), "-fx-background-color: #007d15; ", boutonVert);
     }
 
     /**
@@ -172,9 +172,9 @@ public class View implements Observer {
             controller.colorButtonOnClick(Color.RED);
         }
         if(!startMenu.getCheckBox().isSelected()){
-            playSound(channel, pause);
+            playSound(channel, pause,71);
         }
-        setTimeout(1000, "-fx-background-color: #7a0010; ",boutonRouge);
+        setTimeout((startMenu.getSliderValue() - startMenu.getSliderValue()/5), "-fx-background-color: #7a0010; ",boutonRouge);
     }
 
     /**
@@ -189,9 +189,9 @@ public class View implements Observer {
             controller.colorButtonOnClick(Color.YELLOW);
         }
         if(!startMenu.getCheckBox().isSelected()){
-            playSound(channel, pause);
+            playSound(channel, pause,72);
         }
-        setTimeout(1000,"-fx-background-color: #c7b600; ", boutonJaune);
+        setTimeout((startMenu.getSliderValue() - startMenu.getSliderValue()/5),"-fx-background-color: #c7b600; ", boutonJaune);
     }
 
     /**
@@ -206,9 +206,9 @@ public class View implements Observer {
             controller.colorButtonOnClick(Color.BLUE);
         }
         if(!startMenu.getCheckBox().isSelected()){
-            playSound(channel, pause);
+            playSound(channel, pause,74);
         }
-        setTimeout(1000,"-fx-background-color: #004da6; ",boutonBleu);
+        setTimeout((startMenu.getSliderValue() - startMenu.getSliderValue()/5),"-fx-background-color: #004da6; ",boutonBleu);
     }
 
 
@@ -245,8 +245,8 @@ public class View implements Observer {
      * @param channel MidiChannel
      * @param pause PauseTransition
      */
-    private void playSound(MidiChannel channel, PauseTransition pause){
-        channel.noteOn(69, 80);
+    private void playSound(MidiChannel channel, PauseTransition pause, int noteSound){
+        channel.noteOn(noteSound, 80);
         pause.setOnFinished(event -> channel.noteOff(69));
         pause.play();
     }
@@ -262,7 +262,7 @@ public class View implements Observer {
                     stateOfModel);
         }
         final int[] i = {0};
-        var timeline = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
+        var timeline = new Timeline(new KeyFrame(Duration.millis(startMenu.getSliderValue()), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 switch (listeColor.get(i[0])){
