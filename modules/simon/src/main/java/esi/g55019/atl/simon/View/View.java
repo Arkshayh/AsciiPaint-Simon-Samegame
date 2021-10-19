@@ -8,6 +8,7 @@ import esi.g55019.atl.simon.util.Observer;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -21,6 +22,8 @@ import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Synthesizer;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * the view of the game, the view is an observer and has as attributes every thing that is visible for the player.
@@ -202,7 +205,6 @@ public class View implements Observer {
     private void onClickBlue(){
         boutonBleu.setStyle("-fx-background-color: #0091ff; ");
         if(stateOfModel == State.PLAYER_CHOOSE){
-            System.out.println("click Blue");
             controller.colorButtonOnClick(Color.BLUE);
         }
         if(!startMenu.getCheckBox().isSelected()){
@@ -289,6 +291,27 @@ public class View implements Observer {
                 model.setState(State.PLAYER_CHOOSE);
             }
         });
+    }
+
+    /**
+     * Display a popup with the message given
+     * @param message String
+     */
+    public void displayAlert(String message){
+        Alert alertlast = new Alert(Alert.AlertType.ERROR);
+        alertlast.setTitle(message);
+        alertlast.setContentText(message);
+        alertlast.showAndWait();
+    }
+
+    /**
+     * Display a popup who say PERDU
+     */
+    public void displayLose(){
+        Alert alertlast = new Alert(Alert.AlertType.INFORMATION);
+        alertlast.setTitle("Perdu");
+        alertlast.setContentText("Perdu");
+        alertlast.showAndWait();
     }
 
     /**

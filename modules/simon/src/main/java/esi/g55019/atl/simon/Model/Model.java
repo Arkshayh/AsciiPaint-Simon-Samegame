@@ -2,9 +2,12 @@ package esi.g55019.atl.simon.Model;
 
 import esi.g55019.atl.simon.util.Observable;
 import esi.g55019.atl.simon.util.Observer;
+import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * the model of the game. Model implement Observable and each time that its state change every Observer in its list
@@ -32,7 +35,6 @@ public class Model implements Observable {
         listLonguest = new ArrayList<>();
         listLast = new ArrayList<>();
         listeActuelleJoueur = new ArrayList<>();
-
         index = -1;
     }
 

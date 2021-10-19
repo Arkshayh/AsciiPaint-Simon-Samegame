@@ -5,7 +5,6 @@ import esi.g55019.atl.simon.Model.Model;
 import esi.g55019.atl.simon.Model.State;
 import esi.g55019.atl.simon.View.View;
 import javafx.application.Application;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 /**
@@ -47,7 +46,7 @@ public class Controller extends Application {
      */
     public void lastOnClick(){
         if(model.getListLast().size() == 0){
-            displayAlert("Pas de dernière liste");
+            view.displayAlert("Pas de dernière liste");
         }
         else{
             model.setState(State.AFFICHAGE_START);
@@ -59,27 +58,6 @@ public class Controller extends Application {
     }
 
     /**
-     * Display a popup with the message given
-     * @param message String
-     */
-    private void displayAlert(String message){
-        Alert alertlast = new Alert(Alert.AlertType.ERROR);
-        alertlast.setTitle(message);
-        alertlast.setContentText(message);
-        alertlast.showAndWait();
-    }
-
-    /**
-     * Display a popup who say PERDU
-     */
-    private void displayLose(){
-        Alert alertlast = new Alert(Alert.AlertType.INFORMATION);
-        alertlast.setTitle("Perdu");
-        alertlast.setContentText("Perdu");
-        alertlast.showAndWait();
-    }
-
-    /**
      * this function is call when the player click on the longuest button.
      * if there is no value in the longuest list a popup is display and nothing else append
      * if there is at least one value in the list the function will change the state to AFFICHE_START
@@ -88,7 +66,7 @@ public class Controller extends Application {
      */
     public void longuestOnClick(){
         if(model.getListLonguest().size() == 0){
-            displayAlert("Pas de longuest liste");
+            view.displayAlert("Pas de longuest liste");
         }
         else{
             model.setState(State.AFFICHAGE_START);
@@ -125,15 +103,13 @@ public class Controller extends Application {
                 model.addToStartList();
                 playDisplayStartSequence();
             }
+            else{
+
+            }
         }
         else{
-            displayLose();
-            model.setState(State.ON_THE_MENU);
-            model.updateLastList();
-            if(model.getListStartColor().size() > model.getListLonguest().size()){
-                model.setListLonguest();
-            }
-            model.clearStartListAndPlayerList();
+            view.displayLose();
+            lose();
         }
     }
 
@@ -150,6 +126,16 @@ public class Controller extends Application {
      */
     public void addOnListeActuelle(Color color){
         model.addListeActuelle(color);
+    }
+
+    //TODO
+    public void lose(){
+        model.setState(State.ON_THE_MENU);
+        model.updateLastList();
+        if(model.getListStartColor().size() > model.getListLonguest().size()){
+            model.setListLonguest();
+        }
+        model.clearStartListAndPlayerList();
     }
 
     /**
