@@ -25,7 +25,7 @@ public class StartMenu implements Observer {
     private VBox vbox = new VBox();
     private Label simon = new Label("Simon");
     private Slider slider = new Slider();
-    private Label speed = new Label("speed");
+    private Label speed = new Label("rapide <- speed ->   lent");
     private HBox hbox = new HBox();
     private Label info = new Label("info");
     private CheckBox checkBox = new CheckBox("Silent mode ");
