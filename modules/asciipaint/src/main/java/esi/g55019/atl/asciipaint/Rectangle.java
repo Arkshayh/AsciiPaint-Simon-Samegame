@@ -59,6 +59,7 @@ public class Rectangle extends ColoredShape {
         double yMax = this.upperLeft.getY();
         double yMin = this.upperLeft.getY() - this.height + 1;
 
+        //@pbt replace if with one return
         if (p.getX() > xMax || p.getX() < xMin || p.getY() > yMax || p.getY() < yMin) {
             return false;
         }

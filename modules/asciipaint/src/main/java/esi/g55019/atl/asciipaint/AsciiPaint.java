@@ -74,6 +74,8 @@ public class AsciiPaint {
 
         for (int i = drawing.getHeight(); i >= 0; i--) {
             for (int j = 0; j < drawing.getWidth(); j++) {
+                // @pbt better to use local var in place of 2 calls to
+                // getshapeat and 2 contructions of some point
                 if (drawing.getShapeAt(new Point(j, i)) != null) {
                     monstring += (" " + (drawing.getShapeAt(new Point(j, i)).getColor()) + " ");
                 } else {

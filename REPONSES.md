@@ -189,3 +189,7 @@ Q5:
         comme public dans la classe parent
 
     5.9 ça appel fait appel à la méthode move de la classe parent. 
+
+---
+vu @pbt
+---

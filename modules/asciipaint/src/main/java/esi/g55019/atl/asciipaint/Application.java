@@ -32,6 +32,7 @@ public class Application {
         askDimension();
 
         while (!fin) {
+            // @pbt prefer use of text blocks
             rep = askAddShowEnd("Entrer \"add\" pour ajouter un élément \nEntrer \"show\" pour afficher" +
                     " le dessin \nEntrer \"end\" pour arrêter le programme");
             switch (rep) {
@@ -90,22 +91,17 @@ public class Application {
         double radius;
         char couleur;
 
+        // @pbt line break and line feed are also regulated ;-)
         Scanner clavier = new Scanner(System.in);
-
         System.out.println("Ajout d'un cercle :");
         x = askInt("Entrer les coordonnées X de son centre : ");
-
         y = askInt("Entrer les coordonnées Y de son centre : ");
-
         radius = askDouble("Entrer la taille du rayon du cercle");
-
         if (radius < 1) {
             throw new IllegalArgumentException("Le rayon doit être >= 1 \n Rayon entré :" + radius);
         }
-
         System.out.println("Entrer sa couleur : ");
         couleur = clavier.next().charAt(0);
-
         paint.newCircle(x, y, radius, couleur);
     }
 
