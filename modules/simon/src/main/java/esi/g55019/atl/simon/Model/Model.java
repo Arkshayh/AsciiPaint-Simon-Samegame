@@ -2,7 +2,6 @@ package esi.g55019.atl.simon.Model;
 
 import esi.g55019.atl.simon.util.Observable;
 import esi.g55019.atl.simon.util.Observer;
-import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +22,7 @@ public class Model implements Observable {
     private List<Color> listLast;
     private List<Color> listeActuelleJoueur;
     private int index;
+    private Timer timer;
 
     /**
      * Constructor for a Model, the default state is ON_THE_MENU.
@@ -151,11 +151,24 @@ public class Model implements Observable {
 
     /**
      * change the state of the model and notify each Observer in the Observer list
-     * @param state
+     * @param state State
      */
     public void setState(State state) {
         this.state = state;
         notifyObservers();
+    }
+
+    public void setTimer(TimerTask timerTask) {
+        this.timer = new Timer();
+        timer.schedule(timerTask, 10000);
+    }
+
+    /**
+     * getter for the timer
+     * @return timer Timer
+     */
+    public Timer getTimer(){
+        return timer;
     }
 
     /**
