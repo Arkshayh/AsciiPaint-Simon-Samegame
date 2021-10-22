@@ -2,6 +2,7 @@ package esi.g55019.atl.simon.Model;
 
 import esi.g55019.atl.simon.util.Observable;
 import esi.g55019.atl.simon.util.Observer;
+import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,8 +159,19 @@ public class Model implements Observable {
         notifyObservers();
     }
 
-    public void setTimer(TimerTask timerTask) {
+    public void startTimer() {
         this.timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        setState(State.TIMER);
+                    }
+                });
+            }
+        };
         timer.schedule(timerTask, 10000);
     }
 

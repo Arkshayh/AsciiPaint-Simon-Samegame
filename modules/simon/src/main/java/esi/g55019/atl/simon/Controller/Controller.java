@@ -105,7 +105,7 @@ public class Controller extends Application {
                 playDisplayStartSequence();
             }
             else{
-                model.setState(State.TIMER);
+                model.startTimer();
                 model.setState(State.PLAYER_CHOOSE);
             }
         }

@@ -288,7 +288,7 @@ public class View implements Observer {
         timeline.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                model.setState(State.TIMER);
+                model.startTimer();
                 model.setState(State.PLAYER_CHOOSE);
             }
         });
@@ -325,30 +325,6 @@ public class View implements Observer {
         alertlast.showAndWait();
     }
 
-    //TODO: est ce qu'il faut la définir dans le model ?
-
-    /**
-     * create a timerTask for the timer in the model, this task display a message : no more time
-     * then displayLose() is called and at the end lose() is called
-     * @return TimerTask timerTask
-     */
-    private TimerTask goTimer(){
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        displayLoseTime();
-                        displayLose();
-                        controller.lose();
-                    }
-                });
-            }
-        };
-        return timerTask;
-    }
-
     /**
      * this method is called when the state of the model change, it will modify the stateofmodel attribute by the
      * given state
@@ -359,7 +335,9 @@ public class View implements Observer {
         this.stateOfModel = state;
         System.out.println("update view : " + this.stateOfModel);
         if(stateOfModel == State.TIMER){
-            model.setTimer(goTimer());
+            displayLoseTime();
+            displayLose();
+            controller.lose();
         }
     }
 }
