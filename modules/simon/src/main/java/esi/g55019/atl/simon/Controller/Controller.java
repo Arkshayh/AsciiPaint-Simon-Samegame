@@ -83,6 +83,7 @@ public class Controller extends Application {
      * @param color Color
      */
     public void colorButtonOnClick(Color color){
+        model.getTimer().cancel();
         addOnListeActuelle(color);
         fullCheck();
     }
@@ -104,7 +105,8 @@ public class Controller extends Application {
                 playDisplayStartSequence();
             }
             else{
-
+                model.setState(State.TIMER);
+                model.setState(State.PLAYER_CHOOSE);
             }
         }
         else{
