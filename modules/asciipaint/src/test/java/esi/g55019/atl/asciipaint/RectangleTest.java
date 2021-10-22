@@ -1,7 +1,6 @@
 package esi.g55019.atl.asciipaint;
 
-import  esi.g55019.atl.asciipaint.Point;
-import  esi.g55019.atl.asciipaint.Rectangle;
+import esi.g55019.atl.asciipaint.ShapePackage.Rectangle;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;

@@ -35,7 +35,8 @@ public class Application {
                     " le dessin \nEntrer \"end\" pour arrêter le programme");
             switch (rep) {
                 case "ADD":
-                    chooseForm(askForm("Quelle forme voulez-vous ajouter ? (c = cercle, r = rectangle, s = carré)"));
+                    chooseForm(askForm("Quelle forme voulez-vous ajouter ? (c = cercle, r = rectangle, s = carré, " +
+                            "l = ligne)"));
                     break;
                 case "SHOW":
                     show();
@@ -62,7 +63,7 @@ public class Application {
     }
 
     /**
-     * will add a circle/square/rectangle to the drawing
+     * will add a circle/square/rectangle/line to the drawing
      * @param c char | the char will be choose by the user using the method askform
      */
     private void chooseForm(char c) {
@@ -75,7 +76,26 @@ public class Application {
                 break;
             case 'S':
                 addSquare();
+                break;
+            case 'L':
+                addLine();
         }
+    }
+
+    private void addLine(){
+        int x1, y1, x2, y2;
+        char color;
+
+        Scanner clavier = new Scanner(System.in);
+        System.out.println("Ajout d'une ligne : ");
+        x1 = askInt("Entrer les coordonnées X de son 1er point : ");
+        y1 = askInt("Entrer les coordonnées Y de son 1er point : ");
+        x2 = askInt("Entrer les coordonnées X de son 2ème point : ");
+        y2 = askInt("Entrer les coordonnées Y de son 2ème point : ");
+
+        System.out.println("Entrer sa couleur : ");
+        color = clavier.next().charAt(0);
+        paint.newLine(x1,y1,x2,y2,color);
     }
 
     /**
@@ -214,7 +234,7 @@ public class Application {
         Scanner clavier = new Scanner(System.in);
         String chara = clavier.nextLine();
         chara = chara.toUpperCase();
-        while (!chara.equals("C") && !chara.equals("R") && !chara.equals("S")) {
+        while (!chara.equals("C") && !chara.equals("R") && !chara.equals("S") && !chara.equals("L")) {
             System.out.println("Erreur, réessayer : ");
             chara = clavier.nextLine();
             chara = chara.toUpperCase();

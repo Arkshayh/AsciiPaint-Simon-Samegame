@@ -1,4 +1,6 @@
-package esi.g55019.atl.asciipaint;
+package esi.g55019.atl.asciipaint.ShapePackage;
+
+import esi.g55019.atl.asciipaint.Point;
 
 /**
  * @author g55019 / Cotton Ian

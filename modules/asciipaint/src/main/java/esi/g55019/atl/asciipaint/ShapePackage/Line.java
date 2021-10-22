@@ -7,7 +7,6 @@ public class Line extends ColoredShape {
     private double pente;
     private Point point1;
     private Point point2;
-    private double b;
 
     public Line(Point point1, Point point2, char color){
         super(color);
@@ -20,8 +19,14 @@ public class Line extends ColoredShape {
         return  ((point2.getY() - point1.getY()) / (point2.getX() - point1.getX()));
     }
 
+    //TODO make double
     private int distanceTo(Point pointC){
-        return (int)((pente * pointC.getX()) - pointC.getY() - (pente * point1.getX()) + point1.getY());
+        return (int)(pente * pointC.getX() - pointC.getY() - pente * point1.getX() + point1.getY()) /
+                (int)(Math.sqrt(Math.pow(pente,2)) + 1);
+    }
+
+    public boolean isInside(Point pointC){
+        return distanceTo(pointC) == 0;
     }
 
     @Override
@@ -29,9 +34,5 @@ public class Line extends ColoredShape {
         this.point1.move(dx, dy);
         this.point2.move(dx, dy);
         this.pente = calculerPente();
-    }
-
-    public boolean isInside(Point pointC){
-        return distanceTo(pointC) == 0;
     }
 }

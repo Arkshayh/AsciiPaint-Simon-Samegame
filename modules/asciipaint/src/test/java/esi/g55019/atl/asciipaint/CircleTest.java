@@ -1,7 +1,7 @@
 package esi.g55019.atl.asciipaint;
 
-import esi.g55019.atl.asciipaint.Circle;
-import esi.g55019.atl.asciipaint.Point;
+
+import esi.g55019.atl.asciipaint.ShapePackage.Circle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
