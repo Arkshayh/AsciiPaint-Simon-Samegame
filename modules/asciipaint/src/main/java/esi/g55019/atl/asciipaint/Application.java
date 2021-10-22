@@ -153,7 +153,6 @@ public class Application {
 
     /**
      * ask to the user an integer (int) he can't input something else
-     *
      * @param message string
      * @return int
      */
@@ -187,7 +186,6 @@ public class Application {
     /**
      * the user choose if he want to add a shape/show the drawing or end the programm. He must input ADD SHOW OR END
      * his choose will be return
-     *
      * @param message String
      * @return String
      */
@@ -208,7 +206,6 @@ public class Application {
 
     /**
      * The user choose a form to add, he must input C for a circle, R for a rectangle and S for a square
-     *
      * @param message string
      * @return char
      */
