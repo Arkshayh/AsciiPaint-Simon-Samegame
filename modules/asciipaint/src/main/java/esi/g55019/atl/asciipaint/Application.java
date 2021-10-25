@@ -1,5 +1,7 @@
 package esi.g55019.atl.asciipaint;
 
+import esi.g55019.atl.asciipaint.ShapePackage.Line;
+
 import java.util.Scanner;
 
 /**

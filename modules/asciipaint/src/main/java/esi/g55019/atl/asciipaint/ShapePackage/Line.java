@@ -35,4 +35,13 @@ public class Line extends ColoredShape {
         this.point2.move(dx, dy);
         this.pente = calculerPente();
     }
+
+    @Override
+    public String toString() {
+        return "Line [" +
+                "pente = " + pente +
+                " | point1 = " + point1 +
+                " | point2 = " + point2 +
+                ']';
+    }
 }

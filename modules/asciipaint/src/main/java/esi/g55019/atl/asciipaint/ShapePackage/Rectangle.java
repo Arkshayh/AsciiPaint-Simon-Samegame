@@ -17,7 +17,6 @@ public class Rectangle extends ColoredShape {
 
     /**
      * Constructor of a rectangle
-     *
      * @param upperLeft Point
      * @param width     double
      * @param height    double
@@ -39,7 +38,6 @@ public class Rectangle extends ColoredShape {
     /**
      * changes the position of the rectangle, this is defined by its upperleft attribute,
      * this method will therefore move this point according to the coordinates given in parameter
-     *
      * @param dx double
      * @param dy double
      */
@@ -51,7 +49,6 @@ public class Rectangle extends ColoredShape {
     /**
      * return a boolean : false if the point given in parameter is not consider inside the rectangle, $
      * true if it's the case
-     *
      * @param p Point
      * @return boolean
      */
@@ -65,9 +62,16 @@ public class Rectangle extends ColoredShape {
         if (p.getX() > xMax || p.getX() < xMin || p.getY() > yMax || p.getY() < yMin) {
             return false;
         }
-
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Rectangle [" +
+                "upperLeft = " + upperLeft +
+                " | width = " + width +
+                " | height = " + height +
+                ']';
+    }
 }
 

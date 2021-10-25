@@ -73,5 +73,17 @@ public class Drawing {
         return width;
     }
 
+    //TODO : question retourner la liste ou juste afficher
+    //TODO = faire appel à cette méthode en écrivant liste dans la console
+    public void showList(){
+        if(shapes.size() == 0){
+            System.out.println("Pas de forme");
+            return;
+        }
+        for (int i = 0; i <shapes.size(); i++) {
+            System.out.println(i + " : " + shapes.get(i));
+        }
+    }
+
 
 }

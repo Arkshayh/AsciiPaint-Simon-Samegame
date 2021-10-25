@@ -52,4 +52,12 @@ public class Circle extends ColoredShape {
     public boolean isInside(Point p) {
         return p.distanceTo(center) <= radius;
     }
+
+    @Override
+    public String toString() {
+        return "Circle [" +
+                "radius = " + radius +
+                " | center = " + center +
+                ']';
+    }
 }
