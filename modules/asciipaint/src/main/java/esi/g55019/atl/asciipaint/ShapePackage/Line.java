@@ -19,10 +19,10 @@ public class Line extends ColoredShape {
         return  ((point2.getY() - point1.getY()) / (point2.getX() - point1.getX()));
     }
 
-    //TODO make double
-    private int distanceTo(Point pointC){
-        return (int)(pente * pointC.getX() - pointC.getY() - pente * point1.getX() + point1.getY()) /
-                (int)(Math.sqrt(Math.pow(pente,2)) + 1);
+
+    private double distanceTo(Point pointC){
+        return (pente * pointC.getX() - pointC.getY() - pente * point1.getX() + point1.getY()) /
+                (Math.sqrt(Math.pow(pente,2)) + 1);
     }
 
     public boolean isInside(Point pointC){
