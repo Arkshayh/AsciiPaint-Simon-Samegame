@@ -82,6 +82,9 @@ public class Application {
         }
     }
 
+    /**
+     * add a line in the paint, the coordonate of 2 point will be asked and the color too;
+     */
     private void addLine(){
         int x1, y1, x2, y2;
         char color;
