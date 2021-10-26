@@ -1,5 +1,6 @@
 package esi.g55019.atl.asciipaint;
 
+import esi.g55019.atl.asciipaint.DPComposite.Leaf;
 import esi.g55019.atl.asciipaint.ShapePackage.Circle;
 import esi.g55019.atl.asciipaint.ShapePackage.Line;
 import esi.g55019.atl.asciipaint.ShapePackage.Rectangle;
@@ -39,7 +40,7 @@ public class AsciiPaint {
      * @param color  char
      */
     public void newCircle(int x, int y, double radius, char color) {
-        drawing.addShape(new Circle(new Point(x, y), radius, color));
+        drawing.addShape(new Leaf(new Circle(new Point(x, y), radius, color)));
     }
 
     /**
@@ -51,7 +52,7 @@ public class AsciiPaint {
      * @param color  char
      */
     public void newRectangle(int x, int y, double width, double height, char color) {
-        drawing.addShape(new Rectangle(new Point(x, y), width, height, color));
+        drawing.addShape(new Leaf(new Rectangle(new Point(x, y), width, height, color)));
     }
 
     /**
@@ -62,11 +63,11 @@ public class AsciiPaint {
      * @param color char
      */
     public void newSquare(int x, int y, double side, char color) {
-        drawing.addShape(new Square(new Point(x, y), side, color));
+        drawing.addShape(new Leaf(new Square(new Point(x, y), side, color)));
     }
 
     public void newLine(int x1, int y1, int x2, int y2, char color){
-        drawing.addShape(new Line(new Point(x1,y1), new Point(x2,y2), color));
+        drawing.addShape(new Leaf(new Line(new Point(x1,y1), new Point(x2,y2), color)));
     }
 
     /**

@@ -23,4 +23,9 @@ public class Leaf extends Component{
     public char getColor() {
         return shape.getColor();
     }
+
+    @Override
+    public String toString() {
+        return shape.toString();
+    }
 }

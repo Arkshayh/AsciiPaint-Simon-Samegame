@@ -22,6 +22,8 @@ public class Application {
         app.start();
     }
 
+    //TODO: groupe
+
     /**
      * start the program, this method will manage the input of the user (if he want to end the programm/add shape/show
      * the drawing)

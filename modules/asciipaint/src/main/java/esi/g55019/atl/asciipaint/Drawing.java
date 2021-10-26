@@ -1,5 +1,7 @@
 package esi.g55019.atl.asciipaint;
 
+import esi.g55019.atl.asciipaint.DPComposite.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
 
 public class Drawing {
 
-    private List<Shape> shapes;
+    private List<Component> shapes;
     private int height;
     private int width;
 
@@ -38,7 +40,7 @@ public class Drawing {
      * add to the drawing the given shape
      * @param shape Shape
      */
-    public void addShape(Shape shape) {
+    public void addShape(Component shape) {
         shapes.add(shape);
     }
 
