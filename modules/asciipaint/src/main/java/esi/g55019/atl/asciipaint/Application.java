@@ -22,7 +22,8 @@ public class Application {
         app.start();
     }
 
-    //TODO: groupe
+    //TODO: groupe, le groupe crée va à la fin de la liste, et lorsqu'il est supprimé les formes ajouter à la fin de la
+    //      liste
 
     /**
      * start the program, this method will manage the input of the user (if he want to end the programm/add shape/show
