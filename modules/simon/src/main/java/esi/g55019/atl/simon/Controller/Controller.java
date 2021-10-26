@@ -130,7 +130,10 @@ public class Controller extends Application {
         model.addListeActuelle(color);
     }
 
-    //TODO
+    /**
+     * called when the player lose the game, it will update the last list, change the longuestlist if necessary
+     * and it will clear the start list and the player list
+     */
     public void lose(){
         model.setState(State.ON_THE_MENU);
         model.updateLastList();
