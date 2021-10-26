@@ -33,7 +33,8 @@ public class Application {
         askDimension();
 
         while (!fin) {
-            rep = askAddShowEnd("Entrer \"add\" pour ajouter un élément \nEntrer \"show\" pour afficher" +
+            rep = askAddShowEnd("Entrer \"add\" pour ajouter un élément \nEntrer \"list\" pour afficher la liste " +
+                    "des formes disponible \nEntrer \"move\" pour déplacer une forme \nEntrer \"show\" pour afficher" +
                     " le dessin \nEntrer \"end\" pour arrêter le programme");
             switch (rep) {
                 case "ADD":
@@ -42,6 +43,12 @@ public class Application {
                     break;
                 case "SHOW":
                     show();
+                    break;
+                case "LIST":
+                    showList();
+                    break;
+                case "MOVE":
+                    move();
                     break;
                 default:
                     fin = true;
@@ -220,7 +227,8 @@ public class Application {
         String msg = clavier.nextLine();
         msg = msg.toUpperCase();
 
-        while (!msg.equals("ADD") && !msg.equals("SHOW") && !msg.equals("END")) {
+        while (!msg.equals("ADD") && !msg.equals("SHOW") && !msg.equals("END") && !msg.equals("LIST")
+                && !msg.equals("MOVE")) {
             System.out.println("Erreur, réessayer : ");
             msg = clavier.nextLine();
             msg = msg.toUpperCase();
@@ -245,5 +253,19 @@ public class Application {
             chara = chara.toUpperCase();
         }
         return chara.charAt(0);
+    }
+
+    private void showList(){
+        paint.showList();
+    }
+
+    private void move(){
+        System.out.println("Voici la liste des formes : ");
+        showList();
+        int num = askInt("Quelle liste voulez vous déplacer ? ");
+        int dx = askInt("De combien de X voulez-vous la déplacer ?");
+        int dy = askInt("De combien de Y voulez-vous la déplacer ?");
+
+        paint.move(num, dx, dy);
     }
 }

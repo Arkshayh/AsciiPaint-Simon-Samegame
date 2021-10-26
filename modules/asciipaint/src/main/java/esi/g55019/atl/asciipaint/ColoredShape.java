@@ -10,7 +10,7 @@ public abstract class ColoredShape implements Shape{
     private char color;
 
     /**
-     * constructoer
+     * constructor
      * @param color char
      */
     public ColoredShape(char color) {

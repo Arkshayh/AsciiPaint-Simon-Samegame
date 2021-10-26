@@ -67,11 +67,7 @@ public class Rectangle extends ColoredShape {
 
     @Override
     public String toString() {
-        return "Rectangle [" +
-                "upperLeft = " + upperLeft +
-                " | width = " + width +
-                " | height = " + height +
-                ']';
+        return "Rectangle";
     }
 }
 

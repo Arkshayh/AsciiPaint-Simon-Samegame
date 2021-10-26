@@ -25,7 +25,7 @@ public class DrawingTest {
     @Test
     public void getShapeAt_when_shape_at_the_point(){
         Rectangle rec = new Rectangle(new Point(0,10),20,10,'r');
-        drawing.addShape(rec);
+        //drawing.addShape(rec);
         assertEquals(rec,drawing.getShapeAt(new Point(5,5)));
     }
 }

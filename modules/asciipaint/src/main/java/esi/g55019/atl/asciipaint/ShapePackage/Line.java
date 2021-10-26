@@ -38,10 +38,6 @@ public class Line extends ColoredShape {
 
     @Override
     public String toString() {
-        return "Line [" +
-                "pente = " + pente +
-                " | point1 = " + point1 +
-                " | point2 = " + point2 +
-                ']';
+        return "Line";
     }
 }

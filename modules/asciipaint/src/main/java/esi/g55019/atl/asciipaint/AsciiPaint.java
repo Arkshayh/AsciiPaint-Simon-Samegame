@@ -89,5 +89,13 @@ public class AsciiPaint {
 
         return monstring;
     }
+
+    public void showList(){
+        drawing.showList();
+    }
+
+    public void move(int numberOfTheShape, int dx, int dy){
+        drawing.move(numberOfTheShape, dx, dy);
+    }
 }
 

@@ -73,17 +73,25 @@ public class Drawing {
         return width;
     }
 
-    //TODO : question retourner la liste ou juste afficher
-    //TODO = faire appel à cette méthode en écrivant liste dans la console
+
     public void showList(){
         if(shapes.size() == 0){
             System.out.println("Pas de forme");
             return;
         }
         for (int i = 0; i <shapes.size(); i++) {
-            System.out.println(i + " : " + shapes.get(i));
+            System.out.println((i+1) + " : " + shapes.get(i));
         }
     }
 
+    public void move(int numberOfTheShape, int dx, int dy){
+        int shapeToMove = numberOfTheShape - 1;
+        if(shapeToMove <0 || shapeToMove >= shapes.size()){
+            System.out.println("La forme choisie n'existe pas");
+        }
+        else{
+            shapes.get(shapeToMove).move(dx, dy);
+        }
+    }
 
 }
