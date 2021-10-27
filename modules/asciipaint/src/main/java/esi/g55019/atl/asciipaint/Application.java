@@ -30,37 +30,19 @@ public class Application {
      */
     public void start() {
         boolean fin = false;
-        String commande;
-        String [] correctedCommande;
-        String typeCommande;
-        FactoryCommand usineCommande = new FactoryCommand();;
+        String commandeString;
+        FactoryCommand usineCommande = new FactoryCommand(paint);;
         askDimension();
         Command command;
 
+        //TODO: a débugger
         while (!fin) {
-            commande = askCommand();
+            commandeString = askCommand();
             try{
-                usineCommande.setCommandeIni(commande);
-                typeCommande = usineCommande.getTypeCommande();
-                correctedCommande = usineCommande.getCommandeCorrection();
+                usineCommande.setCommandeIni(commandeString);
+                command = usineCommande.getCommandeCorrection();
+                command.execute();
 
-                switch (typeCommande){
-                    case "add":
-                        command = new AddCommand(paint, correctedCommande);
-                        command.execute();
-                        break;
-                    case "show":
-                        command = new ShowCommand(paint);
-                        command.execute();
-                        break;
-                    case "list":
-                        command = new ListCommand(paint);
-                        command.execute();
-                        break;
-                    default:
-                        fin = true;
-                        break;
-                }
             }catch (Exception e){
                 System.out.printf("Erreur. ");
             }
@@ -115,9 +97,6 @@ public class Application {
     }
 
 
-    private void showList(){
-        paint.showList();
-    }
 
     private void move(){
         System.out.println("Voici la liste des formes : ");
@@ -130,7 +109,9 @@ public class Application {
     }
 
     private String askCommand(){
-        System.out.printf("Entrer une commande valide : ");
+        System.out.printf("Entrer :\n* add : pour ajouter un élément. \n " +
+                "*show : pour afficher le dessin.\n" +
+                "*list");
         Scanner clavier = new Scanner(System.in);
         String commandes = clavier.nextLine();
         return commandes;

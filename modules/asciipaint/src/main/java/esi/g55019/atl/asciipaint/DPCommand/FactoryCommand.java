@@ -1,16 +1,18 @@
 package esi.g55019.atl.asciipaint.DPCommand;
 
-import java.util.Scanner;
+import esi.g55019.atl.asciipaint.AsciiPaint;
+
 
 public class FactoryCommand {
 
+    private AsciiPaint paint;
     private String[] commandeIni;
     private String[] commandeCorrection;
-    private Scanner clavier = new Scanner(System.in);
     private int index = 0;
 
 
-    public FactoryCommand() {
+    public FactoryCommand(AsciiPaint paint) {
+        this.paint = paint;
     }
 
     public void setCommandeIni(String commande){
@@ -30,6 +32,7 @@ public class FactoryCommand {
                     commandeCorrection = commandeIni;
                     break;
                 case "list":
+                    commandeCorrection = commandeIni;
                     break;
                 case "group":
                     break;
@@ -141,12 +144,23 @@ public class FactoryCommand {
         }
     }
 
-    public String[] getCommandeCorrection(){
-        return commandeCorrection;
-    }
-
-    public String getTypeCommande(){
-        return commandeCorrection[0];
+    public Command getCommandeCorrection(){
+        Command command;
+        switch (commandeCorrection[0]) {
+            case "add":
+                command = new AddCommand(paint, commandeCorrection);
+                break;
+            case "show":
+                command = new ShowCommand(paint);
+                break;
+            case "list":
+                command = new ListCommand(paint);
+                break;
+            default:
+                command = new ShowCommand(paint);//TODO: commande end ici
+                break;
+        }
+        return command;
     }
 
 }
