@@ -29,19 +29,19 @@ public class Application {
      * the drawing)
      */
     public void start() {
-        boolean fin = false;
         String commandeString;
-        FactoryCommand usineCommande = new FactoryCommand(paint);;
         askDimension();
+        FactoryCommand usineCommande = new FactoryCommand(paint);
         Command command;
 
-        //TODO: a débugger
-        while (!fin) {
+        //TODO: a débugger pour show
+        while (!paint.getEnd()) {
             commandeString = askCommand();
             try{
                 usineCommande.setCommandeIni(commandeString);
                 command = usineCommande.getCommandeCorrection();
                 command.execute();
+                usineCommande.setPaint(paint);
 
             }catch (Exception e){
                 System.out.printf("Erreur. ");
@@ -109,9 +109,10 @@ public class Application {
     }
 
     private String askCommand(){
-        System.out.printf("Entrer :\n* add : pour ajouter un élément. \n " +
-                "*show : pour afficher le dessin.\n" +
-                "*list");
+        System.out.println("Entrer :\n* add : pour ajouter un élément. \n" +
+                "* show : pour afficher le dessin.\n" +
+                "* list : pour afficher la liste des formes de votre dessin.\n" +
+                "* end : pour fermer le programme");
         Scanner clavier = new Scanner(System.in);
         String commandes = clavier.nextLine();
         return commandes;

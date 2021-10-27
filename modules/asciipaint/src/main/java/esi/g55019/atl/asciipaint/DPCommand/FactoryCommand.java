@@ -29,14 +29,11 @@ public class FactoryCommand {
                     checkAdd();
                     break;
                 case "show":
-                    commandeCorrection = commandeIni;
-                    break;
                 case "list":
+                case "end":
                     commandeCorrection = commandeIni;
                     break;
                 case "group":
-                    break;
-                case "end":
                     break;
                 default:
                     erreurCommande();
@@ -134,6 +131,10 @@ public class FactoryCommand {
         }
     }
 
+    public void setPaint(AsciiPaint paint){
+        this.paint = paint;
+    }
+
     private void checkColor(){
         try{
             char color = commandeIni[index].charAt(0);
@@ -157,7 +158,7 @@ public class FactoryCommand {
                 command = new ListCommand(paint);
                 break;
             default:
-                command = new ShowCommand(paint);//TODO: commande end ici
+                command = new EndCommand(paint);
                 break;
         }
         return command;

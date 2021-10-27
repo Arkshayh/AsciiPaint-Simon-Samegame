@@ -17,6 +17,7 @@ import esi.g55019.atl.asciipaint.ShapePackage.Square;
 public class AsciiPaint {
 
     private Drawing drawing;
+    private boolean end;
 
     /**
      * Constructor when you choose the dimension of the drawing
@@ -24,6 +25,7 @@ public class AsciiPaint {
      */
     public AsciiPaint(Drawing drawing) {
         this.drawing = drawing;
+        this.end = false;
     }
 
     /**
@@ -109,6 +111,14 @@ public class AsciiPaint {
 
     public int nbForme(){
         return drawing.getSize();
+    }
+
+    public void end(){
+        this.end = true;
+    }
+
+    public boolean getEnd(){
+        return end;
     }
 }
 
