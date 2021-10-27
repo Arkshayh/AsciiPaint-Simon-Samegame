@@ -112,8 +112,8 @@ public class FactoryCommand {
 
     private void checkPoint(){
         try{
-            int x = Integer.parseInt(commandeIni[index]);
-            int y = Integer.parseInt(commandeIni[index + 1]);
+            Integer.parseInt(commandeIni[index]);
+            Integer.parseInt(commandeIni[index + 1]);
             index = index + 2;
         }
         catch (Exception e){
@@ -123,7 +123,7 @@ public class FactoryCommand {
 
     private void checkInt(){
         try {
-            int x = Integer.parseInt(commandeIni[index]);
+            Integer.parseInt(commandeIni[index]);
             index++;
         }
         catch (Exception e){
@@ -137,7 +137,7 @@ public class FactoryCommand {
 
     private void checkColor(){
         try{
-            char color = commandeIni[index].charAt(0);
+            commandeIni[index].charAt(0);
             index++;
         }
         catch (Exception e){

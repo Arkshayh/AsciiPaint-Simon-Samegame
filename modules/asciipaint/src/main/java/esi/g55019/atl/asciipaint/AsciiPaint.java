@@ -21,7 +21,7 @@ public class AsciiPaint {
 
     /**
      * Constructor when you choose the dimension of the drawing
-     * @param drawing
+     * @param drawing Drawing
      */
     public AsciiPaint(Drawing drawing) {
         this.drawing = drawing;
@@ -86,7 +86,7 @@ public class AsciiPaint {
      */
     public String asAscii() {
         String monstring = "";
-
+        //TODO: question prof si optimisation ok + explication
         for (int i = drawing.getHeight(); i >= 0; i--) {
             for (int j = 0; j < drawing.getWidth(); j++) {
                 if (drawing.getShapeAt(new Point(j, i)) != null) {

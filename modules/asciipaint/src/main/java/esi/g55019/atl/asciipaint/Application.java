@@ -1,9 +1,6 @@
 package esi.g55019.atl.asciipaint;
 
 import esi.g55019.atl.asciipaint.DPCommand.*;
-import esi.g55019.atl.asciipaint.ShapePackage.Line;
-
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -17,7 +14,6 @@ public class Application {
 
     /**
      * main methode
-     * @param args
      */
     public static void main(String[] args) {
         Application app = new Application();
@@ -34,7 +30,6 @@ public class Application {
         FactoryCommand usineCommande = new FactoryCommand(paint);
         Command command;
 
-        //TODO: a débugger pour show
         while (!paint.getEnd()) {
             commandeString = askCommand();
             try{

@@ -9,7 +9,7 @@ public enum typeOfCommande {
 
     private int longueur;
 
-    private typeOfCommande(int longueur) {
+    typeOfCommande(int longueur) {
         this.longueur = longueur;
     }
 
