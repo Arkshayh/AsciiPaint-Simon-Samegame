@@ -96,4 +96,12 @@ public class Drawing {
         }
     }
 
+    public int getSize(){
+        return shapes.size();
+    }
+
+    public Shape getShapeInList(int index){
+        return shapes.get(index);
+    }
+
 }

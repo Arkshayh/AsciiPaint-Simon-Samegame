@@ -1,7 +1,6 @@
 package esi.g55019.atl.asciipaint.DPComposite;
 
 import esi.g55019.atl.asciipaint.Point;
-import esi.g55019.atl.asciipaint.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +8,7 @@ import java.util.List;
 public class Composite extends Component {
     private List<Component> componentList;
 
-    public Composite(Shape shape) {
-        super(shape);
+    public Composite() {
         componentList = new ArrayList<>();
     }
 

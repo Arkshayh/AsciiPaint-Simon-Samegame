@@ -1,5 +1,6 @@
 package esi.g55019.atl.asciipaint;
 
+import esi.g55019.atl.asciipaint.DPComposite.Composite;
 import esi.g55019.atl.asciipaint.DPComposite.Leaf;
 import esi.g55019.atl.asciipaint.ShapePackage.Circle;
 import esi.g55019.atl.asciipaint.ShapePackage.Line;
@@ -70,6 +71,13 @@ public class AsciiPaint {
         drawing.addShape(new Leaf(new Line(new Point(x1,y1), new Point(x2,y2), color)));
     }
 
+    public void newGroup(int shape1, int shape2){
+        Composite groupe = new Composite();
+        groupe.add(new Leaf(drawing.getShapeInList(shape1)));
+        groupe.add(new Leaf(drawing.getShapeInList(shape2)));
+        drawing.addShape(groupe);
+    }
+
     /**
      * Return the drawing
      * @return String as a string.
@@ -97,6 +105,10 @@ public class AsciiPaint {
 
     public void move(int numberOfTheShape, int dx, int dy){
         drawing.move(numberOfTheShape, dx, dy);
+    }
+
+    public int nbForme(){
+        return drawing.getSize();
     }
 }
 
