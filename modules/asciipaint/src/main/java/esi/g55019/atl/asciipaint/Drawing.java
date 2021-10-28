@@ -44,6 +44,10 @@ public class Drawing {
         shapes.add(shape);
     }
 
+    public void removeShape(Component shape){
+        shapes.remove(shape);
+    }
+
     /**
      * Returns the first form containing the point given in parameter,
      * if no form contains this point then this method returns null
@@ -100,7 +104,7 @@ public class Drawing {
         return shapes.size();
     }
 
-    public Shape getShapeInList(int index){
+    public Component getShapeInList(int index){
         return shapes.get(index);
     }
 

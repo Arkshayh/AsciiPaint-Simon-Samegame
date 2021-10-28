@@ -73,10 +73,20 @@ public class AsciiPaint {
         drawing.addShape(new Leaf(new Line(new Point(x1,y1), new Point(x2,y2), color)));
     }
 
-    public void newGroup(int shape1, int shape2){
+    public void newGroup(int[] commandes){
         Composite groupe = new Composite();
-        groupe.add(new Leaf(drawing.getShapeInList(shape1)));
-        groupe.add(new Leaf(drawing.getShapeInList(shape2)));
+        for (int i = 0; i < commandes.length; i++) {
+            if(drawing.getShapeInList(commandes[i]) instanceof Leaf){
+                groupe.add(new Leaf(drawing.getShapeInList(commandes[i])));
+            }
+            else{
+                groupe.add(new Composite(drawing.getShapeInList(commandes[i])));
+            }
+
+        }
+        for (int i = commandes.length -1; i >= 0; i--) {
+            drawing.removeShape(drawing.getShapeInList(commandes[i]));
+        }
         drawing.addShape(groupe);
     }
 

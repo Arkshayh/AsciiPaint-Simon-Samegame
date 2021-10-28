@@ -11,6 +11,10 @@ public class Composite extends Component {
     public Composite() {
         componentList = new ArrayList<>();
     }
+    public Composite(Component component) {
+        componentList = new ArrayList<>();
+        componentList.add(component);
+    }
 
     public int getSize(){
         return componentList.size();

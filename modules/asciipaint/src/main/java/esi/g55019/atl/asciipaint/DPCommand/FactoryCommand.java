@@ -2,12 +2,15 @@ package esi.g55019.atl.asciipaint.DPCommand;
 
 import esi.g55019.atl.asciipaint.AsciiPaint;
 
+import java.util.Arrays;
+
 
 public class FactoryCommand {
 
     private AsciiPaint paint;
     private String[] commandeIni;
     private String[] commandeCorrection;
+    private int[] commandeCorrectionForGroup;
     private int index = 0;
 
 
@@ -34,6 +37,7 @@ public class FactoryCommand {
                     commandeCorrection = commandeIni;
                     break;
                 case "group":
+                    checkGroup();
                     break;
                 default:
                     erreurCommande();
@@ -43,6 +47,43 @@ public class FactoryCommand {
         catch (Exception e){
             erreurCommande();
         }
+    }
+
+    private void checkGroup(){
+        if(commandeIni.length < 3){
+            erreurCommande();
+        }
+        else{
+            int [] tab = new int[commandeIni.length-1];
+            try{
+                for (int i = 1; i < commandeIni.length; i++) {
+                    tab[i-1] = Integer.parseInt(commandeIni[i]) -1;
+                }
+                if(!hasDoublon(tab)){
+                    //TODO: faire un check si les num rentrés sont bien dans la liste (donc > 0 et < listeshape.length)
+                    Arrays.sort(tab);
+                    commandeCorrection = commandeIni;
+                    commandeCorrectionForGroup = tab;
+                }
+                else{
+                    erreurCommande();
+                }
+            }catch (Exception e){
+                erreurCommande();
+            }
+        }
+    }
+    
+    private boolean hasDoublon(int [] tab){
+        for (int i = 0; i < tab.length; i++) {
+            for (int j = i+1; j < tab.length; j++) {
+                if(tab[i] == tab[j]){
+                    System.out.print("Vous voulez ajouter 2 fois la même forme dans le groupe : ");
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void erreurCommande(){
@@ -156,6 +197,9 @@ public class FactoryCommand {
                 break;
             case "list":
                 command = new ListCommand(paint);
+                break;
+            case "group":
+                command = new GroupCommand(paint, commandeCorrectionForGroup);
                 break;
             default:
                 command = new EndCommand(paint);

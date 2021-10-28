@@ -30,6 +30,7 @@ public class Application {
         FactoryCommand usineCommande = new FactoryCommand(paint);
         Command command;
 
+        //TODO: groupe marche mais ToString à définir pour component (genre juste groupe)
         while (!paint.getEnd()) {
             commandeString = askCommand();
             try{
@@ -42,22 +43,6 @@ public class Application {
                 System.out.printf("Erreur. ");
             }
         }
-    }
-
-    private void group(){
-        int forme1 = askInt("Quelle forme voulez-vous ajouter dans le groupe : ");
-        while (forme1 > paint.nbForme() || forme1 <= 0){
-            System.out.println("Erreur, choissisez une forme valide");
-            forme1 = askInt("Quelle forme voulez-vous ajouter dans le groupe : ");
-        }
-        int forme2 = askInt("Quelle autres formes voulez vous ajouter dans le groupe");
-        while(forme2 > paint.nbForme() || forme2 <= 0){
-            forme2 = askInt("Quelle autres formes voulez vous ajouter dans le groupe");
-        }
-        forme1--;
-        forme2--;
-        paint.newGroup(forme1, forme2);
-
     }
 
     /**
@@ -107,6 +92,7 @@ public class Application {
         System.out.println("Entrer :\n* add : pour ajouter un élément. \n" +
                 "* show : pour afficher le dessin.\n" +
                 "* list : pour afficher la liste des formes de votre dessin.\n" +
+                "* group : pour grouper plusieurs formes (au moins 2).\n" +
                 "* end : pour fermer le programme");
         Scanner clavier = new Scanner(System.in);
         String commandes = clavier.nextLine();
