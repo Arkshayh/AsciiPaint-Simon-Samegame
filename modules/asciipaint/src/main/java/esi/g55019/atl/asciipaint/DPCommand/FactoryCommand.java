@@ -13,6 +13,7 @@ public class FactoryCommand {
     private String[] commandeCorrection;
     private int[] commandeCorrectionForGroup;
     private int index = 0;
+    private int indexForDeleteOrUngroup;
 
 
     public FactoryCommand(AsciiPaint paint) {
@@ -41,6 +42,10 @@ public class FactoryCommand {
                     index++;
                     checkColorCommand();
                     break;
+                case "delete":
+                    index++;
+                    checkDelete();
+                    break;
                 case "group":
                     checkGroup();
                     break;
@@ -56,6 +61,7 @@ public class FactoryCommand {
             erreurCommande("");
         }
     }
+
     private void checkColorCommand(){
         if(commandeIni.length != 3){
             erreurCommande("Commande incorrect pour color");
@@ -72,22 +78,36 @@ public class FactoryCommand {
         }
     }
 
+    private void checkDelete(){
+        if(commandeIni.length != 2){
+            erreurCommande("Commande incorrect pour un delete");
+        }
+        else{
+            checkInt();
+            if(isInside(Integer.parseInt(commandeIni[index -1]) -1)){
+                indexForDeleteOrUngroup = Integer.parseInt(commandeIni[index -1]) -1;
+                commandeCorrection = commandeIni;
+            }
+            else{
+                erreurCommande("Vous voulez supprimer une forme ou un groupe inexistant");
+            }
+        }
+    }
+
     private void checkUngroup(){
         if(commandeIni.length != 2){
             erreurCommande("Commande incorrect pour un ungroup");
         }
         else{
-            int [] tab = new int[1];
             try {
-                tab[0] = Integer.parseInt(commandeIni[1]) -1;
-                if(tab[0] < 0 || tab[0] > paint.nbForme() -1){
+                int nb = Integer.parseInt(commandeIni[1]) -1;
+                if(nb < 0 || nb > paint.nbForme() -1){
                     erreurCommande("Votre groupe n'existe pas");
                 }
-                if(!isAGroup(tab[0])){
+                if(!isAGroup(nb)){
                     erreurCommande("Vous voulez dégroupe une forme et non un groupe");
                 }
-                commandeCorrection = commandeIni;
-                commandeCorrectionForGroup = tab;
+                indexForDeleteOrUngroup =nb;
             }
             catch (Exception e){
                 erreurCommande("Erreur commande ungroup");
@@ -164,7 +184,7 @@ public class FactoryCommand {
             switch (commandeIni[index]){
                 case "circle":
                     if(commandeIni.length != typeOfCommande.ADD_CIRCLE.getLongueur()){
-                        erreurCommande("Longueur de la commande pour ajouter un cercle trop petite");
+                        erreurCommande("Longueur de la commande pour ajouter un cercle incorrecte");
                     }
                     else {
                         index++;
@@ -176,7 +196,7 @@ public class FactoryCommand {
                     break;
                 case "square":
                     if(commandeIni.length != typeOfCommande.ADD_SQUARE.getLongueur()){
-                        erreurCommande("Longueur de la commande pour ajouter un carré trop petite");
+                        erreurCommande("Longueur de la commande pour ajouter un carré incorrecte");
                     }
                     else{
                         index++;
@@ -188,7 +208,7 @@ public class FactoryCommand {
                     break;
                 case "line":
                     if(commandeIni.length != typeOfCommande.ADD_LINE.getLongueur()){
-                        erreurCommande("Longueur de la commande pour ajouter une ligne trop petite");
+                        erreurCommande("Longueur de la commande pour ajouter une ligne incorrecte");
                     }
                     else{
                         index++;
@@ -200,7 +220,7 @@ public class FactoryCommand {
                     break;
                 case "rectangle":
                     if(commandeIni.length != typeOfCommande.ADD_RECTANGLE.getLongueur()){
-                        erreurCommande("Longueur de la commande pour ajouter un rectangle trop petite");
+                        erreurCommande("Longueur de la commande pour ajouter un rectangle incorrecte");
                     }
                     else{
                         index++;
@@ -274,7 +294,10 @@ public class FactoryCommand {
                 command = new GroupCommand(paint, commandeCorrectionForGroup);
                 break;
             case "ungroup":
-                command = new UngroupCommand(paint, commandeCorrectionForGroup);
+                command = new UngroupCommand(paint, indexForDeleteOrUngroup);
+                break;
+            case "delete":
+                command = new DeleteCommand(paint, indexForDeleteOrUngroup);
                 break;
             default:
                 command = new EndCommand(paint);

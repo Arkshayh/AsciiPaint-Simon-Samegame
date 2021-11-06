@@ -57,4 +57,9 @@ public class Circle extends ColoredShape {
     public String toString() {
         return "Circle";
     }
+
+    @Override
+    public void changeColor(char color) {
+        setColor(color);
+    }
 }

@@ -66,6 +66,11 @@ public class Rectangle extends ColoredShape {
     }
 
     @Override
+    public void changeColor(char color) {
+        setColor(color);
+    }
+
+    @Override
     public String toString() {
         return "Rectangle";
     }

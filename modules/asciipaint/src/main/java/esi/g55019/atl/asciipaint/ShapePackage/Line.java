@@ -40,4 +40,9 @@ public class Line extends ColoredShape {
     public String toString() {
         return "Line";
     }
+
+    @Override
+    public void changeColor(char color) {
+        setColor(color);
+    }
 }

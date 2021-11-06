@@ -111,12 +111,6 @@ public class Drawing {
     }
 
     public void changeColor(int index, char color){
-        if(shapes.get(index) instanceof Leaf){
-            ((Leaf) shapes.get(index)).setColor(color);
-        }
-        else{
-            System.out.println("On peut pas changer la couleur d'un groupe");
-            //((Composite) shapes.get(index)).setColor(color);
-        }
+        shapes.get(index).changeColor(color);
     }
 }

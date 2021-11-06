@@ -3,7 +3,7 @@ package esi.g55019.atl.asciipaint;
 import esi.g55019.atl.asciipaint.DPCommand.*;
 import java.util.Scanner;
 
-//TODO: delete : (emplacement forme) | undo | redo
+//TODO: undo | redo
 
 /**
  * @author Cotton Ian g55019
@@ -96,6 +96,7 @@ public class Application {
                 "* color : pour changer la couleur d'une forme" +
                 "* group : pour grouper plusieurs formes (au moins 2).\n" +
                 "* ungroup : pour dégrouper.\n" +
+                "* delete : pour supprimer un groupe ou une forme" +
                 "* end : pour fermer le programme");
         Scanner clavier = new Scanner(System.in);
         String commandes = clavier.nextLine();

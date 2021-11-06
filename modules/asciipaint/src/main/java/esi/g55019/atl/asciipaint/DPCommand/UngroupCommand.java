@@ -8,16 +8,16 @@ import java.util.List;
 
 public class UngroupCommand implements Command{
     private AsciiPaint paint;
-    private int[] commande;
+    private int index;
 
-    public UngroupCommand(AsciiPaint paint, int[] commande) {
+    public UngroupCommand(AsciiPaint paint, int index) {
         this.paint = paint;
-        this.commande = commande;
+        this.index = index;
     }
 
     @Override
     public void execute() {
-        Component groupe = paint.getShapeAt(commande[0]);
+        Component groupe = paint.getShapeAt(index);
         List<Component> list = ((Composite) groupe).getChildren();
         for (int i = 0; i < list.size(); i++) {
             paint.addCompenent(list.get(i));
