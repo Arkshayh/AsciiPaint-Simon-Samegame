@@ -1,5 +1,6 @@
 package esi.g55019.atl.asciipaint;
 
+import esi.g55019.atl.asciipaint.DPComposite.Component;
 import esi.g55019.atl.asciipaint.DPComposite.Composite;
 import esi.g55019.atl.asciipaint.DPComposite.Leaf;
 import esi.g55019.atl.asciipaint.ShapePackage.Circle;
@@ -90,6 +91,14 @@ public class AsciiPaint {
         drawing.addShape(groupe);
     }
 
+    public void addCompenent(Component composant){
+        drawing.addShape(composant);
+    }
+
+    public void removeShape(Component compenent){
+        drawing.removeShape(compenent);
+    }
+
     /**
      * Return the drawing
      * @return String as a string.
@@ -125,6 +134,14 @@ public class AsciiPaint {
 
     public void end(){
         this.end = true;
+    }
+
+    public Component getShapeAt(int index){
+        return drawing.getShapeInList(index);
+    }
+
+    public void changeColor(int index, char color){
+        drawing.changeColor(index, color);
     }
 
     public boolean getEnd(){

@@ -1,5 +1,6 @@
 package esi.g55019.atl.asciipaint.ShapePackage;
 
+import esi.g55019.atl.asciipaint.ColoredShape;
 import esi.g55019.atl.asciipaint.Point;
 
 /**

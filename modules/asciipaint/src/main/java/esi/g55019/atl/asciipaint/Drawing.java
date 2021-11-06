@@ -1,6 +1,8 @@
 package esi.g55019.atl.asciipaint;
 
 import esi.g55019.atl.asciipaint.DPComposite.Component;
+import esi.g55019.atl.asciipaint.DPComposite.Composite;
+import esi.g55019.atl.asciipaint.DPComposite.Leaf;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,4 +110,13 @@ public class Drawing {
         return shapes.get(index);
     }
 
+    public void changeColor(int index, char color){
+        if(shapes.get(index) instanceof Leaf){
+            ((Leaf) shapes.get(index)).setColor(color);
+        }
+        else{
+            System.out.println("On peut pas changer la couleur d'un groupe");
+            //((Composite) shapes.get(index)).setColor(color);
+        }
+    }
 }

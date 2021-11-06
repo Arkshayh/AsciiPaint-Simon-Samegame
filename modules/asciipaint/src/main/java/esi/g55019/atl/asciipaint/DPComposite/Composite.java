@@ -53,4 +53,18 @@ public class Composite extends Component {
     public char getColor() {
         return componentList.get(0).getColor();
     }
+
+    //TODO demander au prof comment faire
+    /*public void setColor(char color){
+        if(componentList.get(0) instanceof Leaf){
+            ((Leaf) componentList.get(0)).setColor(color);
+        }else{
+            ((Composite) componentList.get(0)).setColor(color);
+        }
+    }*/
+
+    @Override
+    public String toString() {
+        return "Groupe";
+    }
 }

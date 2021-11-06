@@ -1,6 +1,7 @@
 package esi.g55019.atl.asciipaint.DPCommand;
 
 import esi.g55019.atl.asciipaint.AsciiPaint;
+import esi.g55019.atl.asciipaint.DPComposite.Composite;
 
 import java.util.Arrays;
 
@@ -36,22 +37,75 @@ public class FactoryCommand {
                 case "end":
                     commandeCorrection = commandeIni;
                     break;
+                case "color":
+                    index++;
+                    checkColorCommand();
+                    break;
                 case "group":
                     checkGroup();
                     break;
+                case "ungroup":
+                    checkUngroup();
+                    break;
                 default:
-                    erreurCommande();
+                    erreurCommande("Commande inconnue");
                     break;
             }
         }
         catch (Exception e){
-            erreurCommande();
+            erreurCommande("");
         }
+    }
+    private void checkColorCommand(){
+        if(commandeIni.length != 3){
+            erreurCommande("Commande incorrect pour color");
+        }
+        checkInt();
+        int nb = Integer.parseInt(commandeIni[index -1]) -1;
+        if(!isInside(nb)){
+            erreurCommande("Erreur dans la commande color");
+        }
+        else{
+            commandeIni[1] = Integer.toString(nb);
+            checkColor();
+            commandeCorrection = commandeIni;
+        }
+    }
+
+    private void checkUngroup(){
+        if(commandeIni.length != 2){
+            erreurCommande("Commande incorrect pour un ungroup");
+        }
+        else{
+            int [] tab = new int[1];
+            try {
+                tab[0] = Integer.parseInt(commandeIni[1]) -1;
+                if(tab[0] < 0 || tab[0] > paint.nbForme() -1){
+                    erreurCommande("Votre groupe n'existe pas");
+                }
+                if(!isAGroup(tab[0])){
+                    erreurCommande("Vous voulez dégroupe une forme et non un groupe");
+                }
+                commandeCorrection = commandeIni;
+                commandeCorrectionForGroup = tab;
+            }
+            catch (Exception e){
+                erreurCommande("Erreur commande ungroup");
+            }
+
+        }
+    }
+
+    private boolean isAGroup(int emplacement){
+        if(paint.getShapeAt(emplacement) instanceof Composite){
+            return true;
+        }
+        return false;
     }
 
     private void checkGroup(){
         if(commandeIni.length < 3){
-            erreurCommande();
+            erreurCommande("Taille de la commande rentrée trop petite");
         }
         else{
             int [] tab = new int[commandeIni.length-1];
@@ -60,16 +114,24 @@ public class FactoryCommand {
                     tab[i-1] = Integer.parseInt(commandeIni[i]) -1;
                 }
                 if(!hasDoublon(tab)){
-                    //TODO: faire un check si les num rentrés sont bien dans la liste (donc > 0 et < listeshape.length)
                     Arrays.sort(tab);
+
+                    //Ce if/ else if vérifie si les nombres rentrés sont bien dans la liste
+                    if(!isInside(tab[0])){
+                        erreurCommande("Le premier élément que vous voulez grouper n'est pas dans la liste");
+                    }
+                    else if(!isInside(tab[tab.length-1])){
+                        erreurCommande("Le dernier élément que vous voulez grouper n'est pas dans la liste");
+                    }
+
                     commandeCorrection = commandeIni;
                     commandeCorrectionForGroup = tab;
                 }
                 else{
-                    erreurCommande();
+                    erreurCommande("Vous voulez ajouter un même élément plusieurs fois dans le même groupe");
                 }
             }catch (Exception e){
-                erreurCommande();
+                erreurCommande("");
             }
         }
     }
@@ -78,7 +140,6 @@ public class FactoryCommand {
         for (int i = 0; i < tab.length; i++) {
             for (int j = i+1; j < tab.length; j++) {
                 if(tab[i] == tab[j]){
-                    System.out.print("Vous voulez ajouter 2 fois la même forme dans le groupe : ");
                     return true;
                 }
             }
@@ -86,8 +147,16 @@ public class FactoryCommand {
         return false;
     }
 
-    private void erreurCommande(){
-        throw new IllegalArgumentException("Erreur commande");
+    private void erreurCommande(String erreurMsg){
+        System.out.println(erreurMsg);
+        throw new IllegalArgumentException();
+    }
+
+    private boolean isInside(int indexForme){
+        if(indexForme < 0 || indexForme > paint.nbForme()-1){
+            return false;
+        }
+        return true;
     }
 
     private void checkAdd(){
@@ -95,7 +164,7 @@ public class FactoryCommand {
             switch (commandeIni[index]){
                 case "circle":
                     if(commandeIni.length != typeOfCommande.ADD_CIRCLE.getLongueur()){
-                        erreurCommande();
+                        erreurCommande("Longueur de la commande pour ajouter un cercle trop petite");
                     }
                     else {
                         index++;
@@ -107,7 +176,7 @@ public class FactoryCommand {
                     break;
                 case "square":
                     if(commandeIni.length != typeOfCommande.ADD_SQUARE.getLongueur()){
-                        erreurCommande();
+                        erreurCommande("Longueur de la commande pour ajouter un carré trop petite");
                     }
                     else{
                         index++;
@@ -119,7 +188,7 @@ public class FactoryCommand {
                     break;
                 case "line":
                     if(commandeIni.length != typeOfCommande.ADD_LINE.getLongueur()){
-                        erreurCommande();
+                        erreurCommande("Longueur de la commande pour ajouter une ligne trop petite");
                     }
                     else{
                         index++;
@@ -131,7 +200,7 @@ public class FactoryCommand {
                     break;
                 case "rectangle":
                     if(commandeIni.length != typeOfCommande.ADD_RECTANGLE.getLongueur()){
-                        erreurCommande();
+                        erreurCommande("Longueur de la commande pour ajouter un rectangle trop petite");
                     }
                     else{
                         index++;
@@ -142,12 +211,12 @@ public class FactoryCommand {
                     }
                     break;
                 default:
-                    erreurCommande();
+                    erreurCommande("Vous voulez ajouter une forme inconnu :(");
                     break;
             }
         }
         catch (Exception e){
-            erreurCommande();
+            erreurCommande("");
         }
     }
 
@@ -158,7 +227,7 @@ public class FactoryCommand {
             index = index + 2;
         }
         catch (Exception e){
-            erreurCommande();
+            erreurCommande("");
         }
     }
 
@@ -168,7 +237,7 @@ public class FactoryCommand {
             index++;
         }
         catch (Exception e){
-            erreurCommande();
+            erreurCommande("");
         }
     }
 
@@ -182,7 +251,7 @@ public class FactoryCommand {
             index++;
         }
         catch (Exception e){
-            erreurCommande();
+            erreurCommande("");
         }
     }
 
@@ -198,8 +267,14 @@ public class FactoryCommand {
             case "list":
                 command = new ListCommand(paint);
                 break;
+            case "color":
+                command = new ColorCommand(paint, commandeCorrection);
+                break;
             case "group":
                 command = new GroupCommand(paint, commandeCorrectionForGroup);
+                break;
+            case "ungroup":
+                command = new UngroupCommand(paint, commandeCorrectionForGroup);
                 break;
             default:
                 command = new EndCommand(paint);

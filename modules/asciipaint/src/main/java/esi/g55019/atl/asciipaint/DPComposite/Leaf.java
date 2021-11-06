@@ -1,5 +1,6 @@
 package esi.g55019.atl.asciipaint.DPComposite;
 
+import esi.g55019.atl.asciipaint.ColoredShape;
 import esi.g55019.atl.asciipaint.Point;
 import esi.g55019.atl.asciipaint.Shape;
 
@@ -29,5 +30,9 @@ public class Leaf extends Component{
     @Override
     public String toString() {
         return shape.toString();
+    }
+
+    public void setColor(char color){
+        ((ColoredShape) shape).setColor(color);
     }
 }
