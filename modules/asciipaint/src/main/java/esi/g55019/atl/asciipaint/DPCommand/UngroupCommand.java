@@ -36,4 +36,9 @@ public class UngroupCommand implements Command{
         }
         paint.addCompenent(groupe);
     }
+
+    @Override
+    public boolean isReversible() {
+        return true;
+    }
 }

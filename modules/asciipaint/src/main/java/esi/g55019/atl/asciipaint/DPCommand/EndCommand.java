@@ -19,4 +19,9 @@ public class EndCommand implements Command {
     public void unexecute() {
 
     }
+
+    @Override
+    public boolean isReversible() {
+        return false;
+    }
 }

@@ -16,6 +16,11 @@ public class ListCommand implements Command{
 
     @Override
     public void unexecute() {
-        System.out.println("Impossible d'annuler la commande list");
+
+    }
+
+    @Override
+    public boolean isReversible() {
+        return false;
     }
 }

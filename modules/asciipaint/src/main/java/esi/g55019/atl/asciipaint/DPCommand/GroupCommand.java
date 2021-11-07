@@ -30,4 +30,9 @@ public class GroupCommand implements Command{
         }
         paint.removeShape(groupe);
     }
+
+    @Override
+    public boolean isReversible() {
+        return true;
+    }
 }

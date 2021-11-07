@@ -26,4 +26,9 @@ public class DeleteCommand implements Command {
         paint.addCompenent(oldComponent);
     }
 
+    @Override
+    public boolean isReversible() {
+        return true;
+    }
+
 }

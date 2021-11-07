@@ -43,4 +43,9 @@ public class AddCommand implements Command{
     public void unexecute() {
         paint.removeShape(paint.getShapeAt(paint.nbForme() -1));
     }
+
+    @Override
+    public boolean isReversible() {
+        return true;
+    }
 }

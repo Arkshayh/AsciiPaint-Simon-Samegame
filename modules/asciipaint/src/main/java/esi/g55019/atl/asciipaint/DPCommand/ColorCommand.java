@@ -23,4 +23,9 @@ public class ColorCommand implements Command{
     public void unexecute() {
         paint.changeColor(Integer.parseInt(commande[1]), oldColor);
     }
+
+    @Override
+    public boolean isReversible() {
+        return true;
+    }
 }
