@@ -13,8 +13,8 @@ public class AddCommand implements Command{
     }
 
     /**
-     * execute pour la commande add
-     * Pas checker l'élément à l'index 0 car c'est le type de commande (add/show/...)
+     * execute the add Command
+     * it will add a
      */
     @Override
     public void execute() {
@@ -39,6 +39,9 @@ public class AddCommand implements Command{
         }
     }
 
+    /**
+     * remove the last shape added
+     */
     @Override
     public void unexecute() {
         paint.removeShape(paint.getShapeAt(paint.nbForme() -1));

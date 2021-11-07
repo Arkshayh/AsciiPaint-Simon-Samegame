@@ -58,6 +58,10 @@ public class Circle extends ColoredShape {
         return "Circle";
     }
 
+    /**
+     * change the color of the circle
+     * @param color char
+     */
     @Override
     public void changeColor(char color) {
         setColor(color);

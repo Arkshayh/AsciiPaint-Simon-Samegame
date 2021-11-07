@@ -65,6 +65,10 @@ public class Rectangle extends ColoredShape {
         return true;
     }
 
+    /**
+     * change the color of the rectangle
+     * @param color char
+     */
     @Override
     public void changeColor(char color) {
         setColor(color);

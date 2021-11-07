@@ -8,8 +8,12 @@ import esi.g55019.atl.asciipaint.Point;
 import java.util.Arrays;
 
 
+/**
+ * The factory will checked if the user enter a correct command if it's not the case it will return an error
+ * If it's the case it will return a Command based of what the user inputed
+ * @author Cotton Ian g55019
+ */
 public class FactoryCommand {
-
     private AsciiPaint paint;
     private String[] commandeIni;
     private String[] commandeCorrection;
@@ -22,15 +26,27 @@ public class FactoryCommand {
     private Component oldComponentForUndoDelete;
     private Point forUndoMove;
 
+    /**
+     * Constructor
+     * @param paint AsciiPaint
+     */
     public FactoryCommand(AsciiPaint paint) {
         this.paint = paint;
     }
 
+    /**
+     * set the commandIni attribute by transforming it in a tab of String, then will called createComman()
+     * @param commande String
+     */
     public void setCommandeIni(String commande){
         commandeIni = commande.split(" ");
         createCommande();
     }
 
+    /**
+     * Will create a command
+     * called the erreurCommand if the input of the user is incorrect
+     */
     private void createCommande(){
         index = 0;
         try {
@@ -76,6 +92,9 @@ public class FactoryCommand {
         }
     }
 
+    /**
+     * check if the move command enter by the user is correct otherwise erreurCommane is called
+     */
     private void checkMove(){
         checkInt();
         if(isInside(Integer.parseInt(commandeIni[index-1]) -1)){
@@ -90,6 +109,9 @@ public class FactoryCommand {
         }
     }
 
+    /**
+     * change the undo attribute
+     */
     public void setUndo() {
         if(!undo){
             undo = true;
@@ -99,10 +121,17 @@ public class FactoryCommand {
         }
     }
 
+    /**
+     * getter for undo
+     * @return boolean
+     */
     public boolean isUndo() {
         return undo;
     }
 
+    /**
+     * check if the color command of the user is correct otherwise erreurCommane is called
+     */
     private void checkColorCommand(){
         if(commandeIni.length != 3){
             erreurCommande("Commande incorrect pour color");
@@ -120,6 +149,9 @@ public class FactoryCommand {
         }
     }
 
+    /**
+     * check if the delete command of the user is correct otherwise erreurCommane is called
+     */
     private void checkDelete(){
         if(commandeIni.length != 2){
             erreurCommande("Commande incorrect pour un delete");
@@ -137,6 +169,9 @@ public class FactoryCommand {
         }
     }
 
+    /**
+     * check if the ungroup command of the user is correct otherwise erreurCommane is called
+     */
     private void checkUngroup(){
         if(commandeIni.length != 2){
             erreurCommande("Commande incorrect pour un ungroup");
@@ -157,10 +192,14 @@ public class FactoryCommand {
             catch (Exception e){
                 erreurCommande("Erreur commande ungroup");
             }
-
         }
     }
 
+    /**
+     * check if the Component at the given position is a Composite
+     * @param emplacement int
+     * @return  boolean
+     */
     private boolean isAGroup(int emplacement){
         if(paint.getShapeAt(emplacement) instanceof Composite){
             return true;
@@ -168,6 +207,9 @@ public class FactoryCommand {
         return false;
     }
 
+    /**
+     * check if the group command of the user is correct otherwise erreurCommane is called
+     */
     private void checkGroup(){
         if(commandeIni.length < 3){
             erreurCommande("Taille de la commande rentrée trop petite");
@@ -199,7 +241,12 @@ public class FactoryCommand {
             }
         }
     }
-    
+
+    /**
+     * check if the tab has duplicate in it
+     * @param tab int[]
+     * @return boolean
+     */
     private boolean hasDoublon(int [] tab){
         for (int i = 0; i < tab.length; i++) {
             for (int j = i+1; j < tab.length; j++) {
@@ -211,11 +258,21 @@ public class FactoryCommand {
         return false;
     }
 
+    /**
+     * Display the message in parameter and throw an exception
+     * @param erreurMsg String
+     * @throws IllegalArgumentException
+     */
     private void erreurCommande(String erreurMsg){
         System.out.println(erreurMsg);
         throw new IllegalArgumentException();
     }
 
+    /**
+     * check if the index of a component given is in the drawing
+     * @param indexForme int
+     * @return boolean
+     */
     private boolean isInside(int indexForme){
         if(indexForme < 0 || indexForme > paint.nbForme()-1){
             return false;
@@ -223,6 +280,9 @@ public class FactoryCommand {
         return true;
     }
 
+    /**
+     * check if the add command of the user is correct otherwise erreurCommane is called
+     */
     private void checkAdd(){
         try {
             switch (commandeIni[index]){
@@ -284,6 +344,9 @@ public class FactoryCommand {
         }
     }
 
+    /**
+     * check if the value at the commandeIni[index] and commandeIni[index + 1] are an integer otherwise erreurCommane is called
+     */
     private void checkPoint(){
         try{
             Integer.parseInt(commandeIni[index]);
@@ -295,6 +358,9 @@ public class FactoryCommand {
         }
     }
 
+    /**
+     * check if the value at the commandeIni[index] are an integer otherwise erreurCommane is called
+     */
     private void checkInt(){
         try {
             Integer.parseInt(commandeIni[index]);
@@ -305,10 +371,17 @@ public class FactoryCommand {
         }
     }
 
+    /**
+     * update paint
+     * @param paint AsciiPaint
+     */
     public void setPaint(AsciiPaint paint){
         this.paint = paint;
     }
 
+    /**
+     * check if the value at the commandIni[index] is a char otherwise erreurCommane is called
+     */
     private void checkColor(){
         try{
             commandeIni[index].charAt(0);
@@ -319,6 +392,10 @@ public class FactoryCommand {
         }
     }
 
+    /**
+     * return a command based of the input of the user
+     * @return Command
+     */
     public Command getCommandeCorrection(){
         Command command;
         switch (commandeCorrection[0]) {

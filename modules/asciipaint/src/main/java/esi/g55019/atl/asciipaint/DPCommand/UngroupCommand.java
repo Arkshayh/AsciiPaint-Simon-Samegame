@@ -6,17 +6,29 @@ import esi.g55019.atl.asciipaint.DPComposite.Composite;
 
 import java.util.List;
 
+/**
+ * this class represent the ungroup command and implement the command interface
+ */
 public class UngroupCommand implements Command{
     private AsciiPaint paint;
     private int index;
     private int nbUndoUngroupForm;
 
+    /**
+     * Constructor
+     * @param paint Asciipaint
+     * @param index int
+     * @param nbUndoUngroupForm int
+     */
     public UngroupCommand(AsciiPaint paint, int index, int nbUndoUngroupForm) {
         this.paint = paint;
         this.index = index;
         this.nbUndoUngroupForm = nbUndoUngroupForm;
     }
 
+    /**
+     * Ungroup the group
+     */
     @Override
     public void execute() {
         Component groupe = paint.getShapeAt(index);
@@ -27,6 +39,9 @@ public class UngroupCommand implements Command{
         paint.removeShape(groupe);
     }
 
+    /**
+     * create back the previous group
+     */
     @Override
     public void unexecute() {
         Composite groupe = new Composite();

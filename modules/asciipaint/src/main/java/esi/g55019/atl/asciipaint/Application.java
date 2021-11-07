@@ -3,7 +3,6 @@ package esi.g55019.atl.asciipaint;
 import esi.g55019.atl.asciipaint.DPCommand.*;
 import java.util.Scanner;
 
-//TODO: redo
 
 /**
  * @author Cotton Ian g55019
@@ -85,18 +84,10 @@ public class Application {
         return clavier.nextInt();
     }
 
-
-
-    private void move(){
-        System.out.println("Voici la liste des formes : ");
-
-        int num = askInt("Quelle liste voulez vous déplacer ? ");
-        int dx = askInt("De combien de X voulez-vous la déplacer ?");
-        int dy = askInt("De combien de Y voulez-vous la déplacer ?");
-
-        paint.move(num, dx, dy);
-    }
-
+    /**
+     * display a message and return the input of the user
+     * @return String
+     */
     private String askCommand(){
         System.out.println("Entrer :\n* add : pour ajouter un élément. \n" +
                 "* move : pour déplacer une forme ou un groupe.\n" +

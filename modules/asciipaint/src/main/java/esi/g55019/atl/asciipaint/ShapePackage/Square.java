@@ -1,6 +1,5 @@
 package esi.g55019.atl.asciipaint.ShapePackage;
 
-import esi.g55019.atl.asciipaint.ColoredShape;
 import esi.g55019.atl.asciipaint.Point;
 
 /**
@@ -14,12 +13,10 @@ public class Square extends Rectangle {
 
     /**
      * Constructor of a Square, The side of a square must be >= 0.
-     *
      * @param upperLeft Point
      * @param side      double
      * @param color     char
      */
-
     public Square(Point upperLeft, double side, char color) {
         super(upperLeft, side, side, color);
     }

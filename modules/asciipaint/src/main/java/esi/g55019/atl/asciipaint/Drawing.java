@@ -1,8 +1,6 @@
 package esi.g55019.atl.asciipaint;
 
 import esi.g55019.atl.asciipaint.DPComposite.Component;
-import esi.g55019.atl.asciipaint.DPComposite.Composite;
-import esi.g55019.atl.asciipaint.DPComposite.Leaf;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +79,9 @@ public class Drawing {
         return width;
     }
 
-
+    /**
+     * display each component of the drawing
+     */
     public void showList(){
         if(shapes.size() == 0){
             System.out.println("Pas de forme");
@@ -92,6 +92,12 @@ public class Drawing {
         }
     }
 
+    /**
+     * move the component at the position given
+     * @param numberOfTheShape  int
+     * @param dx    int
+     * @param dy    int
+     */
     public void move(int numberOfTheShape, int dx, int dy){
         int shapeToMove = numberOfTheShape - 1;
         if(shapeToMove <0 || shapeToMove >= shapes.size()){
@@ -102,14 +108,28 @@ public class Drawing {
         }
     }
 
+    /**
+     * return the number of shape of the drawing
+     * @return int
+     */
     public int getSize(){
         return shapes.size();
     }
 
+    /**
+     * return the component at the given index
+     * @param index
+     * @return
+     */
     public Component getShapeInList(int index){
         return shapes.get(index);
     }
 
+    /**
+     * change the color of the component at the given index
+     * @param index int
+     * @param color char
+     */
     public void changeColor(int index, char color){
         shapes.get(index).changeColor(color);
     }
