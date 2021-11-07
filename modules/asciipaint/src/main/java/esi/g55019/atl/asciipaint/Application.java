@@ -99,16 +99,17 @@ public class Application {
 
     private String askCommand(){
         System.out.println("Entrer :\n* add : pour ajouter un élément. \n" +
+                "* move : pour déplacer une forme ou un groupe.\n" +
                 "* show : pour afficher le dessin.\n" +
                 "* list : pour afficher la liste des formes de votre dessin.\n" +
                 "* color : pour changer la couleur d'une forme" +
                 "* group : pour grouper plusieurs formes (au moins 2).\n" +
                 "* ungroup : pour dégrouper.\n" +
+                "* redo : pour refaire la commande précédente.\n" +
                 "* undo : pour annuler l'action précédente.\n" +
                 "* delete : pour supprimer un groupe ou une forme.\n" +
                 "* end : pour fermer le programme.\n");
         Scanner clavier = new Scanner(System.in);
-        String commandes = clavier.nextLine();
-        return commandes;
+        return clavier.nextLine();
     }
 }

@@ -3,6 +3,7 @@ package esi.g55019.atl.asciipaint.DPCommand;
 import esi.g55019.atl.asciipaint.AsciiPaint;
 import esi.g55019.atl.asciipaint.DPComposite.Component;
 import esi.g55019.atl.asciipaint.DPComposite.Composite;
+import esi.g55019.atl.asciipaint.Point;
 
 import java.util.Arrays;
 
@@ -14,11 +15,12 @@ public class FactoryCommand {
     private String[] commandeCorrection;
     private int[] commandeCorrectionForGroup;
     private int index = 0;
-    private int indexForDeleteOrUngroup;
+    private int indexForDeleteOrUngroupOrMove;
     private boolean undo = false;
     private char colorUndo;
     private int nbFormeUndoUngroup;
     private Component oldComponentForUndoDelete;
+    private Point forUndoMove;
 
     public FactoryCommand(AsciiPaint paint) {
         this.paint = paint;
@@ -37,6 +39,9 @@ public class FactoryCommand {
                     index++;
                     checkAdd();
                     break;
+                case "move":
+                    index++;
+                    checkMove();
                 case "show":
                 case "list":
                 case "end":
@@ -59,6 +64,8 @@ public class FactoryCommand {
                 case "undo":
                     setUndo();
                     break;
+                case "redo":
+                    break;
                 default:
                     erreurCommande("Commande inconnue");
                     break;
@@ -66,6 +73,20 @@ public class FactoryCommand {
         }
         catch (Exception e){
             erreurCommande("");
+        }
+    }
+
+    private void checkMove(){
+        checkInt();
+        if(isInside(Integer.parseInt(commandeIni[index-1]) -1)){
+            checkPoint();
+
+            indexForDeleteOrUngroupOrMove = Integer.parseInt(commandeIni[1]);
+            forUndoMove = new Point(Integer.parseInt(commandeIni[2]), Integer.parseInt(commandeIni[3]));
+            commandeCorrection = commandeIni;
+        }
+        else{
+            erreurCommande("Erreur move");
         }
     }
 
@@ -106,7 +127,7 @@ public class FactoryCommand {
         else{
             checkInt();
             if(isInside(Integer.parseInt(commandeIni[index -1]) -1)){
-                indexForDeleteOrUngroup = Integer.parseInt(commandeIni[index -1]) -1;
+                indexForDeleteOrUngroupOrMove = Integer.parseInt(commandeIni[index -1]) -1;
                 oldComponentForUndoDelete = paint.getShapeAt(Integer.parseInt(commandeIni[index -1]) -1);
                 commandeCorrection = commandeIni;
             }
@@ -130,7 +151,7 @@ public class FactoryCommand {
                     erreurCommande("Vous voulez dégroupe une forme et non un groupe");
                 }
                 nbFormeUndoUngroup = ((Composite) paint.getShapeAt(nb)).getSize();
-                indexForDeleteOrUngroup =nb;
+                indexForDeleteOrUngroupOrMove =nb;
                 commandeCorrection = commandeIni;
             }
             catch (Exception e){
@@ -160,7 +181,6 @@ public class FactoryCommand {
                 if(!hasDoublon(tab)){
                     Arrays.sort(tab);
 
-                    //Ce if/ else if vérifie si les nombres rentrés sont bien dans la liste
                     if(!isInside(tab[0])){
                         erreurCommande("Le premier élément que vous voulez grouper n'est pas dans la liste");
                     }
@@ -305,6 +325,11 @@ public class FactoryCommand {
             case "add":
                 command = new AddCommand(paint, commandeCorrection);
                 break;
+            case "move":
+                command = new MoveCommand(paint, Integer.parseInt(commandeCorrection[1]),
+                        Integer.parseInt(commandeCorrection[2]), Integer.parseInt(commandeCorrection[3]), forUndoMove,
+                        indexForDeleteOrUngroupOrMove);
+                break;
             case "show":
                 command = new ShowCommand(paint);
                 break;
@@ -318,10 +343,10 @@ public class FactoryCommand {
                 command = new GroupCommand(paint, commandeCorrectionForGroup);
                 break;
             case "ungroup":
-                command = new UngroupCommand(paint, indexForDeleteOrUngroup, nbFormeUndoUngroup);
+                command = new UngroupCommand(paint, indexForDeleteOrUngroupOrMove, nbFormeUndoUngroup);
                 break;
             case "delete":
-                command = new DeleteCommand(paint, indexForDeleteOrUngroup, oldComponentForUndoDelete);
+                command = new DeleteCommand(paint, indexForDeleteOrUngroupOrMove, oldComponentForUndoDelete);
                 break;
             default:
                 command = new EndCommand(paint);
