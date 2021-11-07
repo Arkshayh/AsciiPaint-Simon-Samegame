@@ -9,10 +9,12 @@ import java.util.List;
 public class UngroupCommand implements Command{
     private AsciiPaint paint;
     private int index;
+    private int nbUndoUngroupForm;
 
-    public UngroupCommand(AsciiPaint paint, int index) {
+    public UngroupCommand(AsciiPaint paint, int index, int nbUndoUngroupForm) {
         this.paint = paint;
         this.index = index;
+        this.nbUndoUngroupForm = nbUndoUngroupForm;
     }
 
     @Override
@@ -23,5 +25,15 @@ public class UngroupCommand implements Command{
             paint.addCompenent(list.get(i));
         }
         paint.removeShape(groupe);
+    }
+
+    @Override
+    public void unexecute() {
+        Composite groupe = new Composite();
+        for (int i = 0; i < nbUndoUngroupForm; i++) {
+            groupe.add(paint.getShapeAt(paint.nbForme()-1));
+            paint.removeShape(paint.getShapeAt(paint.nbForme()-1));
+        }
+        paint.addCompenent(groupe);
     }
 }

@@ -13,4 +13,9 @@ public class ShowCommand implements Command{
     public void execute() {
         System.out.println(paint.asAscii());
     }
+
+    @Override
+    public void unexecute() {
+        System.out.println("Impossible d'annuler un show");
+    }
 }

@@ -13,4 +13,10 @@ public class EndCommand implements Command {
     public void execute() {
         paint.end();
     }
+
+
+    @Override
+    public void unexecute() {
+
+    }
 }

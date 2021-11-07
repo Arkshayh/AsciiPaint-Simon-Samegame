@@ -13,4 +13,9 @@ public class ListCommand implements Command{
     public void execute() {
         paint.showList();
     }
+
+    @Override
+    public void unexecute() {
+        System.out.println("Impossible d'annuler la commande list");
+    }
 }

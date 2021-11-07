@@ -38,4 +38,9 @@ public class AddCommand implements Command{
                 break;
         }
     }
+
+    @Override
+    public void unexecute() {
+        paint.removeShape(paint.getShapeAt(paint.nbForme() -1));
+    }
 }
