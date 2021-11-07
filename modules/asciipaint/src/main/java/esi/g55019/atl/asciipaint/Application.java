@@ -39,7 +39,9 @@ public class Application {
                 command = usineCommande.getCommandeCorrection();
                 if(usineCommande.isUndo()){
                     usineCommande.setUndo();
-                    command.unexecute();
+                    if(command.isReversible()){
+                        command.unexecute();
+                    }
                 }
                 else{
                     command.execute();
