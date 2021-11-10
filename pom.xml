@@ -19,6 +19,7 @@
     <modules>
         <module>modules/asciipaint</module>
         <module>modules/simon</module>
+        <module>modules/SameGame</module>
     </modules>
 
     <dependencies>

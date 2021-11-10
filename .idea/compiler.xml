@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="atl.asciipaint" />
         <module name="atl.simon" />
+        <module name="SameGame" />
       </profile>
     </annotationProcessing>
   </component>
