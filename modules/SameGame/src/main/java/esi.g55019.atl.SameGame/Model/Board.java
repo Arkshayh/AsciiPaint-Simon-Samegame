@@ -58,8 +58,10 @@ public class Board {
         boolean [][] tabVérif = new boolean[ligne][colonne];
         List<Position> elementASupprimer = new ArrayList<>();
         algoRécu(position, plateau[position.getColonne()][position.getLigne()].getColor() ,tabVérif, elementASupprimer);
-        for (int i = 0; i < elementASupprimer.size(); i++) {
-            plateau[elementASupprimer.get(i).getLigne()][elementASupprimer.get(i).getColonne()] = null;
+        if(elementASupprimer.size() > 1){
+            for (int i = 0; i < elementASupprimer.size(); i++) {
+                plateau[elementASupprimer.get(i).getLigne()][elementASupprimer.get(i).getColonne()] = null;
+            }
         }
     }
 
@@ -71,7 +73,6 @@ public class Board {
             if(isInside(voisins.get(i))){
                 if(hasTheSameColor(voisins.get(i), color)){
                     if(!tab[voisins.get(i).getLigne()][voisins.get(i).getColonne()]){
-                        aSupprimer.add(voisins.get(i));
                         algoRécu(voisins.get(i), color, tab, aSupprimer);
                     }
                 }

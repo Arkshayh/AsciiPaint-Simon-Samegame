@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="atl.asciipaint" />
+        <module name="atl.SameGame" />
         <module name="atl.simon" />
         <module name="SameGame" />
       </profile>

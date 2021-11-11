@@ -6,9 +6,11 @@ import esi.g55019.atl.SameGame.Model.Position;
 
 public class App {
     public static void main(String[] args) {
-        Board board = new Board(5, false);;
+        Board board = new Board(3);
+        board.afficherPlateau();
+        System.out.printf("---------------");
         board.supprimerColorSetUp(new Position(0,0));
-
+        board.afficherPlateau();
     }
 }
 
