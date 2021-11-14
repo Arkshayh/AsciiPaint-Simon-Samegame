@@ -1,5 +1,7 @@
 package esi.g55019.atl.SameGame.Model;
 
+import javafx.geometry.Pos;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -57,11 +59,14 @@ public class Board {
     public void supprimerColorSetUp(Position position){
         boolean [][] tabVérif = new boolean[ligne][colonne];
         List<Position> elementASupprimer = new ArrayList<>();
-        algoRécu(position, plateau[position.getColonne()][position.getLigne()].getColor() ,tabVérif, elementASupprimer);
+        algoRécu(position, plateau[position.getLigne()][position.getColonne()].getColor() ,tabVérif, elementASupprimer);
         if(elementASupprimer.size() > 1){
             for (int i = 0; i < elementASupprimer.size(); i++) {
                 plateau[elementASupprimer.get(i).getLigne()][elementASupprimer.get(i).getColonne()] = null;
             }
+        }
+        else{
+            System.out.println("Cette bille ne peut être enlevées car elle n'a pas de voisin");
         }
     }
 
@@ -71,16 +76,22 @@ public class Board {
         List<Position> voisins = getVoisin(courante);
         for (int i = 0; i < voisins.size(); i++) {
             if(isInside(voisins.get(i))){
-                if(hasTheSameColor(voisins.get(i), color)){
-                    if(!tab[voisins.get(i).getLigne()][voisins.get(i).getColonne()]){
-                        algoRécu(voisins.get(i), color, tab, aSupprimer);
+                if(!isNull(voisins.get(i))){
+                    if(hasTheSameColor(voisins.get(i), color)){
+                        if(!tab[voisins.get(i).getLigne()][voisins.get(i).getColonne()]){
+                            algoRécu(voisins.get(i), color, tab, aSupprimer);
+                        }
                     }
                 }
             }
         }
     }
 
-    private boolean isInside(Position pos){
+    private boolean isNull(Position pos){
+        return plateau[pos.getLigne()][pos.getColonne()] == null;
+    }
+
+    public boolean isInside(Position pos){
         if(pos.getLigne() >= 0 && pos.getLigne() < ligne){
             if(pos.getColonne() >= 0 && pos.getColonne() < colonne){
                 return true;
@@ -104,5 +115,20 @@ public class Board {
         return voisins;
     }
 
+
+    public void faireTomberBille(){
+        for (int j = 0; j < plateau[0].length; j++) {
+            for (int i = 0; i < plateau.length; i++) {
+                if(plateau[i][j] == null){
+                    for (int k = 0; k < i; k++) {
+                        if(i-k-1 >=0){
+                            plateau[i-k][j] = plateau[i-k-1][j];
+                        }
+                    }
+                    plateau[0][j] = null;
+                }
+            }
+        }
+    }
 }
 
