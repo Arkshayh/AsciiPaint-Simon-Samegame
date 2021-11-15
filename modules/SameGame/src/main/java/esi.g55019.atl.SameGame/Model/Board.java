@@ -1,7 +1,5 @@
 package esi.g55019.atl.SameGame.Model;
 
-import javafx.geometry.Pos;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,6 +8,7 @@ public class Board {
     private int ligne;
     private int colonne;
     private Bille[][] plateau;
+    private int score;
 
     public Board(int ligne, int colonne, int nbColor) {
         if(nbColor < 3 || nbColor > 5){
@@ -28,6 +27,10 @@ public class Board {
         initialiseBoard(nbColor);
     }
 
+    public int getScore() {
+        return score;
+    }
+
     private void initialiseBoard(int nbColor){
         for (int i = 0; i < ligne; i++) {
             for (int j = 0; j < colonne; j++){
@@ -43,6 +46,7 @@ public class Board {
     }
 
     public void afficherPlateau(){
+        System.out.println("Score : " + score);
         for (int i = 0; i < ligne; i++) {
             for (int j = 0; j < colonne; j++) {
                 if(plateau[i][j] == null){
@@ -64,6 +68,7 @@ public class Board {
             for (int i = 0; i < elementASupprimer.size(); i++) {
                 plateau[elementASupprimer.get(i).getLigne()][elementASupprimer.get(i).getColonne()] = null;
             }
+            score = score + (elementASupprimer.size() * elementASupprimer.size()) - elementASupprimer.size();
         }
         else{
             System.out.println("Cette bille ne peut être enlevées car elle n'a pas de voisin");

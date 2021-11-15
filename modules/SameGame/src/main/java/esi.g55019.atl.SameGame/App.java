@@ -10,7 +10,6 @@ public class App {
     private Board board;
 
     //TODO: faire en sorte de que lorsque colonne vide <- tout va vers la gauche
-    //TODO: afficher et calculer score
     //TODO: checker fin
     public static void main(String[] args) {
         App app = new App();
