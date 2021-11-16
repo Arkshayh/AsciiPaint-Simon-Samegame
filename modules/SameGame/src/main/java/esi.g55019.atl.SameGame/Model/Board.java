@@ -3,6 +3,7 @@ package esi.g55019.atl.SameGame.Model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Board {
     private int ligne;
@@ -45,7 +46,7 @@ public class Board {
         return Color.values()[nombreAleatoire];
     }
 
-    public void afficherPlateau(){
+    private void afficherPlateau(){
         System.out.println("Score : " + score);
         for (int i = 0; i < ligne; i++) {
             for (int j = 0; j < colonne; j++) {
@@ -60,9 +61,13 @@ public class Board {
         }
     }
 
-    public void supprimerColorSetUp(Position position){
+    private void supprimerColorSetUp(Position position){
         boolean [][] tabVérif = new boolean[ligne][colonne];
         List<Position> elementASupprimer = new ArrayList<>();
+        if(plateau[position.getLigne()][position.getColonne()] == null){
+            System.out.println("Cette bille a déjà été enlevée ! ");
+            return;
+        }
         algoRécu(position, plateau[position.getLigne()][position.getColonne()].getColor() ,tabVérif, elementASupprimer);
         if(elementASupprimer.size() > 1){
             for (int i = 0; i < elementASupprimer.size(); i++) {
@@ -96,7 +101,7 @@ public class Board {
         return plateau[pos.getLigne()][pos.getColonne()] == null;
     }
 
-    public boolean isInside(Position pos){
+    private boolean isInside(Position pos){
         if(pos.getLigne() >= 0 && pos.getLigne() < ligne){
             if(pos.getColonne() >= 0 && pos.getColonne() < colonne){
                 return true;
@@ -120,8 +125,7 @@ public class Board {
         return voisins;
     }
 
-
-    public void faireTomberBille(){
+    private void faireTomberBille(){
         for (int j = 0; j < plateau[0].length; j++) {
             for (int i = 0; i < plateau.length; i++) {
                 if(plateau[i][j] == null){
@@ -135,5 +139,86 @@ public class Board {
             }
         }
     }
+
+    private void concatener(){
+        for (int j = 0; j < plateau[0].length; j++) { //J = colonne 1
+            if(plateau[plateau.length-1][j] == null && j+1 < plateau[0].length){
+                for (int j2 = j+1; j2 < plateau[0].length; j2++) { //colonne 2
+                    if(plateau[plateau.length-1][j2] != null){
+                        echangerColonnes(j, j2);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private void echangerColonnes(int c1, int c2){
+        for (int i = 0; i < plateau.length; i++) {
+            plateau[i][c1] = plateau[i][c2];
+            plateau[i][c2] = null;
+        }
+    }
+
+    public void play(){
+        boolean fin = false;
+        while (!fin){
+            afficherPlateau();
+            supprimerColorSetUp(askPosition());
+            faireTomberBille();
+            concatener();
+            if(isFinish()){
+                fin = true;
+            }
+        }
+        afficherPlateau();
+        System.out.println("\n Fin de la partie ! " + "\u001B[31m");
+        System.out.println("Score final : " + score + "\u001B[0m");
+    }
+
+    private Position askPosition(){
+        Position pos = new Position(askInt("Entrer la ligne de la bille : "), askInt("Entrer la colonne de la bille :"));
+        while (!isInside(pos)){
+            System.out.println("Position incorrecte : ");
+            pos.setLigne(askInt("Entrer la ligne de la bille : "));
+            pos.setColonne(askInt("Entrer la colonne de la bille :"));
+        }
+        return pos;
+    }
+
+    private int askInt(String message) {
+        System.out.println(message);
+        Scanner clavier = new Scanner(System.in);
+
+        while (!clavier.hasNextInt()) {
+            System.out.println("Erreur, veuillez réessayer :");
+            clavier.next();
+        }
+        return clavier.nextInt();
+    }
+
+    private boolean isFinish(){
+        List<Position> voisins;
+        Position currentVoisin;
+        for (int i = 0; i < plateau.length; i++) {
+            for (int j = 0; j < plateau[0].length; j++) {
+                if(plateau[i][j] != null){
+                    voisins = getVoisin(new Position(i,j));
+                    for (int k = 0; k < voisins.size(); k++) {
+                        currentVoisin = voisins.get(k);
+                        if(isInside(currentVoisin)){
+                            if(!isNull(currentVoisin)){
+                                if(hasTheSameColor(currentVoisin, plateau[i][j].getColor())){
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
 }
 

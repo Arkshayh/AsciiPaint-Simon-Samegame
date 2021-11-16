@@ -2,33 +2,34 @@ package esi.g55019.atl.SameGame;
 
 
 import esi.g55019.atl.SameGame.Model.Board;
-import esi.g55019.atl.SameGame.Model.Position;
-
 import java.util.Scanner;
 
 public class App {
     private Board board;
 
-    //TODO: faire en sorte de que lorsque colonne vide <- tout va vers la gauche
     //TODO: checker fin
     public static void main(String[] args) {
+
         App app = new App();
         app.start();
     }
 
     private void start(){
-        boolean fin = false;
+
         int nbColor = askInt("Entrer le nombre de couleurs");
         while(nbColor > 5 || nbColor < 3){
             nbColor = askInt("Erreur, entrer le nombre de couleurs entre 3 et 5 :");
         }
-        this.board = new Board(nbColor);
-        while (!fin){
-            board.afficherPlateau();
-            board.supprimerColorSetUp(askPosition());
-            board.faireTomberBille();
+        int nbLigne = askInt("Entrer le nombre de lignes (entre 5 et 50 compris) : ");
+        while (nbLigne <5 || nbLigne > 50){
+            nbLigne = askInt("Erreur ! \n Entrer le nombre de lignes (entre 5 et 50 compris) : ");
         }
-
+        int nbColonne = askInt("Entrer le nombre de colonnes (entre 5 et 50 compris) : ");
+        while (nbColonne <5 || nbColonne > 50){
+            nbColonne = askInt("Erreur ! \n Entrer le nombre de colonnes (entre 5 et 50 compris) : ");
+        }
+        this.board = new Board(nbLigne,nbColonne,nbColor);
+        this.board.play();
     }
 
     private int askInt(String message) {
@@ -42,15 +43,6 @@ public class App {
         return clavier.nextInt();
     }
 
-    private Position askPosition(){
-        Position pos = new Position(askInt("Entrer la ligne de la bille : "), askInt("Entrer la colonne de la bille :"));
-        while (!board.isInside(pos)){
-            System.out.println("Position incorrecte : ");
-            pos.setLigne(askInt("Entrer la ligne de la bille : "));
-            pos.setColonne(askInt("Entrer la colonne de la bille :"));
-        }
-        return pos;
-    }
 }
 
 
