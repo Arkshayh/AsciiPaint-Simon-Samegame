@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class App {
     private Board board;
 
-    //TODO: checker fin
+    //TODO : DP
     public static void main(String[] args) {
 
         App app = new App();
