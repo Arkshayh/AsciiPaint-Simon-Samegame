@@ -51,13 +51,23 @@ public class Controller {
 
             switch (maCommande){
                 case "UNDO": //TODO à tester
-                    listeDeCommandeAUndo.get(listeDeCommandeAUndo.size()-1).unexecute();
-                    listeDeCommandeARedo.add(listeDeCommandeAUndo.get(listeDeCommandeAUndo.size()-1));
-                    listeDeCommandeAUndo.remove(listeDeCommandeAUndo.size()-1);
+                    if(listeDeCommandeAUndo.size() > 0){
+                        listeDeCommandeAUndo.get(listeDeCommandeAUndo.size()-1).unexecute();
+                        listeDeCommandeARedo.add(listeDeCommandeAUndo.get(listeDeCommandeAUndo.size()-1));
+                        listeDeCommandeAUndo.remove(listeDeCommandeAUndo.size()-1);
+                    }
+                    else{
+                        System.out.println("Plus de undo possible");
+                    }
                     break;
                 case "REDO": //TODO à tester
-                    listeDeCommandeARedo.get(listeDeCommandeARedo.size()-1).execute();
-                    listeDeCommandeARedo.remove(listeDeCommandeARedo.size()-1);
+                    if(listeDeCommandeARedo.size() > 0){
+                        listeDeCommandeARedo.get(listeDeCommandeARedo.size()-1).execute();
+                        listeDeCommandeARedo.remove(listeDeCommandeARedo.size()-1);
+                    }
+                    else {
+                        System.out.printf("Plus de redo possible");
+                    }
                     break;
                 case "GIVEUP":
                     return false;

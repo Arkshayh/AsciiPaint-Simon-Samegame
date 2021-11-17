@@ -10,22 +10,29 @@ public class Board {
     private int colonne;
     private Bille[][] plateau;
     private int score;
+    private int nbColor;
 
     public Board(int ligne, int colonne, int nbColor) {
         if(nbColor < 3 || nbColor > 5){
             throw new IllegalArgumentException("Nbr de billes incorrect");
         }
+        this.nbColor = nbColor;
         this.colonne = colonne;
         this.ligne = ligne;
         plateau = new Bille[ligne][colonne];
         initialiseBoard(nbColor);
     }
 
-    public Board(int nbColor) {
-        this.colonne = 16;
-        this.ligne = 12;
-        plateau = new Bille[ligne][colonne];
-        initialiseBoard(nbColor);
+    public Board(int ligne, int colonne, Bille[][] plateau, int score){
+        this.ligne = ligne;
+        this.colonne = colonne;
+        this.score = score;
+        this.plateau = new Bille[ligne][colonne];
+        for (int i = 0; i <ligne; i++) {
+            for (int j = 0; j < colonne; j++) {
+                this.plateau[i][j] = plateau[i][j];
+            }
+        }
     }
 
     public int getScore() {
@@ -182,5 +189,16 @@ public class Board {
         return true;
     }
 
+    public int getLigne() {
+        return ligne;
+    }
+
+    public int getColonne() {
+        return colonne;
+    }
+
+    public Bille[][] getPlateau() {
+        return plateau;
+    }
 }
 

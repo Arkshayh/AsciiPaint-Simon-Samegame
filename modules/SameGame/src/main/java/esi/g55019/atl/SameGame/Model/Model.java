@@ -35,4 +35,12 @@ public class Model {
         return board.getScore();
     }
 
+    public Board getBoard() {
+        Board copieDefensive = new Board(board.getLigne(), board.getColonne(),board.getPlateau(), board.getScore());
+        return copieDefensive;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
 }
