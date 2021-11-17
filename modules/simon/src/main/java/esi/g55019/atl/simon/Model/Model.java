@@ -9,11 +9,14 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+// @pbt avoid long lines
 /**
- * the model of the game. Model implement Observable and each time that its state change every Observer in its list
- * will be notified of its new state. A model has 4 list : the list of the player, the start list (the color that the
- * player must remember, and the last list (the color of the last game) and finally the longuest list (the bigger list
- * of color that the player must have remembered).
+ * the model of the game. Model implement Observable and each time that its
+ * state change every Observer in its list will be notified of its new state. A
+ * model has 4 list : the list of the player, the start list (the color that the
+ * player must remember, and the last list (the color of the last game) and
+ * finally the longuest list (the bigger list of color that the player must have
+ * remembered).
  */
 public class Model implements Observable {
     private List<Observer> listObserver;

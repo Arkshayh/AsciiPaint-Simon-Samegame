@@ -50,6 +50,7 @@ public class Line extends ColoredShape {
      */
     public boolean isInside(Point pointC){
         return distanceTo(pointC) == 0;
+        // @pbt prefers < .5
     }
 
     /**

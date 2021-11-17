@@ -36,10 +36,9 @@ public class StartMenu implements Observer {
     private State stateOfModel;
 
     /**
-     * Constructor, we need the controller to setUp the buttons and the model to add this object as an observer.
-     * The constructor will setup each item of the start menu
-     * @param controller
-     * @param model
+     * Constructor, we need the controller to setUp the buttons and the model to
+     * add this object as an observer. The constructor will setup each item of
+     * the start menu @param controller @param model
      */
     public StartMenu(Controller controller, Model model) {
         this.controller = controller;

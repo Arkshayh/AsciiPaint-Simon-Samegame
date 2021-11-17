@@ -1,5 +1,7 @@
 package esi.g55019.atl.asciipaint.DPCommand;
 
+// @pbt package name in lowercase
+
 public interface Command {
     /**
      * Interface for the Command DP

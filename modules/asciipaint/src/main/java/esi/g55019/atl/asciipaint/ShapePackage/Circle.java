@@ -1,4 +1,5 @@
 package esi.g55019.atl.asciipaint.ShapePackage;
+// @pbt idem package name in lowercase
 
 import esi.g55019.atl.asciipaint.ColoredShape;
 import esi.g55019.atl.asciipaint.Point;

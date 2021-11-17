@@ -22,6 +22,7 @@ public class DeleteCommand implements Command {
     public DeleteCommand(AsciiPaint paint, int delete, Component oldComponent) {
         this.paint = paint;
         this.deleteIndex = delete;
+        // @pbt why not ? this.oldComponent = paint.getShapeAt(delete);
         this.oldComponent = oldComponent;
     }
 

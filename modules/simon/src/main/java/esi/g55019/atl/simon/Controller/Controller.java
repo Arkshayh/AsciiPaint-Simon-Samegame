@@ -89,14 +89,18 @@ public class Controller extends Application {
     }
 
     /**
-     * check if the player has clicked on the right button, if it's the case it will check called aRattraper function
-     * if the return is true the list of the plauer his clear the state become AFFICHAGE_START, a new color is add to
-     * the start list and then each color of the list is display for the player
-     * If the player has clicked on the wrong button a popup appear then the list of the player is clear and the last
-     * list is updated, if the start list is bigger than the longuest list, the update list became the start list then
-     * the start list is clear. In the end, the state become ON_THE_MENU
+     * check if the player has clicked on the right button, if it's the case it
+     * will check called aRattraper function if the return is true the list of
+     * the plauer his clear the state become AFFICHAGE_START, a new color is add
+     * to the start list and then each color of the list is display for the
+     * player If the player has clicked on the wrong button a popup appear then
+     * the list of the player is clear and the last list is updated, if the
+     * start list is bigger than the longuest list, the update list became the
+     * start list then the start list is clear. In the end, the state become
+     * ON_THE_MENU
      */
     private void fullCheck(){
+        // @pbt it is the role of the model
         if(model.checkCorrectColor()){
             if(model.aRattraper()){
                 model.clearListPlayer();
