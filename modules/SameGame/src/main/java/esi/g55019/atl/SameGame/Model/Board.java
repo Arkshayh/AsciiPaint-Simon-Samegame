@@ -42,7 +42,7 @@ public class Board {
     private void initialiseBoard(int nbColor){
         for (int i = 0; i < ligne; i++) {
             for (int j = 0; j < colonne; j++){
-                plateau[i][j] = new Bille(randomColor(nbColor), new Position(i,j));
+                plateau[i][j] = new Bille(randomColor(nbColor));
             }
         }
     }
@@ -183,6 +183,17 @@ public class Board {
                             }
                         }
                     }
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean isWin(){
+        for (int i = 0; i < ligne; i++) {
+            for (int j = 0; j < colonne; j++) {
+                if(plateau[i][j] != null){
+                    return false;
                 }
             }
         }

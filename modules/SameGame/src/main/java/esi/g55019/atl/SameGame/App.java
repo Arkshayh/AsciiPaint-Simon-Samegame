@@ -6,6 +6,10 @@ import esi.g55019.atl.SameGame.Model.Model;
 
 public class App {
 
+    /**
+     * Main method
+     * @param args
+     */
     public static void main(String[] args) {
         Model model = new Model();
         Controller controller = new Controller(model);
@@ -13,7 +17,7 @@ public class App {
     }
 }
 
-
+//TODO javaFX + DP Observer
 /**
  * gridpane n * m  et un bouton dans chaque, si on a des objets dans son model on va créer
  */

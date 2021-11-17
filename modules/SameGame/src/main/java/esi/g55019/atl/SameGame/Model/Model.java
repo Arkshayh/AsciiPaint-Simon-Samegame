@@ -31,6 +31,10 @@ public class Model {
         return board.isFinish();
     }
 
+    public boolean isWin(){
+        return board.isWin();
+    }
+
     public int getScore(){
         return board.getScore();
     }

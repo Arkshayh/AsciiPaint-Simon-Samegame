@@ -90,6 +90,12 @@ public class Controller {
 
             if(model.isFinish()){
                 viewConsole.displayBoard();
+                if(model.isWin()){
+                    System.out.println("Vous avez gagné ! ");
+                }
+                else{
+                    System.out.println("Vous avez perdu !");
+                }
                 viewConsole.displayScore("\nFin de la partie ! Votre score : ");
                 viewConsole.replayMsg();
                 return doReplay();

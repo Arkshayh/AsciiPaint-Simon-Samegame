@@ -1,23 +1,27 @@
 package esi.g55019.atl.SameGame.Model;
 
+/**
+ * @author Cotton Ian g55019
+ * this class represent a Bille
+ * A Bille has a color
+ */
 public class Bille {
     private Color color;
-    private Position position;
 
-    public Bille(Color color, Position position) {
+    /**
+     * Constructor
+     * @param color
+     */
+    public Bille(Color color) {
         this.color = color;
-        this.position = position;
     }
 
+    /**
+     * getter
+     * @return color
+     */
     public Color getColor() {
         return color;
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
 }
