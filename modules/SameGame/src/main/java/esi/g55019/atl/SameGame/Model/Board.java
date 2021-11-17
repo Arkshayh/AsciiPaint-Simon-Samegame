@@ -46,8 +46,7 @@ public class Board {
         return Color.values()[nombreAleatoire];
     }
 
-    private void afficherPlateau(){
-        System.out.println("Score : " + score);
+    public void afficherPlateau(){
         for (int i = 0; i < ligne; i++) {
             for (int j = 0; j < colonne; j++) {
                 if(plateau[i][j] == null){
@@ -61,7 +60,7 @@ public class Board {
         }
     }
 
-    private void supprimerColorSetUp(Position position){
+    public void supprimerColorSetUp(Position position){
         boolean [][] tabVérif = new boolean[ligne][colonne];
         List<Position> elementASupprimer = new ArrayList<>();
         if(plateau[position.getLigne()][position.getColonne()] == null){
@@ -125,7 +124,7 @@ public class Board {
         return voisins;
     }
 
-    private void faireTomberBille(){
+    public void faireTomberBille(){
         for (int j = 0; j < plateau[0].length; j++) {
             for (int i = 0; i < plateau.length; i++) {
                 if(plateau[i][j] == null){
@@ -140,7 +139,7 @@ public class Board {
         }
     }
 
-    private void concatener(){
+    public void concatener(){
         for (int j = 0; j < plateau[0].length; j++) { //J = colonne 1
             if(plateau[plateau.length-1][j] == null && j+1 < plateau[0].length){
                 for (int j2 = j+1; j2 < plateau[0].length; j2++) { //colonne 2
@@ -160,44 +159,7 @@ public class Board {
         }
     }
 
-    public void play(){
-        boolean fin = false;
-        while (!fin){
-            afficherPlateau();
-            supprimerColorSetUp(askPosition());
-            faireTomberBille();
-            concatener();
-            if(isFinish()){
-                fin = true;
-            }
-        }
-        afficherPlateau();
-        System.out.println("\n Fin de la partie ! " + "\u001B[31m");
-        System.out.println("Score final : " + score + "\u001B[0m");
-    }
-
-    private Position askPosition(){
-        Position pos = new Position(askInt("Entrer la ligne de la bille : "), askInt("Entrer la colonne de la bille :"));
-        while (!isInside(pos)){
-            System.out.println("Position incorrecte : ");
-            pos.setLigne(askInt("Entrer la ligne de la bille : "));
-            pos.setColonne(askInt("Entrer la colonne de la bille :"));
-        }
-        return pos;
-    }
-
-    private int askInt(String message) {
-        System.out.println(message);
-        Scanner clavier = new Scanner(System.in);
-
-        while (!clavier.hasNextInt()) {
-            System.out.println("Erreur, veuillez réessayer :");
-            clavier.next();
-        }
-        return clavier.nextInt();
-    }
-
-    private boolean isFinish(){
+    public boolean isFinish(){
         List<Position> voisins;
         Position currentVoisin;
         for (int i = 0; i < plateau.length; i++) {
