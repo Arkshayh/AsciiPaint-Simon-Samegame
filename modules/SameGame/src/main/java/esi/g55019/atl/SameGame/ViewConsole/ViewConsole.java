@@ -59,4 +59,17 @@ public class ViewConsole {
     public void displayScore(String msg){
         System.out.println(msg + model.getScore());
     }
+
+    public void displayListCommand(){
+        System.out.println("Entrer une commande : \n" +
+                "* Une position pour enlèver la bille à cet endroit.\n" +
+                "* Redo : pour reéxecuter la commande précédente.\n" +
+                "* Undo : pour annuler la commande précédente.\n" +
+                "* GiveUp : pour abandonner la partie et fermer le programme.\n" +
+                "* Restart : pour recommancer une partie.\n");
+    }
+
+    public void replayMsg(){
+        System.out.println("Voulez-vous rejouer ? (Y/N)");
+    }
 }

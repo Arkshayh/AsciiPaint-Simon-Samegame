@@ -100,7 +100,7 @@ public class Board {
         return plateau[pos.getLigne()][pos.getColonne()] == null;
     }
 
-    private boolean isInside(Position pos){
+    public boolean isInside(Position pos){
         if(pos.getLigne() >= 0 && pos.getLigne() < ligne){
             if(pos.getColonne() >= 0 && pos.getColonne() < colonne){
                 return true;

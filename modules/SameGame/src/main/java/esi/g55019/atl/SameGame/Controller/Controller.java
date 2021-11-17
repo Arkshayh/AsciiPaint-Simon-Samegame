@@ -1,7 +1,13 @@
 package esi.g55019.atl.SameGame.Controller;
 
+import esi.g55019.atl.SameGame.DPCommand.Command;
+import esi.g55019.atl.SameGame.DPCommand.Factory;
 import esi.g55019.atl.SameGame.Model.Model;
 import esi.g55019.atl.SameGame.ViewConsole.ViewConsole;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Controller {
     private ViewConsole viewConsole;
@@ -17,20 +23,81 @@ public class Controller {
         int nbLigne = viewConsole.askLigneOrColonne("lignes");
         int nbColonne = viewConsole.askLigneOrColonne("colonnes");
         model.initialiseBoard(nbLigne, nbColonne,nbColor);
-        play(nbLigne, nbColonne);
+
+        while (play()){
+            nbColor = viewConsole.askColor();
+            nbLigne = viewConsole.askLigneOrColonne("lignes");
+            nbColonne = viewConsole.askLigneOrColonne("colonnes");
+            model.initialiseBoard(nbLigne, nbColonne,nbColor);
+        }
     }
 
-    private void play(int nbLigne, int nbColonne){
+    private boolean play(){
+        Scanner clavier = new Scanner(System.in);
         boolean end = false;
+        boolean replay = false;
+        List<Command> listeDeCommandeAUndo = new ArrayList<>();
+        List<Command> listeDeCommandeARedo = new ArrayList<>();
+        Command factoryCommand;
+        Factory factory = new Factory(model);
+
         while (!end){
+            viewConsole.displayListCommand();
             viewConsole.displayScore("Score : ");
             viewConsole.displayBoard();
-            model.play(viewConsole.askPosition(nbLigne-1, nbColonne-1));
+            System.out.print("\nVotre commande : ");
+            String maCommande = clavier.nextLine();
+            maCommande = maCommande.toUpperCase();
+
+            switch (maCommande){
+                case "UNDO": //TODO à tester
+                    listeDeCommandeAUndo.get(listeDeCommandeAUndo.size()-1).unexecute();
+                    listeDeCommandeARedo.add(listeDeCommandeAUndo.get(listeDeCommandeAUndo.size()-1));
+                    listeDeCommandeAUndo.remove(listeDeCommandeAUndo.size()-1);
+                    break;
+                case "REDO": //TODO à tester
+                    listeDeCommandeARedo.get(listeDeCommandeARedo.size()-1).execute();
+                    listeDeCommandeARedo.remove(listeDeCommandeARedo.size()-1);
+                    break;
+                case "GIVEUP":
+                    return false;
+                case "RESTART":
+                    System.out.println("\nCréation d'une nouvelle partie : \n");
+                    return true;
+                default:
+                   try {
+                       factoryCommand = factory.giveAndGetCommand(maCommande);
+                       factoryCommand.execute();
+                       listeDeCommandeAUndo.add(factoryCommand);
+                       listeDeCommandeARedo.clear();
+
+                   }
+                   catch (IllegalArgumentException e){
+                       System.out.println("Erreur ! ");
+                   }
+            }
+            factory.setModel(model);
+
             if(model.isFinish()){
-                end = true;
                 viewConsole.displayBoard();
                 viewConsole.displayScore("\nFin de la partie ! Votre score : ");
+                viewConsole.replayMsg();
+                return doReplay();
             }
         }
+        return replay;
+    }
+
+    private boolean doReplay(){
+        Scanner clavier = new Scanner(System.in);
+        String replayAnswer = clavier.nextLine();
+        while (!replayAnswer.equals("Y") && !replayAnswer.equals("N")){
+            viewConsole.replayMsg();
+            replayAnswer = clavier.nextLine();
+        }
+        if(replayAnswer.equals("Y")){
+            return true;
+        }
+        return false;
     }
 }

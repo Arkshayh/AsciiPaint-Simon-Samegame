@@ -6,7 +6,6 @@ import esi.g55019.atl.SameGame.Model.Model;
 
 public class App {
 
-    //TODO : DP pas de Composite
     public static void main(String[] args) {
         Model model = new Model();
         Controller controller = new Controller(model);

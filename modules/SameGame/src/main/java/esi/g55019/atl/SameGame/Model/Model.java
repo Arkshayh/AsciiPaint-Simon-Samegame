@@ -13,9 +13,14 @@ public class Model {
     }
 
     public void play(Position pos){
-        board.supprimerColorSetUp(pos);
-        board.faireTomberBille();
-        board.concatener();
+        if(board.isInside(pos)){
+            board.supprimerColorSetUp(pos);
+            board.faireTomberBille();
+            board.concatener();
+        }
+        else{
+            System.out.println("position incorrecte ! ");
+        }
     }
 
     public void displayBoard(){
@@ -29,4 +34,5 @@ public class Model {
     public int getScore(){
         return board.getScore();
     }
+
 }
