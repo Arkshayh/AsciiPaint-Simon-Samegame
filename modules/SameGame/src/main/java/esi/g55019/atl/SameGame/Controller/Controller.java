@@ -50,7 +50,7 @@ public class Controller {
             maCommande = maCommande.toUpperCase();
 
             switch (maCommande){
-                case "UNDO": //TODO à tester
+                case "UNDO":
                     if(listeDeCommandeAUndo.size() > 0){
                         listeDeCommandeAUndo.get(listeDeCommandeAUndo.size()-1).unexecute();
                         listeDeCommandeARedo.add(listeDeCommandeAUndo.get(listeDeCommandeAUndo.size()-1));
@@ -60,7 +60,7 @@ public class Controller {
                         System.out.println("Plus de undo possible");
                     }
                     break;
-                case "REDO": //TODO à tester
+                case "REDO":
                     if(listeDeCommandeARedo.size() > 0){
                         listeDeCommandeARedo.get(listeDeCommandeARedo.size()-1).execute();
                         listeDeCommandeARedo.remove(listeDeCommandeARedo.size()-1);
