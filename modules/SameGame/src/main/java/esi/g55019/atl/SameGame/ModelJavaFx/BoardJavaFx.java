@@ -13,15 +13,17 @@ public class BoardJavaFx {
     private Board board;
     private Button[][] buttonBoard;
     private GridPane boardPane;
+    private Bille[][] plateauBille;
+
 
     public BoardJavaFx(int ligne, int colonne, int nbColor) {
         board = new Board(ligne,colonne, nbColor);
+        plateauBille = board.getPlateau();
         boardPane = new GridPane();
         setUpBoardPane(ligne, colonne);
     }
 
     private void setUpBoardPane(int ligne, int colonne){
-        Bille[][] plateauBille = board.getPlateau();
         buttonBoard = new Button[ligne][colonne];
 
         for (int i = 0; i < plateauBille.length; i++) {
