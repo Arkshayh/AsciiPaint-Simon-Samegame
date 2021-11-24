@@ -1,5 +1,10 @@
 package esi.g55019.atl.SameGame.ViewJavaFx;
 
+import esi.g55019.atl.SameGame.ControllerJavaFx.ControllerJavaFx;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -21,8 +26,10 @@ public class Menu {
     private HBox giveUpRestart;
     private Button giveUp;
     private Button restart;
+    private ControllerJavaFx controllerJavaFx;
 
-    public Menu() {
+    public Menu(ControllerJavaFx controllerJavaFx) {
+        this.controllerJavaFx = controllerJavaFx;
         setUpMenu();
     }
 
@@ -38,6 +45,7 @@ public class Menu {
         colonne = new TextField();
         colonne.setPromptText("Nombre de colonnes");
         vBox.getChildren().add(colonne);
+        textFieldSetUp();
 
         Label textDifficulté = new Label("Difficulté : ");
         vBox.getChildren().add(textDifficulté);
@@ -49,6 +57,7 @@ public class Menu {
 
         start = new Button("Start");
         vBox.getChildren().add(start);
+        startSetUp();
 
         undoRedo = new HBox();
         undo = new Button("Undo");
@@ -70,8 +79,46 @@ public class Menu {
         vBox.setAlignment(Pos.CENTER);
     }
 
-    private void ligneSetUp(){
+    private void textFieldSetUp(){
+        var changeListener = new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    ligne.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        };
+        ligne.textProperty().addListener(changeListener);
+        colonne.textProperty().addListener(changeListener);
+    }
 
+    private void startSetUp(){
+        start.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if(ligne.getText().equals("") || colonne.getText().equals("")){
+
+                }
+                else{
+                    int nbLigne = Integer.parseInt(ligne.getText());
+                    int nbColonne = Integer.parseInt(colonne.getText());
+                    int nbColor;
+                    switch (difficulté.getValue().toString()){
+                        case "Facile":
+                            nbColor = 3;
+                            break;
+                        case "Moyen":
+                            nbColor = 4;
+                            break;
+                        default:
+                            nbColor = 5;
+                            break;
+                    }
+                    controllerJavaFx.createBoard(nbLigne,nbColonne,nbColor);
+                    start.setDisable(true);
+                }
+            }
+        });
     }
 
     public VBox getvBox() {
