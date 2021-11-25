@@ -2,13 +2,14 @@ package esi.g55019.atl.SameGame.ViewJavaFx;
 
 
 import esi.g55019.atl.SameGame.ControllerJavaFx.ControllerJavaFx;
+import esi.g55019.atl.SameGame.Model.State;
 import esi.g55019.atl.SameGame.ModelJavaFx.BoardJavaFx;
 import esi.g55019.atl.SameGame.ModelJavaFx.ModelJavaFx;
+import esi.g55019.atl.SameGame.util.Observer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -16,7 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class ViewJavaFx {
+public class ViewJavaFx implements Observer {
     private ControllerJavaFx controller;
     private ModelJavaFx model;
     private HBox hbox;
@@ -27,6 +28,7 @@ public class ViewJavaFx {
     public ViewJavaFx(ControllerJavaFx controller, ModelJavaFx model) {
         this.controller = controller;
         this.model = model;
+        model.addObserver(this);
     }
 
     public void start(Stage primaryStage){
@@ -62,5 +64,10 @@ public class ViewJavaFx {
         monBoard.setAlignment(Pos.CENTER);
         monBoard.setPadding(new Insets(10));
         root.setCenter(monBoard);
+    }
+
+    @Override
+    public void update(State state) {
+
     }
 }

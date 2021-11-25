@@ -12,11 +12,9 @@ public class AppJavaFx extends Application {
     }
 
     /**
-     * 1) DP Observer
+     * 1) Utiliser correctement le DP observer (la méthode notify observer)
      * 2) isEndend -> Message fin
-     * 3) concatener
      * 4) hover
-     * 5) pour start limiter les valeur de 5 à 20 + messages si valeurs incorrectes
      * 6) undo / redo
      * 7) give up
      * 8) restart

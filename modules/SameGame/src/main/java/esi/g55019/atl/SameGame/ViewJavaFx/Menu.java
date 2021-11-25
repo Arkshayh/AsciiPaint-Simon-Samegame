@@ -13,11 +13,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class Menu {
     private VBox vBox;
     private TextField ligne;
+    private Label ligneMsg;
     private TextField colonne;
+    private Label colonneMsg;
     private ComboBox difficulté;
     private Button start;
     private HBox undoRedo;
@@ -27,6 +30,7 @@ public class Menu {
     private Button giveUp;
     private Button restart;
     private ControllerJavaFx controllerJavaFx;
+    private boolean displayErrorMsg = false;
 
     public Menu(ControllerJavaFx controllerJavaFx) {
         this.controllerJavaFx = controllerJavaFx;
@@ -41,10 +45,16 @@ public class Menu {
         ligne = new TextField();
         ligne.setPromptText("Nombre de lignes");
         vBox.getChildren().add(ligne);
+        ligneMsg = new Label("Min : 5 | Max = 5");
+        ligneMsg.setTextFill(Color.RED);
+
 
         colonne = new TextField();
         colonne.setPromptText("Nombre de colonnes");
         vBox.getChildren().add(colonne);
+        colonneMsg = new Label("Min : 5 | Max = 5");
+        colonneMsg.setTextFill(Color.RED);
+
         textFieldSetUp();
 
         Label textDifficulté = new Label("Difficulté : ");
@@ -97,6 +107,15 @@ public class Menu {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if(ligne.getText().equals("") || colonne.getText().equals("")){
+
+                }
+                else if (Integer.parseInt(ligne.getText()) < 5 || Integer.parseInt(ligne.getText()) > 20 ||
+                        Integer.parseInt(colonne.getText()) < 5 || Integer.parseInt(colonne.getText()) > 20){
+                    if(!displayErrorMsg){
+                        displayErrorMsg = true;
+                        vBox.getChildren().add(1,ligneMsg);
+                        vBox.getChildren().add(3,colonneMsg);
+                    }
 
                 }
                 else{
