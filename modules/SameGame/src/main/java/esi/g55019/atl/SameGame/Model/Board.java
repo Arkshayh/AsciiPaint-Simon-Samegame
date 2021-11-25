@@ -66,12 +66,12 @@ public class Board {
         }
     }
 
-    public void supprimerColorSetUp(Position position){
+    public boolean supprimerColorSetUp(Position position){
         boolean [][] tabVérif = new boolean[ligne][colonne];
         List<Position> elementASupprimer = new ArrayList<>();
         if(plateau[position.getLigne()][position.getColonne()] == null){
             System.out.println("Cette bille a déjà été enlevée ! ");
-            return;
+            return false;
         }
         algoRécu(position, plateau[position.getLigne()][position.getColonne()].getColor() ,tabVérif, elementASupprimer);
         if(elementASupprimer.size() > 1){
@@ -79,9 +79,11 @@ public class Board {
                 plateau[elementASupprimer.get(i).getLigne()][elementASupprimer.get(i).getColonne()] = null;
             }
             score = score + (elementASupprimer.size() * elementASupprimer.size()) - elementASupprimer.size();
+            return true;
         }
         else{
             System.out.println("Cette bille ne peut être enlevées car elle n'a pas de voisin");
+            return false;
         }
     }
 
