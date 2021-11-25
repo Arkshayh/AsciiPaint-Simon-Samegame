@@ -11,6 +11,18 @@ public class AppJavaFx extends Application {
         launch(args);
     }
 
+    /**
+     * 1) DP Observer
+     * 2) isEndend -> Message fin
+     * 3) concatener
+     * 4) hover
+     * 5) pour start limiter les valeur de 5 à 20 + messages si valeurs incorrectes
+     * 6) undo / redo
+     * 7) give up
+     * 8) restart
+     * 9) score + meilleur score
+     * 10) voir TODO
+     */
     @Override
     public void start(Stage primaryStage){
         ModelJavaFx model  = new ModelJavaFx();
