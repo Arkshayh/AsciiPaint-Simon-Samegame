@@ -6,5 +6,5 @@ public enum State {
     AFFICHAGE_BOARD,
     PLAYER_CHOOSE,
     CHECKING_END,
-    IS_ENDED;
+    IS_ENDED
 }

@@ -1,17 +1,25 @@
 package esi.g55019.atl.SameGame.ControllerJavaFx;
 
+import esi.g55019.atl.SameGame.Model.Board;
 import esi.g55019.atl.SameGame.ViewJavaFx.BoardJavaFx;
 import esi.g55019.atl.SameGame.ModelJavaFx.ModelJavaFx;
 import esi.g55019.atl.SameGame.ViewJavaFx.ViewJavaFx;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ControllerJavaFx {
     private ModelJavaFx model;
     private ViewJavaFx view;
+    private List<Board> undo;
+    private List<Board> redo;
 
     public ControllerJavaFx(ModelJavaFx model) {
         this.model = model;
         this.view = new ViewJavaFx(this, model);
+        undo = new ArrayList<>();
+        redo = new ArrayList<>();
     }
 
     public void start(Stage primaryStage){
@@ -19,7 +27,30 @@ public class ControllerJavaFx {
     }
 
     public void createBoard(int ligne, int colonne, int nbColor){
-        view.addingBoard(new BoardJavaFx(ligne, colonne, nbColor, model));
+        view.addingBoard(new BoardJavaFx(ligne, colonne, nbColor, model, this));
     }
 
+    public void addUndo(Board board){
+        undo.add(board);
+    }
+
+    public void addRedo(Board Board){
+        redo.add(Board);
+    }
+
+    public void updateViewWithUndo(){
+        Board oldBoard = undo.get(undo.size()-1);
+        redo.add(oldBoard);
+        undo.remove(undo.get(undo.size()-1));
+        view.setBoardJavaFx(oldBoard);
+
+    }
+
+    public int getUndoSize(){
+        return undo.size();
+    }
+
+    public int getRedoSize(){
+        return redo.size();
+    }
 }

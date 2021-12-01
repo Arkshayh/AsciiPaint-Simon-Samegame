@@ -87,6 +87,13 @@ public class Board {
         }
     }
 
+    public List<Position> getVoisinASupprimer(Position position){
+        boolean [][] tabVérif = new boolean[ligne][colonne];
+        List<Position> elementASupprimer = new ArrayList<>();
+        algoRécu(position, plateau[position.getLigne()][position.getColonne()].getColor() ,tabVérif, elementASupprimer);
+        return elementASupprimer;
+    }
+
     private void algoRécu(Position courante, Color color, boolean [][] tab, List<Position> aSupprimer){
         tab[courante.getLigne()][courante.getColonne()] = true;
         aSupprimer.add(courante);

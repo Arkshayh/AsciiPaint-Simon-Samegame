@@ -1,13 +1,12 @@
 package esi.g55019.atl.SameGame.ViewJavaFx;
 
+import esi.g55019.atl.SameGame.ControllerJavaFx.ControllerJavaFx;
 import esi.g55019.atl.SameGame.Model.Bille;
 import esi.g55019.atl.SameGame.Model.Board;
 import esi.g55019.atl.SameGame.Model.Position;
 import esi.g55019.atl.SameGame.ModelJavaFx.ModelJavaFx;
 import esi.g55019.atl.SameGame.ModelJavaFx.State;
 import esi.g55019.atl.SameGame.util.Observer;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
@@ -21,9 +20,10 @@ public class BoardJavaFx implements Observer {
     private int colonne;
     private ModelJavaFx model;
     private State stateOfModel;
+    private ControllerJavaFx controller;
 
-
-    public BoardJavaFx(int ligne, int colonne, int nbColor, ModelJavaFx modelJavaFx) {
+    public BoardJavaFx(int ligne, int colonne, int nbColor, ModelJavaFx modelJavaFx, ControllerJavaFx controller) {
+        this.controller = controller;
         this.model = modelJavaFx;
         model.addObserver(this);
         this.ligne = ligne;
@@ -52,14 +52,13 @@ public class BoardJavaFx implements Observer {
                             CornerRadii.EMPTY, Insets.EMPTY)));
                     button.setBorder(new Border(new BorderStroke(Color.rgb(104, 104, 105, 0.15),
                             BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
-                    button.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            if(stateOfModel == State.PLAYER_CHOOSE){
-                                model.setState(State.AFFICHAGE_BOARD);
-                                String[] pos =  button.getId().split(" ");
-                                onClickModify(new Position(Integer.parseInt(pos[0]), Integer.parseInt(pos[1])));
-                            }
+                    button.setOnAction(event -> {
+                        if(stateOfModel == State.PLAYER_CHOOSE){
+                            controller.addUndo(new Board(board.getLigne(), board.getColonne(),board.getPlateau(), board.getScore()));
+
+                            model.setState(State.AFFICHAGE_BOARD);
+                            String[] pos =  button.getId().split(" ");
+                            onClickModify(new Position(Integer.parseInt(pos[0]), Integer.parseInt(pos[1])));
                         }
                     });
                 }
@@ -82,6 +81,10 @@ public class BoardJavaFx implements Observer {
                 board.concatener();
                 setUpBoardPane();
                 model.setState(State.CHECKING_END);
+                System.out.println("update terminée");
+            }
+            else{
+                System.out.println("Update terminée");
             }
         }
         else{
@@ -97,8 +100,6 @@ public class BoardJavaFx implements Observer {
     private boolean isWin(){
         return board.isWin();
     }
-
-
 
     //TODO onHover + changeCouleur voisin
 
@@ -118,5 +119,10 @@ public class BoardJavaFx implements Observer {
                 model.setState(State.PLAYER_CHOOSE);
             }
         }
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+        setUpBoardPane();
     }
 }

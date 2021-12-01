@@ -1,7 +1,6 @@
 package esi.g55019.atl.SameGame.ViewJavaFx;
 
 import esi.g55019.atl.SameGame.ControllerJavaFx.ControllerJavaFx;
-import esi.g55019.atl.SameGame.Model.Model;
 import esi.g55019.atl.SameGame.ModelJavaFx.ModelJavaFx;
 import esi.g55019.atl.SameGame.ModelJavaFx.State;
 import esi.g55019.atl.SameGame.util.Observer;
@@ -81,6 +80,7 @@ public class Menu implements Observer {
         undo = new Button("Undo");
         redo = new Button("Redo");
         undoRedo.getChildren().addAll(undo, redo);
+
         undoRedo.setAlignment(Pos.CENTER);
         undoRedo.setSpacing(10);
         vBox.getChildren().add(undoRedo);
@@ -144,6 +144,7 @@ public class Menu implements Observer {
                         }
                         model.setState(State.CREATION_BOARD);
                         controllerJavaFx.createBoard(nbLigne,nbColonne,nbColor);
+                        undoSetUp();
                         start.setDisable(true);
                     }
                 }
@@ -151,6 +152,17 @@ public class Menu implements Observer {
                     throw new IllegalStateException("Etat incorrect : Votre état : " + stateOfModel +
                             " Etat attendu : ON_THE_MENU");
                 }
+            }
+        });
+    }
+
+    private void undoSetUp(){
+        undo.setOnAction(event -> {
+            if(controllerJavaFx.getUndoSize() != 0){
+                controllerJavaFx.updateViewWithUndo();
+            }
+            else{
+                System.out.println("pas de undo");
             }
         });
     }
@@ -190,5 +202,10 @@ public class Menu implements Observer {
     @Override
     public void update(State state) {
         stateOfModel = state;
+        if(state == State.CREATION_BOARD){
+            undo.setOnAction(event -> {
+
+            });
+        }
     }
 }

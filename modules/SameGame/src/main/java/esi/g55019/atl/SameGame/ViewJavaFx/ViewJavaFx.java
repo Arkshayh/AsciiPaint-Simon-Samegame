@@ -1,7 +1,7 @@
 package esi.g55019.atl.SameGame.ViewJavaFx;
 
-
 import esi.g55019.atl.SameGame.ControllerJavaFx.ControllerJavaFx;
+import esi.g55019.atl.SameGame.Model.Board;
 import esi.g55019.atl.SameGame.ModelJavaFx.State;
 import esi.g55019.atl.SameGame.ModelJavaFx.ModelJavaFx;
 import esi.g55019.atl.SameGame.util.Observer;
@@ -64,6 +64,11 @@ public class ViewJavaFx implements Observer {
         monBoard.setAlignment(Pos.CENTER);
         monBoard.setPadding(new Insets(10));
         root.setCenter(monBoard);
+
+    }
+
+    public void setBoardJavaFx(Board board){
+        this.board.setBoard(board);
     }
 
     @Override
