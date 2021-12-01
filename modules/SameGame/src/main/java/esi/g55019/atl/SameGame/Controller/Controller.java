@@ -64,6 +64,7 @@ public class Controller {
                 case "REDO":
                     if(listeDeCommandeARedo.size() > 0){
                         listeDeCommandeARedo.get(listeDeCommandeARedo.size()-1).execute();
+                        listeDeCommandeAUndo.add(listeDeCommandeARedo.get(listeDeCommandeARedo.size() - 1));
                         listeDeCommandeARedo.remove(listeDeCommandeARedo.size()-1);
                     }
                     else {
