@@ -12,12 +12,11 @@ public class AppJavaFx extends Application {
     }
 
     /**
-     * 1) Utiliser correctement le DP observer (la méthode notify observer)
-     * 2) isEndend -> Message fin
      * 4) hover
      * 6) undo / redo
      * 7) give up
      * 8) restart
+     * 9) Ajouter popup win si gagné sinon lose
      * 9) score + meilleur score
      * 10) voir TODO
      */

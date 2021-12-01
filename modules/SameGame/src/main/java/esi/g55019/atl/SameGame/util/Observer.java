@@ -1,6 +1,6 @@
 package esi.g55019.atl.SameGame.util;
 
-import esi.g55019.atl.SameGame.Model.State;
+import esi.g55019.atl.SameGame.ModelJavaFx.State;
 
 /**
  * An Observer object in the Observer/Observable pattern.

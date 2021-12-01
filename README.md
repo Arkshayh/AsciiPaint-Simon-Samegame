@@ -6,3 +6,6 @@ modules/asciipaint
 
 ## Simon
 modules/simon
+
+## SameGame
+modules/SameGame

@@ -1,6 +1,5 @@
 package esi.g55019.atl.SameGame.ModelJavaFx;
 
-import esi.g55019.atl.SameGame.Model.State;
 import esi.g55019.atl.SameGame.util.Observable;
 import esi.g55019.atl.SameGame.util.Observer;
 
@@ -17,6 +16,11 @@ public class ModelJavaFx implements Observable {
         listObserver = new ArrayList<>();
     }
 
+    public void setState(State state) {
+        this.state = state;
+        notifyObservers();
+    }
+
     /**
      * add an observer to the observerlist
      * @param observer The observer to be added.
@@ -24,6 +28,7 @@ public class ModelJavaFx implements Observable {
     @Override
     public void addObserver(Observer observer) {
         listObserver.add(observer);
+        notifyObservers();
     }
 
     /**

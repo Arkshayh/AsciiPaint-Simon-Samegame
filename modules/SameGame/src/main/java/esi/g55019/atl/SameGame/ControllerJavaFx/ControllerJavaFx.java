@@ -1,6 +1,6 @@
 package esi.g55019.atl.SameGame.ControllerJavaFx;
 
-import esi.g55019.atl.SameGame.ModelJavaFx.BoardJavaFx;
+import esi.g55019.atl.SameGame.ViewJavaFx.BoardJavaFx;
 import esi.g55019.atl.SameGame.ModelJavaFx.ModelJavaFx;
 import esi.g55019.atl.SameGame.ViewJavaFx.ViewJavaFx;
 import javafx.stage.Stage;
@@ -19,7 +19,7 @@ public class ControllerJavaFx {
     }
 
     public void createBoard(int ligne, int colonne, int nbColor){
-        view.addingBoard(new BoardJavaFx(ligne, colonne, nbColor));
+        view.addingBoard(new BoardJavaFx(ligne, colonne, nbColor, model));
     }
 
 }

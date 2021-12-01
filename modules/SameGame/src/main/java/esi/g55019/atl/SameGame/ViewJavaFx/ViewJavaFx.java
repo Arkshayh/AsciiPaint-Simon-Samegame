@@ -2,8 +2,7 @@ package esi.g55019.atl.SameGame.ViewJavaFx;
 
 
 import esi.g55019.atl.SameGame.ControllerJavaFx.ControllerJavaFx;
-import esi.g55019.atl.SameGame.Model.State;
-import esi.g55019.atl.SameGame.ModelJavaFx.BoardJavaFx;
+import esi.g55019.atl.SameGame.ModelJavaFx.State;
 import esi.g55019.atl.SameGame.ModelJavaFx.ModelJavaFx;
 import esi.g55019.atl.SameGame.util.Observer;
 import javafx.geometry.Insets;
@@ -20,6 +19,7 @@ import javafx.stage.Stage;
 public class ViewJavaFx implements Observer {
     private ControllerJavaFx controller;
     private ModelJavaFx model;
+    private State stateOfModel;
     private HBox hbox;
     private BoardJavaFx board;
     private Menu menu;
@@ -38,7 +38,7 @@ public class ViewJavaFx implements Observer {
         root.setMaxSize(1000,750);
 
         setUpHbox();
-        menu = new Menu(controller);
+        menu = new Menu(controller, model);
 
         root.setTop(hbox);
         root.setRight(menu.getvBox());
@@ -68,6 +68,6 @@ public class ViewJavaFx implements Observer {
 
     @Override
     public void update(State state) {
-
+        this.stateOfModel = state;
     }
 }

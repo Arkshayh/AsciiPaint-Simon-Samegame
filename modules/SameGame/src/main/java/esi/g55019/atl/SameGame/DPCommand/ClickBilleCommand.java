@@ -10,13 +10,13 @@ public class ClickBilleCommand implements Command{
     private Position position;
 
     public ClickBilleCommand(Model model, Position position) {
-        this.oldBoard = model.getBoard();
         this.model = model;
         this.position = position;
     }
 
     @Override
     public void execute() {
+        this.oldBoard = model.getBoard();
         model.play(position);
     }
 

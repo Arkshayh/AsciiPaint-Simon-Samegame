@@ -1,6 +1,10 @@
 package esi.g55019.atl.SameGame.ViewJavaFx;
 
 import esi.g55019.atl.SameGame.ControllerJavaFx.ControllerJavaFx;
+import esi.g55019.atl.SameGame.Model.Model;
+import esi.g55019.atl.SameGame.ModelJavaFx.ModelJavaFx;
+import esi.g55019.atl.SameGame.ModelJavaFx.State;
+import esi.g55019.atl.SameGame.util.Observer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -15,7 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class Menu {
+public class Menu implements Observer {
     private VBox vBox;
     private TextField ligne;
     private Label ligneMsg;
@@ -31,8 +35,12 @@ public class Menu {
     private Button restart;
     private ControllerJavaFx controllerJavaFx;
     private boolean displayErrorMsg = false;
+    private ModelJavaFx model;
+    private State stateOfModel;
 
-    public Menu(ControllerJavaFx controllerJavaFx) {
+    public Menu(ControllerJavaFx controllerJavaFx, ModelJavaFx modelJavaFx) {
+        this.model = modelJavaFx;
+        model.addObserver(this);
         this.controllerJavaFx = controllerJavaFx;
         setUpMenu();
     }
@@ -106,35 +114,42 @@ public class Menu {
         start.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if(ligne.getText().equals("") || colonne.getText().equals("")){
+                if(stateOfModel == State.ON_THE_MENU){
+                    if(ligne.getText().equals("") || colonne.getText().equals("")){
 
-                }
-                else if (Integer.parseInt(ligne.getText()) < 5 || Integer.parseInt(ligne.getText()) > 20 ||
-                        Integer.parseInt(colonne.getText()) < 5 || Integer.parseInt(colonne.getText()) > 20){
-                    if(!displayErrorMsg){
-                        displayErrorMsg = true;
-                        vBox.getChildren().add(1,ligneMsg);
-                        vBox.getChildren().add(3,colonneMsg);
                     }
+                    else if (Integer.parseInt(ligne.getText()) < 5 || Integer.parseInt(ligne.getText()) > 20 ||
+                            Integer.parseInt(colonne.getText()) < 5 || Integer.parseInt(colonne.getText()) > 20){
+                        if(!displayErrorMsg){
+                            displayErrorMsg = true;
+                            vBox.getChildren().add(1,ligneMsg);
+                            vBox.getChildren().add(3,colonneMsg);
+                        }
 
+                    }
+                    else{
+                        int nbLigne = Integer.parseInt(ligne.getText());
+                        int nbColonne = Integer.parseInt(colonne.getText());
+                        int nbColor;
+                        switch (difficulté.getValue().toString()){
+                            case "Facile":
+                                nbColor = 3;
+                                break;
+                            case "Moyen":
+                                nbColor = 4;
+                                break;
+                            default:
+                                nbColor = 5;
+                                break;
+                        }
+                        model.setState(State.CREATION_BOARD);
+                        controllerJavaFx.createBoard(nbLigne,nbColonne,nbColor);
+                        start.setDisable(true);
+                    }
                 }
                 else{
-                    int nbLigne = Integer.parseInt(ligne.getText());
-                    int nbColonne = Integer.parseInt(colonne.getText());
-                    int nbColor;
-                    switch (difficulté.getValue().toString()){
-                        case "Facile":
-                            nbColor = 3;
-                            break;
-                        case "Moyen":
-                            nbColor = 4;
-                            break;
-                        default:
-                            nbColor = 5;
-                            break;
-                    }
-                    controllerJavaFx.createBoard(nbLigne,nbColonne,nbColor);
-                    start.setDisable(true);
+                    throw new IllegalStateException("Etat incorrect : Votre état : " + stateOfModel +
+                            " Etat attendu : ON_THE_MENU");
                 }
             }
         });
@@ -170,5 +185,10 @@ public class Menu {
 
     public Button getRestart() {
         return restart;
+    }
+
+    @Override
+    public void update(State state) {
+        stateOfModel = state;
     }
 }

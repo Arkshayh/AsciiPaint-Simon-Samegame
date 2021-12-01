@@ -50,7 +50,6 @@ public class Controller {
             maCommande = maCommande.toUpperCase();
 
             switch (maCommande){
-                //TODO undo redo a debug
                 case "UNDO":
                     if(listeDeCommandeAUndo.size() > 0){
                         listeDeCommandeAUndo.get(listeDeCommandeAUndo.size()-1).unexecute();
