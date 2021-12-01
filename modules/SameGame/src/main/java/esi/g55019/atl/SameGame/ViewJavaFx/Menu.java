@@ -52,14 +52,14 @@ public class Menu implements Observer {
         ligne = new TextField();
         ligne.setPromptText("Nombre de lignes");
         vBox.getChildren().add(ligne);
-        ligneMsg = new Label("Min : 5 | Max = 5");
+        ligneMsg = new Label("Min : 5 | Max = 20");
         ligneMsg.setTextFill(Color.RED);
 
 
         colonne = new TextField();
         colonne.setPromptText("Nombre de colonnes");
         vBox.getChildren().add(colonne);
-        colonneMsg = new Label("Min : 5 | Max = 5");
+        colonneMsg = new Label("Min : 5 | Max = 20");
         colonneMsg.setTextFill(Color.RED);
 
         textFieldSetUp();
@@ -145,7 +145,9 @@ public class Menu implements Observer {
                         model.setState(State.CREATION_BOARD);
                         controllerJavaFx.createBoard(nbLigne,nbColonne,nbColor);
                         undoSetUp();
+                        redoSetUp();
                         start.setDisable(true);
+                        controllerJavaFx.setBoardJavaFx();
                     }
                 }
                 else{
@@ -163,6 +165,17 @@ public class Menu implements Observer {
             }
             else{
                 System.out.println("pas de undo");
+            }
+        });
+    }
+
+    private void redoSetUp(){
+        redo.setOnAction(event -> {
+            if(controllerJavaFx.getRedoSize() != 0){
+                controllerJavaFx.updateViewWithRedo();
+            }
+            else{
+                System.out.println("pas de redo");
             }
         });
     }

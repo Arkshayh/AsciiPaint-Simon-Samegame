@@ -75,4 +75,8 @@ public class ViewJavaFx implements Observer {
     public void update(State state) {
         this.stateOfModel = state;
     }
+
+    public BoardJavaFx getBoard() {
+        return board;
+    }
 }

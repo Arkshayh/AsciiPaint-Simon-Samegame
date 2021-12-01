@@ -14,6 +14,7 @@ public class ControllerJavaFx {
     private ViewJavaFx view;
     private List<Board> undo;
     private List<Board> redo;
+    private BoardJavaFx boardJavaFx;
 
     public ControllerJavaFx(ModelJavaFx model) {
         this.model = model;
@@ -34,16 +35,22 @@ public class ControllerJavaFx {
         undo.add(board);
     }
 
-    public void addRedo(Board Board){
-        redo.add(Board);
-    }
-
     public void updateViewWithUndo(){
         Board oldBoard = undo.get(undo.size()-1);
-        redo.add(oldBoard);
+        redo.add(boardJavaFx.getBoard());
         undo.remove(undo.get(undo.size()-1));
         view.setBoardJavaFx(oldBoard);
+    }
 
+    public void updateViewWithRedo(){
+        Board oldBoard = redo.get(redo.size()-1);
+        undo.add(new Board(oldBoard.getLigne(), oldBoard.getColonne(),oldBoard.getPlateau(), oldBoard.getScore()));
+        redo.remove(redo.get(redo.size()-1));
+        view.setBoardJavaFx(oldBoard);
+    }
+
+    public void clearRedo(){
+        redo.clear();
     }
 
     public int getUndoSize(){
@@ -52,5 +59,9 @@ public class ControllerJavaFx {
 
     public int getRedoSize(){
         return redo.size();
+    }
+
+    public void setBoardJavaFx() {
+        this.boardJavaFx = view.getBoard();
     }
 }

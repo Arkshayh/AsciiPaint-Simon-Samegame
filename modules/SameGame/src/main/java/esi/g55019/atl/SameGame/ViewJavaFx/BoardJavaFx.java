@@ -55,7 +55,7 @@ public class BoardJavaFx implements Observer {
                     button.setOnAction(event -> {
                         if(stateOfModel == State.PLAYER_CHOOSE){
                             controller.addUndo(new Board(board.getLigne(), board.getColonne(),board.getPlateau(), board.getScore()));
-
+                            controller.clearRedo();
                             model.setState(State.AFFICHAGE_BOARD);
                             String[] pos =  button.getId().split(" ");
                             onClickModify(new Position(Integer.parseInt(pos[0]), Integer.parseInt(pos[1])));
@@ -84,6 +84,7 @@ public class BoardJavaFx implements Observer {
                 System.out.println("update terminée");
             }
             else{
+                model.setState(State.PLAYER_CHOOSE);
                 System.out.println("Update terminée");
             }
         }
@@ -124,5 +125,9 @@ public class BoardJavaFx implements Observer {
     public void setBoard(Board board) {
         this.board = board;
         setUpBoardPane();
+    }
+
+    public Board getBoard() {
+        return new Board(board.getLigne(), board.getColonne(),board.getPlateau(), board.getScore());
     }
 }
