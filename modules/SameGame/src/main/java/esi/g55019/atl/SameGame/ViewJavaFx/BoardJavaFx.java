@@ -21,6 +21,7 @@ public class BoardJavaFx implements Observer {
     private ModelJavaFx model;
     private State stateOfModel;
     private ControllerJavaFx controller;
+    private int bestScore;
 
     public BoardJavaFx(int ligne, int colonne, int nbColor, ModelJavaFx modelJavaFx, ControllerJavaFx controller) {
         this.controller = controller;
@@ -30,6 +31,7 @@ public class BoardJavaFx implements Observer {
         this.colonne = colonne;
         board = new Board(ligne,colonne, nbColor);
         boardPane = new GridPane();
+        bestScore = 0;
         if(stateOfModel == State.CREATION_BOARD){
             setUpBoardPane();
             model.setState(State.PLAYER_CHOOSE);
@@ -48,16 +50,22 @@ public class BoardJavaFx implements Observer {
                 Button button = new Button("  ");
                 button.setId(i + " " + j);
                 if(plateauDeBille[i][j] != null){
-                    button.setBackground(new Background(new BackgroundFill(Color.web(plateauDeBille[i][j].getColor().getColorForJavaFx()),
+                    button.setBackground(new Background(new BackgroundFill(
+                            Color.web(plateauDeBille[i][j].getColor().getColorForJavaFx()),
                             CornerRadii.EMPTY, Insets.EMPTY)));
+
                     button.setBorder(new Border(new BorderStroke(Color.rgb(104, 104, 105, 0.15),
                             BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
+
                     button.setOnAction(event -> {
-                        if(stateOfModel == State.PLAYER_CHOOSE){
+                        String[] pos =  button.getId().split(" ");
+
+                        if(stateOfModel == State.PLAYER_CHOOSE && board.getVoisinASupprimer(
+                                new Position(Integer.parseInt(pos[0]), Integer.parseInt(pos[1]))).size() != 1){
+
                             controller.addUndo(new Board(board.getLigne(), board.getColonne(),board.getPlateau(), board.getScore()));
                             controller.clearRedo();
                             model.setState(State.AFFICHAGE_BOARD);
-                            String[] pos =  button.getId().split(" ");
                             onClickModify(new Position(Integer.parseInt(pos[0]), Integer.parseInt(pos[1])));
                         }
                     });
@@ -65,6 +73,7 @@ public class BoardJavaFx implements Observer {
                 else{
                     button.setBackground(new Background(new BackgroundFill(Color.web("#000000"
                     ), CornerRadii.EMPTY, Insets.EMPTY)));
+
                     button.setBorder(new Border(new BorderStroke(Color.rgb(0, 0, 0, 0.15),
                             BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
                 }
@@ -79,13 +88,15 @@ public class BoardJavaFx implements Observer {
             if(board.supprimerColorSetUp(pos)){
                 board.faireTomberBille();
                 board.concatener();
+                if(board.getScore() > bestScore){
+                    bestScore = board.getScore();
+                }
+                controller.updateScore();
                 setUpBoardPane();
                 model.setState(State.CHECKING_END);
-                System.out.println("update terminée");
             }
             else{
                 model.setState(State.PLAYER_CHOOSE);
-                System.out.println("Update terminée");
             }
         }
         else{
@@ -102,8 +113,6 @@ public class BoardJavaFx implements Observer {
         return board.isWin();
     }
 
-    //TODO onHover + changeCouleur voisin
-
     public GridPane getBoardPane() {
         return boardPane;
     }
@@ -113,6 +122,7 @@ public class BoardJavaFx implements Observer {
         stateOfModel = state;
         if(state == State.CHECKING_END){
             if(isEnded()){
+                controller.finish();
                 System.out.println("Fin du jeu");
                 model.setState(State.IS_ENDED);
             }
@@ -130,4 +140,21 @@ public class BoardJavaFx implements Observer {
     public Board getBoard() {
         return new Board(board.getLigne(), board.getColonne(),board.getPlateau(), board.getScore());
     }
+
+    public int getScore(){
+        return board.getScore();
+    }
+
+    public int getBestScore(){
+        return bestScore;
+    }
+
+    public void setLigne(int ligne) {
+        this.ligne = ligne;
+    }
+
+    public void setColonne(int colonne) {
+        this.colonne = colonne;
+    }
 }
+

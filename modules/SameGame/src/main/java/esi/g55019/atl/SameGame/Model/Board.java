@@ -34,6 +34,18 @@ public class Board {
         }
     }
 
+    public Board(int ligne, int colonne){
+        this.ligne = ligne;
+        this.colonne = colonne;
+        score = 0;
+        plateau = new Bille[ligne][colonne];
+        for (int i = 0; i < ligne; i++) {
+            for (int j = 0; j < colonne; j++) {
+                this.plateau[i][j] = null;
+            }
+        }
+    }
+
     public int getScore() {
         return score;
     }
@@ -66,7 +78,7 @@ public class Board {
         }
     }
 
-    public boolean supprimerColorSetUp(Position position){
+    public boolean  supprimerColorSetUp(Position position){
         boolean [][] tabVérif = new boolean[ligne][colonne];
         List<Position> elementASupprimer = new ArrayList<>();
         if(plateau[position.getLigne()][position.getColonne()] == null){

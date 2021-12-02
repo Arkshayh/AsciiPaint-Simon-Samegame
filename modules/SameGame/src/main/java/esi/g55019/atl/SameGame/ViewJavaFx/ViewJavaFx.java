@@ -24,6 +24,7 @@ public class ViewJavaFx implements Observer {
     private BoardJavaFx board;
     private Menu menu;
     private BorderPane root;
+    private Label title;
 
     public ViewJavaFx(ControllerJavaFx controller, ModelJavaFx model) {
         this.controller = controller;
@@ -53,9 +54,9 @@ public class ViewJavaFx implements Observer {
         hbox.setAlignment(Pos.CENTER);
         hbox.setPadding(new Insets(10));
         hbox.setSpacing(10);
-        Label label = new Label("Jeu : SameGame");
-        label.setFont(Font.font("Helvetica", FontWeight.BOLD, 25));
-        hbox.getChildren().add(label);
+        title = new Label("SameGame");
+        title.setFont(Font.font("Helvetica", FontWeight.BOLD, 25));
+        hbox.getChildren().add(title);
     }
 
     public void addingBoard(BoardJavaFx board) {
@@ -78,5 +79,19 @@ public class ViewJavaFx implements Observer {
 
     public BoardJavaFx getBoard() {
         return board;
+    }
+
+    public void disableButtonsMenu(){
+        menu.getGiveUp().setDisable(true);
+        menu.getUndo().setDisable(true);
+        menu.getRedo().setDisable(true);
+    }
+
+    public void updateTitle(int score, int bestScore){
+        title.setText("SameGame | Score : " + score + " | Meilleur score : " + bestScore);
+    }
+
+    public void restartOn(){
+        menu.getRestart().setDisable(false);
     }
 }

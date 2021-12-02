@@ -13,11 +13,7 @@ public class AppJavaFx extends Application {
 
     /**
      * 4) hover
-     * 6) debugger undo redo
-     * 7) give up
-     * 8) restart
-     * 9) Ajouter popup win si gagné sinon lose
-     * 9) score + meilleur score
+     * 9) Ajouter popup win en vert avec musique victoire si gagné sinon lose pop up perdu lose avec rire veigar
      * 10) voir TODO
      */
     @Override
