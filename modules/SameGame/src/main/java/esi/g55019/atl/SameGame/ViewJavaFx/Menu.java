@@ -212,18 +212,6 @@ public class Menu implements Observer {
         return vBox;
     }
 
-    public TextField getLigne() {
-        return ligne;
-    }
-
-    public TextField getColonne() {
-        return colonne;
-    }
-
-    public ComboBox getDifficulté() {
-        return difficulté;
-    }
-
     public Button getUndo() {
         return undo;
     }

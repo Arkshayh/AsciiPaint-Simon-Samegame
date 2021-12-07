@@ -45,8 +45,8 @@ public class ModelJavaFx implements Observable {
      */
     @Override
     public void notifyObservers() {
-        for (int i = 0; i < listObserver.size(); i++) {
-            listObserver.get(i).update(state);
+        for (Observer observer : listObserver) {
+            observer.update(state);
         }
     }
 }
