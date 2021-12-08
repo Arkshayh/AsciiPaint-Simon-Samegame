@@ -59,4 +59,8 @@ public class ControllerJavaFx {
         }
     }
 
+    public void clickOnGiveUp(){
+        model.giveUp();
+    }
+
 }

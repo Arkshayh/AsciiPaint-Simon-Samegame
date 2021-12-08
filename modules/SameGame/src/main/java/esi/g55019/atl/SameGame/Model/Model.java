@@ -1,6 +1,5 @@
 package esi.g55019.atl.SameGame.Model;
 
-import esi.g55019.atl.SameGame.DPCommand.Command;
 import esi.g55019.atl.SameGame.util.Observable;
 import esi.g55019.atl.SameGame.util.Observer;
 
@@ -11,6 +10,7 @@ public class Model implements Observable {
     private State state;
     private List<Observer> listObserver;
     private Board board;
+    private int bestScore = 0;
 
     public Model() {
         this.state = State.ON_THE_MENU;
@@ -34,18 +34,29 @@ public class Model implements Observable {
                 board.faireTomberBille();
                 board.concatener();
                 changeState(State.UPDATE_BOARD);
-                if(board.isFinish()){
-                    if(board.isWin()){
-                        changeState(State.IS_WIN);
-                    }
-                    else{
-                        changeState(State.IS_LOSE);
-                    }
-                }
+                checkingFinish();
             }
             return true;
         }
         return false;
+    }
+
+    private void checkingFinish(){
+        if(board.isFinish()){
+            updateBestScore();
+            if(board.isWin()){
+                changeState(State.IS_WIN);
+            }
+            else{
+                changeState(State.IS_LOSE);
+            }
+        }
+    }
+
+    public void giveUp(){
+        board.giveUp();
+        changeState(State.UPDATE_BOARD);
+        changeState(State.IS_LOSE);
     }
 
     public boolean isFinish(){
@@ -68,6 +79,12 @@ public class Model implements Observable {
     public void setBoard(Board board) {
         this.board = board;
         changeState(State.UPDATE_BOARD);
+    }
+
+    private void updateBestScore(){
+        if(board.getScore() > bestScore){
+            bestScore = board.getScore();
+        }
     }
 
     /**
@@ -96,7 +113,7 @@ public class Model implements Observable {
     public void notifyObservers(Board board) {
         System.out.println(state);
         for (Observer observer : listObserver) {
-            observer.update(state, board);
+            observer.update(state, board, bestScore);
         }
     }
 }

@@ -68,12 +68,25 @@ public class ViewJavaFx implements Observer {
     }
 
     @Override
-    public void update(State state, Board board) {
+    public void update(State state, Board board, int bestScore) {
         switch (state){
             case CREATION_BOARD:
             case UPDATE_BOARD:
                 updatingBoard(board);
+                updateTitle(board.getScore(), bestScore);
                 break;
+            case IS_WIN:
+                //TODO
+                menu.getUndo().setDisable(true);
+                menu.getRedo().setDisable(true);
+                menu.getGiveUp().setDisable(true);
+                menu.getRestart().setDisable(false);
+            case IS_LOSE:
+                //TODO
+                menu.getUndo().setDisable(true);
+                menu.getRedo().setDisable(true);
+                menu.getGiveUp().setDisable(true);
+                menu.getRestart().setDisable(false);
         }
     }
 

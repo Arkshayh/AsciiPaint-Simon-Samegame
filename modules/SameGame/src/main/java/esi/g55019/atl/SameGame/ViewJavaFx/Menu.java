@@ -30,7 +30,6 @@ public class Menu {
     private ControllerJavaFx controllerJavaFx;
     private boolean displayErrorMsg = false;
 
-
     public Menu(ControllerJavaFx controllerJavaFx) {
         this.controllerJavaFx = controllerJavaFx;
         setUpMenu();
@@ -158,8 +157,7 @@ public class Menu {
     private void giveUpSetUp(){
         giveUp.setDisable(false);
         giveUp.setOnAction(event -> {
-            giveUp.setDisable(true);
-            restart.setDisable(false);
+            controllerJavaFx.clickOnGiveUp();
         });
     }
 
@@ -182,7 +180,7 @@ public class Menu {
                     nbColor = 5;
                     break;
             }
-
+            controllerJavaFx.askCreateBoard(nbLigne, nbColonne, nbColor);
 
         });
     }

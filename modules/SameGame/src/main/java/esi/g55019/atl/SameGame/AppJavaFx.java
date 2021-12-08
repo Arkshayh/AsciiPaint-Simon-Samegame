@@ -13,7 +13,7 @@ public class AppJavaFx extends Application {
 
     /**
      * 9) Ajouter popup win en vert avec musique victoire si gagné sinon lose pop up perdu lose avec rire veigar
-     * 10) voir TODO
+     * 10) AJOUTER SCORE | AJOUTER RESTART
      */
     @Override
     public void start(Stage primaryStage){

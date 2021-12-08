@@ -206,6 +206,14 @@ public class Board {
         return true;
     }
 
+    public void giveUp(){
+        for (int i = 0; i < ligne; i++) {
+            for (int j = 0; j < colonne; j++) {
+                plateau[i][j] = null;
+            }
+        }
+    }
+
     public int getLigne() {
         return ligne;
     }
@@ -227,7 +235,7 @@ public class Board {
                     string.append("0 ");
                 }
                 else{
-                    string.append(plateau[i][j].getColor().getColor() + "0 " + "\u001B[0m");
+                    string.append(plateau[i][j].getColor().getColor()).append("0 ").append("\u001B[0m");
                 }
             }
             string.append("\n");

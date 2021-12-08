@@ -16,5 +16,5 @@ public interface Observer {
     /**
      * This method is called whenever the observed object has changed.
      */
-    void update(State state, Board board);
+    void update(State state, Board board, int bestScore);
 }
