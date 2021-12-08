@@ -9,12 +9,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.FileInputStream;
 
 public class ViewJavaFx implements Observer {
     private ControllerJavaFx controller;
@@ -24,6 +27,7 @@ public class ViewJavaFx implements Observer {
     private BoardFx boardFx;
     private BorderPane root;
     private Label title;
+    private StackPane stackPane;
 
     public ViewJavaFx(ControllerJavaFx controller, Model model) {
         this.controller = controller;
@@ -42,6 +46,10 @@ public class ViewJavaFx implements Observer {
 
         root.setTop(hbox);
         root.setRight(menu.getvBox());
+
+        stackPane = new StackPane();
+
+        root.setCenter(stackPane);
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
@@ -63,8 +71,7 @@ public class ViewJavaFx implements Observer {
         GridPane monBoard = boardFx.getBoardPane();
         monBoard.setAlignment(Pos.CENTER);
         monBoard.setPadding(new Insets(10));
-        root.setCenter(monBoard);
-
+        stackPane.getChildren().add(monBoard);
     }
 
     @Override
@@ -87,6 +94,7 @@ public class ViewJavaFx implements Observer {
                 menu.getRedo().setDisable(true);
                 menu.getGiveUp().setDisable(true);
                 menu.getRestart().setDisable(false);
+
         }
     }
 

@@ -91,6 +91,7 @@ public class Menu {
     }
 
     private void textFieldSetUp(){
+        // text formatter
         var changeListener = new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
