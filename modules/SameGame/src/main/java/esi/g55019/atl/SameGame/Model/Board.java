@@ -64,20 +64,6 @@ public class Board {
         return Color.values()[nombreAleatoire];
     }
 
-    public void afficherPlateau(){
-        for (int i = 0; i < ligne; i++) {
-            for (int j = 0; j < colonne; j++) {
-                if(plateau[i][j] == null){
-                    System.out.printf("0 ");
-                }
-                else{
-                    System.out.printf(plateau[i][j].getColor().getColor() + "0 " + "\u001B[0m");
-                }
-            }
-            System.out.println();
-        }
-    }
-
     public boolean  supprimerColorSetUp(Position position){
         boolean [][] tabVérif = new boolean[ligne][colonne];
         List<Position> elementASupprimer = new ArrayList<>();
@@ -230,6 +216,23 @@ public class Board {
 
     public Bille[][] getPlateau() {
         return plateau;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder()  ;
+        for (int i = 0; i < ligne; i++) {
+            for (int j = 0; j < colonne; j++) {
+                if(plateau[i][j] == null){
+                    string.append("0 ");
+                }
+                else{
+                    string.append(plateau[i][j].getColor().getColor() + "0 " + "\u001B[0m");
+                }
+            }
+            string.append("\n");
+        }
+        return string.toString();
     }
 }
 

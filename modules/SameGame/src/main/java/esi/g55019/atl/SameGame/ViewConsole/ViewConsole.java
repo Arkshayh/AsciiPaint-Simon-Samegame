@@ -53,7 +53,7 @@ public class ViewConsole {
     }
 
     public void displayBoard(){
-        model.displayBoard();
+        System.out.println(model.getBoard());
     }
 
     public void displayScore(String msg){

@@ -15,9 +15,12 @@ public class ClickBilleCommand implements Command{
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         this.oldBoard = model.getBoard();
-        model.play(position);
+        if(model.play(position)){
+            return true;
+        }
+        return false;
     }
 
     @Override

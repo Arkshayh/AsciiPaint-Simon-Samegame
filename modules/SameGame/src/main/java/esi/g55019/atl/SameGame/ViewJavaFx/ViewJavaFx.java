@@ -2,8 +2,8 @@ package esi.g55019.atl.SameGame.ViewJavaFx;
 
 import esi.g55019.atl.SameGame.ControllerJavaFx.ControllerJavaFx;
 import esi.g55019.atl.SameGame.Model.Board;
-import esi.g55019.atl.SameGame.ModelJavaFx.State;
-import esi.g55019.atl.SameGame.ModelJavaFx.ModelJavaFx;
+import esi.g55019.atl.SameGame.Model.State;
+import esi.g55019.atl.SameGame.Model.Model;
 import esi.g55019.atl.SameGame.util.Observer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,15 +18,14 @@ import javafx.stage.Stage;
 
 public class ViewJavaFx implements Observer {
     private ControllerJavaFx controller;
-    private ModelJavaFx model;
-    private State stateOfModel;
+    private Model model;
     private HBox hbox;
-    private BoardJavaFx board;
     private Menu menu;
+    private BoardFx boardFx;
     private BorderPane root;
     private Label title;
 
-    public ViewJavaFx(ControllerJavaFx controller, ModelJavaFx model) {
+    public ViewJavaFx(ControllerJavaFx controller, Model model) {
         this.controller = controller;
         this.model = model;
         model.addObserver(this);
@@ -39,7 +38,7 @@ public class ViewJavaFx implements Observer {
         root.setMaxSize(1000,750);
 
         setUpHbox();
-        menu = new Menu(controller, model);
+        menu = new Menu(controller);
 
         root.setTop(hbox);
         root.setRight(menu.getvBox());
@@ -59,33 +58,33 @@ public class ViewJavaFx implements Observer {
         hbox.getChildren().add(title);
     }
 
-    public void addingBoard(BoardJavaFx board) {
-        this.board = board;
-        GridPane monBoard = board.getBoardPane();
+    public void updatingBoard(Board board) {
+        this.boardFx = new BoardFx(board, controller);
+        GridPane monBoard = boardFx.getBoardPane();
         monBoard.setAlignment(Pos.CENTER);
         monBoard.setPadding(new Insets(10));
         root.setCenter(monBoard);
 
     }
 
-    public void setBoardJavaFx(Board board){
-        this.board.setBoard(board);
-    }
-
     @Override
-    public void update(State state) {
-        this.stateOfModel = state;
+    public void update(State state, Board board) {
+        switch (state){
+            case CREATION_BOARD:
+            case UPDATE_BOARD:
+                updatingBoard(board);
+                break;
+        }
     }
 
-    public BoardJavaFx getBoard() {
-        return board;
+    public void disableUndo(boolean bool){
+        menu.getUndo().setDisable(bool);
     }
 
-    public void disableButtonsMenu(){
-        menu.getGiveUp().setDisable(true);
-        menu.getUndo().setDisable(true);
-        menu.getRedo().setDisable(true);
+    public void disableRedo(boolean bool){
+        menu.getRedo().setDisable(bool);
     }
+
 
     public void updateTitle(int score, int bestScore){
         title.setText("SameGame | Score : " + score + " | Meilleur score : " + bestScore);

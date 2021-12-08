@@ -1,6 +1,7 @@
 package esi.g55019.atl.SameGame.util;
 
-import esi.g55019.atl.SameGame.ModelJavaFx.State;
+import esi.g55019.atl.SameGame.Model.Board;
+import esi.g55019.atl.SameGame.Model.State;
 
 /**
  * An Observer object in the Observer/Observable pattern.
@@ -15,5 +16,5 @@ public interface Observer {
     /**
      * This method is called whenever the observed object has changed.
      */
-    void update(State state);
+    void update(State state, Board board);
 }

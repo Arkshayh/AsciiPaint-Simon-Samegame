@@ -22,13 +22,13 @@ public class Controller {
         int nbColor = viewConsole.askColor();
         int nbLigne = viewConsole.askLigneOrColonne("lignes");
         int nbColonne = viewConsole.askLigneOrColonne("colonnes");
-        model.initialiseBoard(nbLigne, nbColonne,nbColor);
+        model.createBoard(nbLigne, nbColonne,nbColor);
 
         while (play()){
             nbColor = viewConsole.askColor();
             nbLigne = viewConsole.askLigneOrColonne("lignes");
             nbColonne = viewConsole.askLigneOrColonne("colonnes");
-            model.initialiseBoard(nbLigne, nbColonne,nbColor);
+            model.createBoard(nbLigne, nbColonne,nbColor);
         }
     }
 

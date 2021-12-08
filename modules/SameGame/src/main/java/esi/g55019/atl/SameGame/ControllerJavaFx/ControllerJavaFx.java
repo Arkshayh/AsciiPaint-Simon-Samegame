@@ -1,94 +1,62 @@
 package esi.g55019.atl.SameGame.ControllerJavaFx;
 
-import esi.g55019.atl.SameGame.Model.Board;
-import esi.g55019.atl.SameGame.ViewJavaFx.BoardJavaFx;
-import esi.g55019.atl.SameGame.ModelJavaFx.ModelJavaFx;
+import esi.g55019.atl.SameGame.DPCommand.ClickBilleCommand;
+import esi.g55019.atl.SameGame.DPCommand.Command;
+import esi.g55019.atl.SameGame.Model.Position;
+import esi.g55019.atl.SameGame.Model.Model;
 import esi.g55019.atl.SameGame.ViewJavaFx.ViewJavaFx;
 import javafx.stage.Stage;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ControllerJavaFx {
-    private ModelJavaFx model;
+    private Model model;
     private ViewJavaFx view;
-    private List<Board> undo;
-    private List<Board> redo;
-    private BoardJavaFx boardJavaFx;
+    private List<Command> undo = new ArrayList<>();
+    private List<Command> redo = new ArrayList<>();
 
-    public ControllerJavaFx(ModelJavaFx model) {
+    public ControllerJavaFx(Model model) {
         this.model = model;
         this.view = new ViewJavaFx(this, model);
-        undo = new ArrayList<>();
-        redo = new ArrayList<>();
     }
 
     public void start(Stage primaryStage){
         view.start(primaryStage);
     }
 
-    public void createBoard(int ligne, int colonne, int nbColor){
-        view.addingBoard(new BoardJavaFx(ligne, colonne, nbColor, model, this));
-
+    public void askCreateBoard(int row, int column, int level){
+        model.createBoard(row, column, level);
     }
 
-    public void addUndo(Board board){
-        undo.add(board);
+    public void clickOnBoardButton(Position pos){
+        Command command = new ClickBilleCommand(model, pos);
+        if(command.execute()){
+            undo.add(command);
+            view.disableUndo(false);
+            redo.clear();
+            view.disableRedo(true);
+        }
     }
 
-    public void updateViewWithUndo(){
-        redo.add(new Board(boardJavaFx.getBoard().getLigne(),boardJavaFx.getBoard().getColonne(),
-                boardJavaFx.getBoard().getPlateau(),boardJavaFx.getBoard().getScore()));
-        Board oldBoard = undo.get(undo.size()-1);
-        view.setBoardJavaFx(oldBoard);
-        undo.remove(undo.get(undo.size()-1));
-        updateScore();
+    public void clickOnUndo(){
+        redo.add(undo.get(undo.size()-1));
+        view.disableRedo(false);
+        undo.get(undo.size()-1).unexecute();
+        undo.remove(undo.size()-1);
+        if(undo.size() == 0){
+            view.disableUndo(true);
+        }
     }
 
-    public void updateViewWithRedo(){
-        undo.add(new Board(boardJavaFx.getBoard().getLigne(),boardJavaFx.getBoard().getColonne(),
-                boardJavaFx.getBoard().getPlateau(),boardJavaFx.getBoard().getScore()));
-        Board oldBoard = redo.get(redo.size()-1);
-        view.setBoardJavaFx(oldBoard);
-        redo.remove(redo.get(redo.size()-1));
-        updateScore();
+    public void clickOnRedo(){
+        redo.get(redo.size()-1).execute();
+        undo.add(redo.get(redo.size() - 1));
+        view.disableUndo(false);
+        redo.remove(redo.size()-1);
+        if(redo.size() == 0){
+            view.disableRedo(true);
+        }
     }
 
-    public void clearRedo(){
-        redo.clear();
-    }
-
-    public int getUndoSize(){
-        return undo.size();
-    }
-
-    public int getRedoSize(){
-        return redo.size();
-    }
-
-    public void setBoardJavaFx() {
-        this.boardJavaFx = view.getBoard();
-        view.updateTitle(boardJavaFx.getScore(), boardJavaFx.getBestScore());
-    }
-
-    public void giveUp(){
-        view.setBoardJavaFx(new Board(boardJavaFx.getBoard().getLigne(),boardJavaFx.getBoard().getColonne()));
-        view.disableButtonsMenu();
-    }
-
-    public void finish(){
-        view.disableButtonsMenu();
-        view.restartOn();
-    }
-
-    public void updateScore(){
-        view.updateTitle(boardJavaFx.getScore(), boardJavaFx.getBestScore());
-    }
-
-    public void restart(int ligne, int colonne, int difficulté){
-        boardJavaFx.setLigne(ligne);
-        boardJavaFx.setColonne(colonne);
-        boardJavaFx.setBoard(new Board(ligne, colonne, difficulté));
-        view.setBoardJavaFx(boardJavaFx.getBoard());
-        view.updateTitle(boardJavaFx.getScore(), boardJavaFx.getBestScore());
-    }
 }

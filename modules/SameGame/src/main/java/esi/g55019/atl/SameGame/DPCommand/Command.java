@@ -9,7 +9,7 @@ public interface Command {
     /**
      * execute the command
      */
-    public void execute();
+    public boolean execute();
 
     /**
      * cancel the previous command. Can only be used if isReversible() is true

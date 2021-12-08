@@ -1,5 +1,7 @@
 package esi.g55019.atl.SameGame.util;
 
+import esi.g55019.atl.SameGame.Model.Board;
+
 public interface Observable {
     /**
      * An Observable object in the Observer/Observable pattern.
@@ -26,5 +28,5 @@ public interface Observable {
     /**
      * Notifies all observers by calling their 'update' method.
      */
-    void notifyObservers();
+    void notifyObservers(Board board);
 }
