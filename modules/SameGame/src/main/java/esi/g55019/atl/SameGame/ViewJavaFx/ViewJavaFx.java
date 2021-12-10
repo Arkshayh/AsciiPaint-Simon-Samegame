@@ -16,9 +16,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
-
 public class ViewJavaFx implements Observer {
     private ControllerJavaFx controller;
     private Model model;
@@ -28,6 +25,8 @@ public class ViewJavaFx implements Observer {
     private BorderPane root;
     private Label title;
     private StackPane stackPane;
+    private ImageView victory;
+    private ImageView defeat;
 
     public ViewJavaFx(ControllerJavaFx controller, Model model) {
         this.controller = controller;
@@ -48,6 +47,19 @@ public class ViewJavaFx implements Observer {
         root.setRight(menu.getvBox());
 
         stackPane = new StackPane();
+        stackPane.setMaxHeight(500);
+        stackPane.setMaxWidth(500);
+
+
+        Image imageVictory = new Image("file:modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ViewJavaFx\\victory.jpg");
+        this.victory = new ImageView(imageVictory);
+        victory.setFitWidth(700);
+        victory.setFitHeight(412);
+
+        Image imageDefeat = new Image("file:modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ViewJavaFx\\defeat.jpg");
+        this.defeat = new ImageView(imageDefeat);
+        defeat.setFitWidth(700);
+        defeat.setFitHeight(412);
 
         root.setCenter(stackPane);
 
@@ -83,17 +95,35 @@ public class ViewJavaFx implements Observer {
                 updateTitle(board.getScore(), bestScore);
                 break;
             case IS_WIN:
-                //TODO
+                stackPane.getChildren().add(victory);
+                stackPane.setAlignment(victory, Pos.CENTER);
                 menu.getUndo().setDisable(true);
                 menu.getRedo().setDisable(true);
                 menu.getGiveUp().setDisable(true);
                 menu.getRestart().setDisable(false);
+                break;
             case IS_LOSE:
-                //TODO
+                stackPane.getChildren().add(defeat);
+                stackPane.setAlignment(defeat, Pos.CENTER);
                 menu.getUndo().setDisable(true);
                 menu.getRedo().setDisable(true);
                 menu.getGiveUp().setDisable(true);
                 menu.getRestart().setDisable(false);
+                break;
+        }
+    }
+
+    public void hideWinLose(){
+        try{
+            stackPane.getChildren().remove(this.defeat);
+        }
+        catch (Exception e){
+
+        }
+        try {
+            stackPane.getChildren().remove(this.victory);
+        }
+        catch (Exception e){
 
         }
     }

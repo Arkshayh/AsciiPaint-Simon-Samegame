@@ -26,6 +26,7 @@ public class ControllerJavaFx {
     }
 
     public void askCreateBoard(int row, int column, int level){
+        view.hideWinLose();
         model.createBoard(row, column, level);
     }
 
@@ -40,6 +41,7 @@ public class ControllerJavaFx {
     }
 
     public void clickOnUndo(){
+        view.hideWinLose();
         redo.add(undo.get(undo.size()-1));
         view.disableRedo(false);
         undo.get(undo.size()-1).unexecute();
