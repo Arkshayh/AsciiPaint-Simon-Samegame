@@ -13,6 +13,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+/**
+ * This class contains every element of the menu of the javaFx app
+ */
 public class Menu {
     private VBox vBox;
     private TextField ligne;
@@ -30,11 +33,18 @@ public class Menu {
     private ControllerJavaFx controllerJavaFx;
     private boolean displayErrorMsg = false;
 
+    /**
+     * Constructor
+     * @param controllerJavaFx ControllerJavaFx
+     */
     public Menu(ControllerJavaFx controllerJavaFx) {
         this.controllerJavaFx = controllerJavaFx;
         setUpMenu();
     }
 
+    /**
+     * This method will add element to the menu and setUp them
+     */
     private void setUpMenu(){
         this.vBox = new VBox();
         vBox.setPadding(new Insets(10));
@@ -90,8 +100,10 @@ public class Menu {
         disableButtons();
     }
 
+    /**
+     * Set up the textField
+     */
     private void textFieldSetUp(){
-        // text formatter
         var changeListener = new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
@@ -104,6 +116,9 @@ public class Menu {
         colonne.textProperty().addListener(changeListener);
     }
 
+    /**
+     * Set up the button start
+     */
     private void startSetUp(){
         start.setOnAction(actionEvent -> {
             if(ligne.getText().equals("") || colonne.getText().equals("")){
@@ -143,18 +158,27 @@ public class Menu {
         });
     }
 
+    /**
+     * SetUp the button undo
+     */
     private void undoSetUp(){
         undo.setOnAction(event -> {
             controllerJavaFx.clickOnUndo();
         });
     }
 
+    /**
+     * setUp the button redo
+     */
     private void redoSetUp(){
         redo.setOnAction(event -> {
             controllerJavaFx.clickOnRedo();
         });
     }
 
+    /**
+     * setUp the button giveUp
+     */
     private void giveUpSetUp(){
         giveUp.setDisable(false);
         giveUp.setOnAction(event -> {
@@ -162,6 +186,9 @@ public class Menu {
         });
     }
 
+    /**
+     * SetUp the button restart
+     */
     private void restartSetUp(){
         restart.setDisable(true);
         restart.setOnAction(event ->{
@@ -182,10 +209,12 @@ public class Menu {
                     break;
             }
             controllerJavaFx.askCreateBoard(nbLigne, nbColonne, nbColor);
-
         });
     }
 
+    /**
+     * Disable the redo/undo/restart/giveUp button
+     */
     private void disableButtons(){
         redo.setDisable(true);
         undo.setDisable(true);
@@ -193,22 +222,42 @@ public class Menu {
         giveUp.setDisable(true);
     }
 
+    /**
+     * getter VBox
+     * @return VBox
+     */
     public VBox getvBox() {
         return vBox;
     }
 
+    /**
+     * getter undo button
+     * @return Button
+     */
     public Button getUndo() {
         return undo;
     }
 
+    /**
+     * getter redo button
+     * @return Button
+     */
     public Button getRedo() {
         return redo;
     }
 
+    /**
+     * getter giveUp button
+     * @return Button
+     */
     public Button getGiveUp() {
         return giveUp;
     }
 
+    /**
+     * getter Restart button
+     * @return Button
+     */
     public Button getRestart() {
         return restart;
     }
