@@ -16,6 +16,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+/**
+ * This class represent the view of the javaFx app
+ * This class is an Observer of the model. It will be notify when the state of the model change/
+ */
 public class ViewJavaFx implements Observer {
     private ControllerJavaFx controller;
     private Model model;
@@ -28,12 +32,21 @@ public class ViewJavaFx implements Observer {
     private ImageView victory;
     private ImageView defeat;
 
+    /**
+     * Constructor
+     * @param controller
+     * @param model
+     */
     public ViewJavaFx(ControllerJavaFx controller, Model model) {
         this.controller = controller;
         this.model = model;
         model.addObserver(this);
     }
 
+    /**
+     * Called when the app is launched
+     * @param primaryStage
+     */
     public void start(Stage primaryStage){
         primaryStage.setTitle("Projet SameGame");
         root = new BorderPane();
@@ -68,6 +81,9 @@ public class ViewJavaFx implements Observer {
         primaryStage.show();
     }
 
+    /**
+     * SetUp the HBOX
+     */
     private void setUpHbox(){
         this.hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);
@@ -78,6 +94,10 @@ public class ViewJavaFx implements Observer {
         hbox.getChildren().add(title);
     }
 
+    /**
+     * Change the current boardFx by a new BoardFx
+     * @param board Board
+     */
     private void updatingBoard(Board board) {
         this.boardFx = new BoardFx(board, controller);
         GridPane monBoard = boardFx.getBoardPane();
@@ -86,6 +106,12 @@ public class ViewJavaFx implements Observer {
         stackPane.getChildren().add(monBoard);
     }
 
+    /**
+     * This method is called when the state of the model change
+     * @param state State
+     * @param board Board
+     * @param bestScore int
+     */
     @Override
     public void update(State state, Board board, int bestScore) {
         switch (state){
@@ -113,6 +139,9 @@ public class ViewJavaFx implements Observer {
         }
     }
 
+    /**
+     * Hide the victoryScreen or the defeatScreen
+     */
     public void hideWinLose(){
         try{
             stackPane.getChildren().remove(this.defeat);
@@ -128,18 +157,32 @@ public class ViewJavaFx implements Observer {
         }
     }
 
+    /**
+     * Disable the undo button if the given boolean
+     * @param bool boolean
+     */
     public void disableUndo(boolean bool){
         menu.getUndo().setDisable(bool);
     }
 
+    /**
+     * Disable the redo button if the given boolean
+     * @param bool boolean
+     */
     public void disableRedo(boolean bool){
         menu.getRedo().setDisable(bool);
     }
 
+    //TODO
     private void musicVictory(){
         
     }
 
+    /**
+     * Update the title with the given score / bestscore
+     * @param score int
+     * @param bestScore int
+     */
     private void updateTitle(int score, int bestScore){
         title.setText("SameGame | Score : " + score + " | Meilleur score : " + bestScore);
     }
