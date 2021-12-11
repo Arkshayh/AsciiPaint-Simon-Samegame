@@ -9,15 +9,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class represent of the Controller of the app
+ */
 public class Controller {
     private ViewConsole viewConsole;
     private Model model;
 
+    /**
+     * Constructor
+     * @param model Model
+     */
     public Controller(Model model) {
         this.model = model;
         this.viewConsole = new ViewConsole(model, this);
     }
 
+    /**
+     * This method is called when the app is launched.
+     * It will ask the number of color/row and column then called the method play()
+     */
     public void start(){
         int nbColor = viewConsole.askColor();
         int nbLigne = viewConsole.askLigneOrColonne("lignes");
@@ -32,6 +43,15 @@ public class Controller {
         }
     }
 
+    /**
+     * This method is called when a game is played
+     * It will called the View for display.
+     * and will ask to the user a command
+     * when the game is finish the user must choose the continue of stop the game.
+     * if the answer of the user is Y this method return true.
+     * If the answer of the user is N this method return false.
+     * @return boolean
+     */
     private boolean play(){
         Scanner clavier = new Scanner(System.in);
         boolean end = false;
@@ -105,6 +125,12 @@ public class Controller {
         return replay;
     }
 
+    /**
+     * The user must input Y or No
+     * if the answer of the user is Y this method return true.
+     * If the answer of the user is N this method return false.
+     * @return boolean
+     */
     private boolean doReplay(){
         Scanner clavier = new Scanner(System.in);
         String replayAnswer = clavier.nextLine();
