@@ -4,68 +4,86 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This class represent the board of the game.
+ * The board has at least 5 row or column and maximum 20 row or column.
+ * A board has also a number of color (between 3 and 5) and a score !
+ * The board is a 2D array of Bille.
+ */
 public class Board {
-    private int ligne;
-    private int colonne;
+    private int row;
+    private int column;
     private Bille[][] plateau;
     private int score;
     private int nbColor;
 
-    public Board(int ligne, int colonne, int nbColor) {
-        if(nbColor < 3 || nbColor > 5){
-            throw new IllegalArgumentException("Nbr de billes incorrect");
+    /**
+     * Constructor
+     * @param row int
+     * @param column int
+     * @param nbColor int
+     */
+    public Board(int row, int column, int nbColor) {
+        if(row < 5 || row > 20 || column <5 || column > 20 || nbColor < 3 || nbColor > 5){
+            throw new IllegalArgumentException("Erreur : nombre de lignes/colonnes/bille incorrect" );
         }
         this.nbColor = nbColor;
-        this.colonne = colonne;
-        this.ligne = ligne;
-        plateau = new Bille[ligne][colonne];
+        this.column = column;
+        this.row = row;
+        plateau = new Bille[row][column];
         initialiseBoard(nbColor);
     }
 
-    public Board(int ligne, int colonne, Bille[][] plateau, int score){
-        this.ligne = ligne;
-        this.colonne = colonne;
+    /**
+     * Second constructor to make a defensive copie of another Board
+     * @param row int
+     * @param column int
+     * @param plateau Bille[][]
+     * @param score int
+     */
+    public Board(int row, int column, Bille[][] plateau, int score){
+        this.row = row;
+        this.column = column;
         this.score = score;
-        this.plateau = new Bille[ligne][colonne];
-        for (int i = 0; i <ligne; i++) {
-            for (int j = 0; j < colonne; j++) {
+        this.plateau = new Bille[row][column];
+        for (int i = 0; i <row; i++) {
+            for (int j = 0; j < column; j++) {
                 this.plateau[i][j] = plateau[i][j];
             }
         }
     }
 
-    public Board(int ligne, int colonne){
-        this.ligne = ligne;
-        this.colonne = colonne;
-        score = 0;
-        plateau = new Bille[ligne][colonne];
-        for (int i = 0; i < ligne; i++) {
-            for (int j = 0; j < colonne; j++) {
-                this.plateau[i][j] = null;
-            }
-        }
-    }
-
-    public int getScore() {
-        return score;
-    }
-
+    /**
+     * This method will add a Bille with a random color in the board
+     * @param nbColor
+     */
     private void initialiseBoard(int nbColor){
-        for (int i = 0; i < ligne; i++) {
-            for (int j = 0; j < colonne; j++){
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++){
                 plateau[i][j] = new Bille(randomColor(nbColor));
             }
         }
     }
 
+    /**
+     * return a random color
+     * @param nBcolor int
+     * @return Color
+     */
     private Color randomColor(int nBcolor){
         Random rand = new Random();
         int nombreAleatoire = rand.nextInt(nBcolor);
         return Color.values()[nombreAleatoire];
     }
 
+    /**
+     * This method receive a position and removes all adjacent balls of the same color of the Board.
+     * The method return a boolean true if the Bille has at least one adjacent ball of the same color  otherwise false.
+     * @param position Position
+     * @return boolean
+     */
     public boolean  supprimerColorSetUp(Position position){
-        boolean [][] tabVérif = new boolean[ligne][colonne];
+        boolean [][] tabVérif = new boolean[row][column];
         List<Position> elementASupprimer = new ArrayList<>();
         if(plateau[position.getLigne()][position.getColonne()] == null){
             System.out.println("Cette bille a déjà été enlevée ! ");
@@ -85,13 +103,26 @@ public class Board {
         }
     }
 
+    /**
+     * return a list of Position of the each ajacent Bille of the same color  of the given position
+     * @param position Position
+     * @return List of Position
+     */
     public List<Position> getVoisinASupprimer(Position position){
-        boolean [][] tabVérif = new boolean[ligne][colonne];
+        boolean [][] tabVérif = new boolean[row][column];
         List<Position> elementASupprimer = new ArrayList<>();
         algoRécu(position, plateau[position.getLigne()][position.getColonne()].getColor() ,tabVérif, elementASupprimer);
         return elementASupprimer;
     }
 
+    /**
+     * add to the given list, each Bille of the same color adjacent.
+     * This method need the color, the current position and an array of boolean.
+     * @param courante Position
+     * @param color Color
+     * @param tab boolean[][]
+     * @param aSupprimer List of Position
+     */
     private void algoRécu(Position courante, Color color, boolean [][] tab, List<Position> aSupprimer){
         tab[courante.getLigne()][courante.getColonne()] = true;
         aSupprimer.add(courante);
@@ -109,24 +140,44 @@ public class Board {
         }
     }
 
+    /**
+     * return a boolean true if the given position is null in the plateau attribute otherwise false
+     * @param pos Position
+     * @return boolean
+     */
     private boolean isNull(Position pos){
         return plateau[pos.getLigne()][pos.getColonne()] == null;
     }
 
+    /**
+     * return a boolean true if the given position is in the Board otherwise false
+     * @param pos
+     * @return
+     */
     public boolean isInside(Position pos){
-        if(pos.getLigne() >= 0 && pos.getLigne() < ligne){
-            if(pos.getColonne() >= 0 && pos.getColonne() < colonne){
+        if(pos.getLigne() >= 0 && pos.getLigne() < row){
+            if(pos.getColonne() >= 0 && pos.getColonne() < column){
                 return true;
             }
         }
         return false;
     }
 
+    /**
+     * Return a boolean, true if the Bille at the given position has the same color of the color given
+     * @param position Position
+     * @param color Color
+     * @return boolean
+     */
     private boolean hasTheSameColor(Position position, Color color){
         return plateau[position.getLigne()][position.getColonne()].getColor() == color;
     }
 
-
+    /**
+     * return a list position of each neighbor of the given position. The list can contain some position who are OOB.
+     * @param pos Position
+     * @return List of Position
+     */
     private List<Position> getVoisin(Position pos){
         List<Position> voisins = List.of(
                 new Position(pos.getLigne() + 1, pos.getColonne()),
@@ -137,6 +188,10 @@ public class Board {
         return voisins;
     }
 
+    /**
+     * Change the position of the Bille in the plateau.
+     * Null locations are moved to the top of the array and other items are moved to the bottom
+     */
     public void faireTomberBille(){
         for (int j = 0; j < plateau[0].length; j++) {
             for (int i = 0; i < plateau.length; i++) {
@@ -152,6 +207,9 @@ public class Board {
         }
     }
 
+    /**
+     * each column who constain only null are moved to the right of the plateau the other are move to the left
+     */
     public void concatener(){
         for (int j = 0; j < plateau[0].length; j++) { //J = colonne 1
             if(plateau[plateau.length-1][j] == null && j+1 < plateau[0].length){
@@ -165,6 +223,11 @@ public class Board {
         }
     }
 
+    /**
+     * exchange the position of 2 column of the plateau. This method need the index of the 2 column
+     * @param c1 int
+     * @param c2 int
+     */
     private void echangerColonnes(int c1, int c2){
         for (int i = 0; i < plateau.length; i++) {
             plateau[i][c1] = plateau[i][c2];
@@ -172,6 +235,10 @@ public class Board {
         }
     }
 
+    /**
+     * return true if the board is empty or  if all the remaining balls no longer have neighbors of the same color
+     * @return boolean
+     */
     public boolean isFinish(){
         List<Position> voisins;
         Position currentVoisin;
@@ -195,9 +262,13 @@ public class Board {
         return true;
     }
 
+    /**
+     * return true if the board only contain null
+     * @return boolean
+     */
     public boolean isWin(){
-        for (int i = 0; i < ligne; i++) {
-            for (int j = 0; j < colonne; j++) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
                 if(plateau[i][j] != null){
                     return false;
                 }
@@ -206,31 +277,58 @@ public class Board {
         return true;
     }
 
+    /**
+     * fill the plateau with null
+     */
     public void giveUp(){
-        for (int i = 0; i < ligne; i++) {
-            for (int j = 0; j < colonne; j++) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
                 plateau[i][j] = null;
             }
         }
     }
 
-    public int getLigne() {
-        return ligne;
+    /**
+     * getter for row
+     * @return int
+     */
+    public int getRow() {
+        return row;
     }
 
-    public int getColonne() {
-        return colonne;
+    /**
+     * getter for column
+     * @return int
+     */
+    public int getColumn() {
+        return column;
     }
 
+    /**
+     * getter for plateau
+     * @return Bille[][]
+     */
     public Bille[][] getPlateau() {
         return plateau;
     }
 
+    /**
+     * getter for the score
+     * @return int
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * to String method
+     * @return String
+     */
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder()  ;
-        for (int i = 0; i < ligne; i++) {
-            for (int j = 0; j < colonne; j++) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
                 if(plateau[i][j] == null){
                     string.append("0 ");
                 }
