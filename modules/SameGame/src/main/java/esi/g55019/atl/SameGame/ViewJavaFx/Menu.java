@@ -131,7 +131,9 @@ public class Menu {
             }
         };
         ligne.textProperty().addListener(changeListener);
+        ligne.setFocusTraversable(false);
         colonne.textProperty().addListener(changeListener);
+        colonne.setFocusTraversable(false);
     }
 
     /**
