@@ -99,6 +99,12 @@ public class ViewJavaFx implements Observer {
      * @param board Board
      */
     private void updatingBoard(Board board) {
+        try {
+            stackPane.getChildren().remove(0);
+        }
+        catch (Exception e){
+
+        }
         this.boardFx = new BoardFx(board, controller);
         GridPane monBoard = boardFx.getBoardPane();
         monBoard.setAlignment(Pos.CENTER);
@@ -121,6 +127,7 @@ public class ViewJavaFx implements Observer {
                 updateTitle(board.getScore(), bestScore);
                 break;
             case IS_WIN:
+                stackPane.getChildren().remove(0);
                 stackPane.getChildren().add(victory);
                 stackPane.setAlignment(victory, Pos.CENTER);
                 menu.getUndo().setDisable(true);
@@ -129,6 +136,7 @@ public class ViewJavaFx implements Observer {
                 menu.getRestart().setDisable(false);
                 break;
             case IS_LOSE:
+                stackPane.getChildren().remove(0);
                 stackPane.getChildren().add(defeat);
                 stackPane.setAlignment(defeat, Pos.CENTER);
                 menu.getUndo().setDisable(true);

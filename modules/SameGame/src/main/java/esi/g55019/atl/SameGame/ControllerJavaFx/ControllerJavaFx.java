@@ -45,6 +45,8 @@ public class ControllerJavaFx {
      * @param level int
      */
     public void askCreateBoard(int row, int column, int level){
+        undo.clear();
+        view.disableUndo(true);
         view.hideWinLose();
         model.createBoard(row, column, level);
     }
