@@ -12,9 +12,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.io.File;
 
 /**
  * This class represent the view of the javaFx app
@@ -31,6 +36,9 @@ public class ViewJavaFx implements Observer {
     private StackPane stackPane;
     private ImageView victory;
     private ImageView defeat;
+    private MediaPlayer defeatSound;
+    private MediaPlayer victorySound;
+    private MediaPlayer playingMusic;
 
     /**
      * Constructor
@@ -122,11 +130,17 @@ public class ViewJavaFx implements Observer {
     public void update(State state, Board board, int bestScore) {
         switch (state){
             case CREATION_BOARD:
+                playMusicPlaying();
+                updatingBoard(board);
+                updateTitle(board.getScore(), bestScore);
+                break;
             case UPDATE_BOARD:
                 updatingBoard(board);
                 updateTitle(board.getScore(), bestScore);
                 break;
             case IS_WIN:
+                stopMusic();
+                playMusicWin();
                 stackPane.getChildren().remove(0);
                 stackPane.getChildren().add(victory);
                 stackPane.setAlignment(victory, Pos.CENTER);
@@ -136,6 +150,8 @@ public class ViewJavaFx implements Observer {
                 menu.getRestart().setDisable(false);
                 break;
             case IS_LOSE:
+                stopMusic();
+                playMusicLose();
                 stackPane.getChildren().remove(0);
                 stackPane.getChildren().add(defeat);
                 stackPane.setAlignment(defeat, Pos.CENTER);
@@ -181,9 +197,34 @@ public class ViewJavaFx implements Observer {
         menu.getRedo().setDisable(bool);
     }
 
-    //TODO
-    private void musicVictory(){
-        
+    /**
+     * Set up the victory and defeat sound.
+     */
+    private void playMusicWin(){
+        Media victoryS = new Media(new File("modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\victorySound.mp3").toURI().toString());
+        victorySound = new MediaPlayer(victoryS);
+        victorySound.play();
+    }
+
+    private void playMusicLose(){
+        Media defeatS = new Media(new File("modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\defeatSound.mp3").toURI().toString());
+        defeatSound = new MediaPlayer(defeatS);
+        defeatSound.play();
+    }
+
+    private void playMusicPlaying(){
+        Media music = new Media(new File("modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\whilePlaying.mp3").toURI().toString());
+        playingMusic = new MediaPlayer(music);
+        playingMusic.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                playingMusic.seek(Duration.ZERO);
+            }
+        });
+        playingMusic.play();
+    }
+
+    private void stopMusic(){
+        playingMusic.stop();
     }
 
     /**
