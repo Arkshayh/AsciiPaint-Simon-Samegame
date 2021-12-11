@@ -3,18 +3,29 @@ package esi.g55019.atl.SameGame.ViewConsole;
 import esi.g55019.atl.SameGame.Controller.Controller;
 import esi.g55019.atl.SameGame.Model.Model;
 import esi.g55019.atl.SameGame.Model.Position;
-
 import java.util.Scanner;
 
+/**
+ * Represent the view of the console app
+ */
 public class ViewConsole {
     private Model model;
     private Controller controller;
 
+    /**
+     * Constructor
+     * @param model Model
+     * @param controller Controller
+     */
     public ViewConsole(Model model, Controller controller) {
         this.model = model;
         this.controller = controller;
     }
 
+    /**
+     * ask to the user to input the number of color (3-5)
+     * @return int
+     */
     public int askColor(){
         int color = askInt("Entrer le nombre de couleurs (entre 3 et 5 compris) : ");
         while(color> 5 || color < 3){
@@ -23,14 +34,24 @@ public class ViewConsole {
         return color;
     }
 
+    /**
+     * Ask to the user to input the number of row/column 5-20
+     * @param msg String
+     * @return int
+     */
     public int askLigneOrColonne(String msg){
         int nb = askInt("Entrer le nombres de " + msg + " (entre 5 et 50 compris) : ");
-        while (nb > 50 || nb < 5){
+        while (nb > 20 || nb < 5){
             nb = askInt("Nombres de " + msg + " incorrectes, réesayer : ");
         }
         return nb;
     }
 
+    /**
+     * ask to the user a number
+     * @param message String
+     * @return int
+     */
     private int askInt(String message) {
         System.out.println(message);
         Scanner clavier = new Scanner(System.in);
@@ -42,24 +63,24 @@ public class ViewConsole {
         return clavier.nextInt();
     }
 
-    public Position askPosition(int ligneMax, int colonneMax){
-        System.out.print("Entrer une position, ");
-        Position pos = new Position(askInt("d'abord le numéro de la ligne : "), askInt("Le numéro de la colonne : "));
-        while (pos.getLigne() > ligneMax || pos.getLigne() <0 || pos.getColonne() > colonneMax || pos.getColonne() <0){
-            System.out.println("Cette position n'est pas dans le plateau, réessayer : ");
-            pos = new Position(askInt("d'abord le numéro de la ligne : "), askInt("Le numéro de la colonne : "));
-        }
-        return pos;
-    }
-
+    /**
+     * Display the board
+     */
     public void displayBoard(){
         System.out.println(model.getBoard());
     }
 
+    /**
+     * display the score
+     * @param msg
+     */
     public void displayScore(String msg){
         System.out.println(msg + model.getScore());
     }
 
+    /**
+     * display the list of commands
+     */
     public void displayListCommand(){
         System.out.println("Entrer une commande : \n" +
                 "* Une position pour enlèver la bille à cet endroit.\n" +
@@ -69,6 +90,9 @@ public class ViewConsole {
                 "* Restart : pour recommancer une partie.\n");
     }
 
+    /**
+     * display a replay message
+     */
     public void replayMsg(){
         System.out.println("Voulez-vous rejouer ? (Y/N)");
     }
