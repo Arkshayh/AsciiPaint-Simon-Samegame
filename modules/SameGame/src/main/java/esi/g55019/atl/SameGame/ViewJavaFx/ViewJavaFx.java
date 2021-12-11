@@ -51,12 +51,12 @@ public class ViewJavaFx implements Observer {
         stackPane.setMaxWidth(500);
 
 
-        Image imageVictory = new Image("file:modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ViewJavaFx\\victory.jpg");
+        Image imageVictory = new Image("file:modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\victory.jpg");
         this.victory = new ImageView(imageVictory);
         victory.setFitWidth(700);
         victory.setFitHeight(412);
 
-        Image imageDefeat = new Image("file:modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ViewJavaFx\\defeat.jpg");
+        Image imageDefeat = new Image("file:modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\defeat.jpg");
         this.defeat = new ImageView(imageDefeat);
         defeat.setFitWidth(700);
         defeat.setFitHeight(412);
@@ -78,7 +78,7 @@ public class ViewJavaFx implements Observer {
         hbox.getChildren().add(title);
     }
 
-    public void updatingBoard(Board board) {
+    private void updatingBoard(Board board) {
         this.boardFx = new BoardFx(board, controller);
         GridPane monBoard = boardFx.getBoardPane();
         monBoard.setAlignment(Pos.CENTER);
@@ -136,12 +136,12 @@ public class ViewJavaFx implements Observer {
         menu.getRedo().setDisable(bool);
     }
 
+    private void musicVictory(){
+        
+    }
 
-    public void updateTitle(int score, int bestScore){
+    private void updateTitle(int score, int bestScore){
         title.setText("SameGame | Score : " + score + " | Meilleur score : " + bestScore);
     }
 
-    public void restartOn(){
-        menu.getRestart().setDisable(false);
-    }
 }

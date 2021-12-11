@@ -5,8 +5,6 @@ import esi.g55019.atl.SameGame.Model.Model;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-
-
 public class AppJavaFx extends Application {
     public static void main(String[] args) {
         launch(args);
