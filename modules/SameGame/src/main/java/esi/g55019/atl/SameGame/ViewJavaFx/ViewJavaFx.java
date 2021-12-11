@@ -198,20 +198,29 @@ public class ViewJavaFx implements Observer {
     }
 
     /**
-     * Set up the victory and defeat sound.
+     * Set up the victory sound and play it.
      */
     private void playMusicWin(){
         Media victoryS = new Media(new File("modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\victorySound.mp3").toURI().toString());
         victorySound = new MediaPlayer(victoryS);
         victorySound.play();
+        victorySound.setVolume(menu.getSliderValue());
     }
 
+    /**
+     * Set up the defeat sound and play it.
+     */
     private void playMusicLose(){
         Media defeatS = new Media(new File("modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\defeatSound.mp3").toURI().toString());
         defeatSound = new MediaPlayer(defeatS);
         defeatSound.play();
+        defeatSound.setVolume(menu.getSliderValue());
+
     }
 
+    /**
+     * Set up the playing sound and play it.
+     */
     private void playMusicPlaying(){
         Media music = new Media(new File("modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\whilePlaying.mp3").toURI().toString());
         playingMusic = new MediaPlayer(music);
@@ -221,10 +230,39 @@ public class ViewJavaFx implements Observer {
             }
         });
         playingMusic.play();
+        playingMusic.setVolume(menu.getSliderValue());
     }
 
+    /**
+     * Stop the playingMusic
+     */
     private void stopMusic(){
         playingMusic.stop();
+    }
+
+    /**
+     * change the volume of the sound
+     * @param volume double
+     */
+    public void updateVolume(double volume){
+        try{
+            defeatSound.setVolume(volume);
+        }
+        catch (Exception e){
+
+        }
+        try {
+            victorySound.setVolume(volume);
+        }
+        catch (Exception e){
+
+        }
+        try {
+            playingMusic.setVolume(volume);
+        }
+        catch (Exception e){
+
+        }
     }
 
     /**

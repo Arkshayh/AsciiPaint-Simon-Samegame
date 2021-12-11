@@ -5,10 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -32,6 +29,8 @@ public class Menu {
     private Button restart;
     private ControllerJavaFx controllerJavaFx;
     private boolean displayErrorMsg = false;
+    private Slider slider;
+    private Label volume;
 
     /**
      * Constructor
@@ -97,7 +96,26 @@ public class Menu {
         vBox.setSpacing(20);
         vBox.setAlignment(Pos.CENTER);
 
+        volume = new Label("Volume : ");
+        volume.setAlignment(Pos.CENTER);
+        vBox.getChildren().add(volume);
+
+        slider = new Slider();
+        slider.setMax(1);
+        slider.setMin(0);
+        slider.setMaxSize(150,10);
+        sliderSetUp();
+        vBox.getChildren().add(slider);
+
         disableButtons();
+    }
+
+    /**
+     * setUp the slider
+     */
+    private void sliderSetUp(){
+        slider.setValue(0.5);
+        slider.valueProperty().addListener((observable, oldValue, newValue) -> controllerJavaFx.sliderOnClick(slider.getValue()));
     }
 
     /**
@@ -260,6 +278,10 @@ public class Menu {
      */
     public Button getRestart() {
         return restart;
+    }
+
+    public double getSliderValue(){
+        return slider.getValue();
     }
 
 }

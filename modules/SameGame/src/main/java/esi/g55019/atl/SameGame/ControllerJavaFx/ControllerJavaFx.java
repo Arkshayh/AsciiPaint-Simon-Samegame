@@ -108,4 +108,10 @@ public class ControllerJavaFx {
         model.giveUp();
     }
 
+    /**
+     * Called the view to update the volume
+     */
+    public void sliderOnClick(double volume){
+        view.updateVolume(volume);
+    }
 }
