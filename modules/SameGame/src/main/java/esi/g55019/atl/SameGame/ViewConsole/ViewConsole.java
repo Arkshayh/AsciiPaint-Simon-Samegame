@@ -2,7 +2,6 @@ package esi.g55019.atl.SameGame.ViewConsole;
 
 import esi.g55019.atl.SameGame.Controller.Controller;
 import esi.g55019.atl.SameGame.Model.Model;
-import esi.g55019.atl.SameGame.Model.Position;
 import java.util.Scanner;
 
 /**
@@ -72,7 +71,7 @@ public class ViewConsole {
 
     /**
      * display the score
-     * @param msg
+     * @param msg String
      */
     public void displayScore(String msg){
         System.out.println(msg + model.getScore());
