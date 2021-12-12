@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: esi.g55019.atl.SameGame.AppJavaFx
+

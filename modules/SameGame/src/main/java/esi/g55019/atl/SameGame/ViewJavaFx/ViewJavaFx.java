@@ -104,9 +104,26 @@ public class ViewJavaFx implements Observer {
         hbox.setAlignment(Pos.CENTER);
         hbox.setPadding(new Insets(10));
         hbox.setSpacing(10);
-        title = new Label("SameGame");
-        title.setFont(Font.font("Helvetica", FontWeight.BOLD, 25));
+        setUpTitle();
         hbox.getChildren().add(title);
+    }
+
+    /**
+     * SetUp the title for the Hbox.
+     */
+    private void setUpTitle(){
+        title = new Label("SameGame");
+        title.setPadding(new Insets(10));
+        title.setFont(Font.font("Helvetica", FontWeight.BOLD, 25));
+        CornerRadii corner = new CornerRadii(10);
+        BorderWidths borderWidths = new BorderWidths(5);
+        title.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, corner, borderWidths)));
+        LinearGradient radiant = new LinearGradient(
+                0, 0, 1, 1, true, CycleMethod.NO_CYCLE,
+                new Stop(0, Color.web("#e8e041")),
+                new Stop(1, Color.web("#e66712")));
+
+        title.setBackground(new Background(new BackgroundFill(radiant,corner, new Insets(1))));
     }
 
     /**
