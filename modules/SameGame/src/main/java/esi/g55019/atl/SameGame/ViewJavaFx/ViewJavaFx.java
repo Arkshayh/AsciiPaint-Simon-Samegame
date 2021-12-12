@@ -87,7 +87,9 @@ public class ViewJavaFx implements Observer {
                 new Stop(1, Color.web("#fcc200")));
 
         root.setBackground(new Background(new BackgroundFill(radiant,CornerRadii.EMPTY, Insets.EMPTY)));
+
         setUpMusic();
+        playMusicPlaying(0);
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
@@ -259,8 +261,11 @@ public class ViewJavaFx implements Observer {
             case 4:
                 musicPlaylist.playMusicLoop("whilePlayingMoyen.mp3");
                 break;
-            default:
+            case 5:
                 musicPlaylist.playMusicLoop("whilePlayingHard.mp3");
+                break;
+            default:
+                musicPlaylist.playMusicLoop("menuMusic.mp3");
                 break;
         }
         musicPlaylist.setVolume(menu.getSliderValue());
