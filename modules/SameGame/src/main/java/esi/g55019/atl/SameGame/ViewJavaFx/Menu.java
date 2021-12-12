@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * This class contains every element of the menu of the javaFx app
@@ -54,13 +56,13 @@ public class Menu {
         vBox.getChildren().add(ligne);
         ligneMsg = new Label("Min : 5 | Max = 20");
         ligneMsg.setTextFill(Color.RED);
-
-
+        ligneMsg.setFont(Font.font("FONT_FAMILLY",FontWeight.BOLD,13));
         colonne = new TextField();
         colonne.setPromptText("Nombre de colonnes");
         vBox.getChildren().add(colonne);
         colonneMsg = new Label("Min : 5 | Max = 20");
         colonneMsg.setTextFill(Color.RED);
+        colonneMsg.setFont(Font.font("FONT_FAMILLY",FontWeight.BOLD,13));
 
         textFieldSetUp();
 
@@ -141,19 +143,7 @@ public class Menu {
      */
     private void startSetUp(){
         start.setOnAction(actionEvent -> {
-            if(ligne.getText().equals("") || colonne.getText().equals("")){
-
-            }
-            else if (Integer.parseInt(ligne.getText()) < 5 || Integer.parseInt(ligne.getText()) > 20 ||
-                    Integer.parseInt(colonne.getText()) < 5 || Integer.parseInt(colonne.getText()) > 20){
-                if(!displayErrorMsg){
-                    displayErrorMsg = true;
-                    vBox.getChildren().add(1,ligneMsg);
-                    vBox.getChildren().add(3,colonneMsg);
-                }
-
-            }
-            else{
+            if(checkValue()){
                 int nbLigne = Integer.parseInt(ligne.getText());
                 int nbColonne = Integer.parseInt(colonne.getText());
                 int nbColor;
@@ -212,24 +202,46 @@ public class Menu {
     private void restartSetUp(){
         restart.setDisable(true);
         restart.setOnAction(event ->{
-            giveUp.setDisable(false);
-            restart.setDisable(true);
-            int nbLigne = Integer.parseInt(ligne.getText());
-            int nbColonne = Integer.parseInt(colonne.getText());
-            int nbColor;
-            switch (difficulté.getValue().toString()){
-                case "Facile":
-                    nbColor = 3;
-                    break;
-                case "Moyen":
-                    nbColor = 4;
-                    break;
-                default:
-                    nbColor = 5;
-                    break;
-            }
-            controllerJavaFx.askCreateBoard(nbLigne, nbColonne, nbColor);
+                    if (checkValue()){
+                        giveUp.setDisable(false);
+                        restart.setDisable(true);
+                        int nbLigne = Integer.parseInt(ligne.getText());
+                        int nbColonne = Integer.parseInt(colonne.getText());
+                        int nbColor;
+                        switch (difficulté.getValue().toString()){
+                            case "Facile":
+                                nbColor = 3;
+                                break;
+                            case "Moyen":
+                                nbColor = 4;
+                                break;
+                            default:
+                                nbColor = 5;
+                                break;
+                        }
+                        controllerJavaFx.askCreateBoard(nbLigne, nbColonne, nbColor);
+                    }
         });
+    }
+
+    /**
+     * Check if the value input by the user in the 2 textfield (ligne and column) are correct.
+     * To be correct their value must be between 5 and 20. If they are not, a message is display under the textfield.
+     */
+    private boolean checkValue(){
+        if(ligne.getText().equals("") || colonne.getText().equals("")){
+            return false;
+        }
+        else if (Integer.parseInt(ligne.getText()) < 5 || Integer.parseInt(ligne.getText()) > 20 ||
+                Integer.parseInt(colonne.getText()) < 5 || Integer.parseInt(colonne.getText()) > 20){
+            if(!displayErrorMsg){
+                displayErrorMsg = true;
+                vBox.getChildren().add(1,ligneMsg);
+                vBox.getChildren().add(3,colonneMsg);
+            }
+            return false;
+        }
+        return true;
     }
 
     /**

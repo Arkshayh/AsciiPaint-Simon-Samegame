@@ -13,12 +13,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.File;
 
@@ -37,14 +35,13 @@ public class ViewJavaFx implements Observer {
     private StackPane stackPane;
     private ImageView victory;
     private ImageView defeat;
-    private MediaPlayer defeatSound;
-    private MediaPlayer victorySound;
-    private MediaPlayer playingMusic;
+    private MusicFx musicPlaylist;
+
 
     /**
      * Constructor
-     * @param controller
-     * @param model
+     * @param controller ControllerJavaFx
+     * @param model Model
      */
     public ViewJavaFx(ControllerJavaFx controller, Model model) {
         this.controller = controller;
@@ -54,7 +51,7 @@ public class ViewJavaFx implements Observer {
 
     /**
      * Called when the app is launched
-     * @param primaryStage
+     * @param primaryStage Stage
      */
     public void start(Stage primaryStage){
         primaryStage.setTitle("Projet SameGame");
@@ -84,16 +81,26 @@ public class ViewJavaFx implements Observer {
         defeat.setFitHeight(412);
 
         root.setCenter(stackPane);
-
         LinearGradient radiant = new LinearGradient(
                 0, 0, 1, 1, true, CycleMethod.NO_CYCLE,
                 new Stop(0, Color.web("#81c483")),
                 new Stop(1, Color.web("#fcc200")));
 
         root.setBackground(new Background(new BackgroundFill(radiant,CornerRadii.EMPTY, Insets.EMPTY)));
+        setUpMusic();
+
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private void setUpMusic(){
+        musicPlaylist = new MusicFx();
+        File file = new File("modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\Music");
+        File[] listOfFile = file.listFiles();
+        for (int i = 0; i < listOfFile.length; i++) {
+            musicPlaylist.add(new Media(new File(listOfFile[i].getPath()).toURI().toString()), listOfFile[i].getName());
+        }
     }
 
     /**
@@ -151,10 +158,11 @@ public class ViewJavaFx implements Observer {
      * @param bestScore int
      */
     @Override
-    public void update(State state, Board board, int bestScore) {
+    public void update(State state, Board board, int bestScore, int level) {
         switch (state){
             case CREATION_BOARD:
-                playMusicPlaying();
+                stopMusic();
+                playMusicPlaying(level);
                 updatingBoard(board);
                 updateTitle(board.getScore(), bestScore);
                 break;
@@ -225,43 +233,44 @@ public class ViewJavaFx implements Observer {
      * Set up the victory sound and play it.
      */
     private void playMusicWin(){
-        Media victoryS = new Media(new File("modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\victorySound.mp3").toURI().toString());
-        victorySound = new MediaPlayer(victoryS);
-        victorySound.play();
-        victorySound.setVolume(menu.getSliderValue());
+        musicPlaylist.playMusicLoop("victoryMusic.mp3");
+        musicPlaylist.playSound("victorySound.mp3");
+        musicPlaylist.setVolume(menu.getSliderValue());
     }
 
     /**
      * Set up the defeat sound and play it.
      */
     private void playMusicLose(){
-        Media defeatS = new Media(new File("modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\defeatSound.mp3").toURI().toString());
-        defeatSound = new MediaPlayer(defeatS);
-        defeatSound.play();
-        defeatSound.setVolume(menu.getSliderValue());
-
+        musicPlaylist.playMusicLoop("defeatMusic.mp3");
+        musicPlaylist.playSound("defeatSound.mp3");
+        musicPlaylist.setVolume(menu.getSliderValue());
     }
 
     /**
+     * The music depend of the level choose by the user
      * Set up the playing sound and play it.
      */
-    private void playMusicPlaying(){
-        Media music = new Media(new File("modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\whilePlaying.mp3").toURI().toString());
-        playingMusic = new MediaPlayer(music);
-        playingMusic.setOnEndOfMedia(new Runnable() {
-            public void run() {
-                playingMusic.seek(Duration.ZERO);
-            }
-        });
-        playingMusic.play();
-        playingMusic.setVolume(menu.getSliderValue());
+    private void playMusicPlaying(int level){
+        switch (level){
+            case 3:
+                musicPlaylist.playMusicLoop("whilePlaying.mp3");
+                break;
+            case 4:
+                musicPlaylist.playMusicLoop("whilePlayingMoyen.mp3");
+                break;
+            default:
+                musicPlaylist.playMusicLoop("whilePlayingHard.mp3");
+                break;
+        }
+        musicPlaylist.setVolume(menu.getSliderValue());
     }
 
     /**
      * Stop the playingMusic
      */
     private void stopMusic(){
-        playingMusic.stop();
+        musicPlaylist.stop();
     }
 
     /**
@@ -269,24 +278,7 @@ public class ViewJavaFx implements Observer {
      * @param volume double
      */
     public void updateVolume(double volume){
-        try{
-            defeatSound.setVolume(volume);
-        }
-        catch (Exception e){
-
-        }
-        try {
-            victorySound.setVolume(volume);
-        }
-        catch (Exception e){
-
-        }
-        try {
-            playingMusic.setVolume(volume);
-        }
-        catch (Exception e){
-
-        }
+        musicPlaylist.setVolume(volume);
     }
 
     /**

@@ -15,6 +15,7 @@ public class Model implements Observable {
     private List<Observer> listObserver;
     private Board board;
     private int bestScore = 0;
+    private int currentLevel;
 
     /**
      * Constructor
@@ -31,6 +32,7 @@ public class Model implements Observable {
      * @param level int
      */
     public void createBoard(int row, int column, int level){
+        currentLevel = level;
         board = new Board(row, column, level);
         changeState(State.CREATION_BOARD);
     }
@@ -170,7 +172,7 @@ public class Model implements Observable {
     public void notifyObservers(Board board) {
         System.out.println(state);
         for (Observer observer : listObserver) {
-            observer.update(state, board, bestScore);
+            observer.update(state, board, bestScore, currentLevel);
         }
     }
 }
