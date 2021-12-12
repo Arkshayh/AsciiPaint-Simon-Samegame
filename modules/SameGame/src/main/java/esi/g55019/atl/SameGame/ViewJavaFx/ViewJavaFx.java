@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -84,6 +85,12 @@ public class ViewJavaFx implements Observer {
 
         root.setCenter(stackPane);
 
+        LinearGradient radiant = new LinearGradient(
+                0, 0, 1, 1, true, CycleMethod.NO_CYCLE,
+                new Stop(0, Color.web("#81c483")),
+                new Stop(1, Color.web("#fcc200")));
+
+        root.setBackground(new Background(new BackgroundFill(radiant,CornerRadii.EMPTY, Insets.EMPTY)));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
