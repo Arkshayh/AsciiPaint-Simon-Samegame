@@ -99,6 +99,7 @@ public class Menu {
         vBox.setAlignment(Pos.CENTER);
 
         volume = new Label("Volume : ");
+        volume.setTextFill(Color.WHITE);
         volume.setAlignment(Pos.CENTER);
         vBox.getChildren().add(volume);
 

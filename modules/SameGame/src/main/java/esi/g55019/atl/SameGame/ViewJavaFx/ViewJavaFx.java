@@ -69,13 +69,14 @@ public class ViewJavaFx implements Observer {
         stackPane.setMaxHeight(500);
         stackPane.setMaxWidth(500);
 
-
-        Image imageVictory = new Image("file:modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\victory.jpg");
+        File victoryFile = new File(getClass().getResource("/victory.jpg").getFile());
+        Image imageVictory = new Image(victoryFile.toURI().toString());
         this.victory = new ImageView(imageVictory);
         victory.setFitWidth(700);
         victory.setFitHeight(412);
 
-        Image imageDefeat = new Image("file:modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\defeat.jpg");
+        File defeatFile = new File(getClass().getResource("/defeat.jpg").getFile());
+        Image imageDefeat = new Image(defeatFile.toURI().toString());
         this.defeat = new ImageView(imageDefeat);
         defeat.setFitWidth(700);
         defeat.setFitHeight(412);
@@ -83,8 +84,8 @@ public class ViewJavaFx implements Observer {
         root.setCenter(stackPane);
         LinearGradient radiant = new LinearGradient(
                 0, 0, 1, 1, true, CycleMethod.NO_CYCLE,
-                new Stop(0, Color.web("#81c483")),
-                new Stop(1, Color.web("#fcc200")));
+                new Stop(0, Color.web("#5e5e5e")),
+                new Stop(1, Color.web("#000000")));
 
         root.setBackground(new Background(new BackgroundFill(radiant,CornerRadii.EMPTY, Insets.EMPTY)));
 
