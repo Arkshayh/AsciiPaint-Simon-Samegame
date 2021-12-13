@@ -13,6 +13,7 @@ public class AppJavaFx extends Application {
         launch(args);
     }
 
+    //TODO test + tuiles restantes
     @Override
     public void start(Stage primaryStage){
         Model model  = new Model();
