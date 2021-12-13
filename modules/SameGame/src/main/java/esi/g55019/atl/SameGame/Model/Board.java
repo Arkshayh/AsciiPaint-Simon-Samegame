@@ -289,6 +289,22 @@ public class Board {
     }
 
     /**
+     * Calculate the number of Billes remaining on the board.
+     * @return int
+     */
+    public int nbOfBillesRemaining(){
+        int nbIni = row*column;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if(plateau[i][j] == null){
+                    nbIni--;
+                }
+            }
+        }
+        return nbIni;
+    }
+
+    /**
      * getter for row
      * @return int
      */
