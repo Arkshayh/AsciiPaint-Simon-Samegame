@@ -170,9 +170,16 @@ public class Model implements Observable {
      */
     @Override
     public void notifyObservers(Board board) {
+        int remaining = 0;
         System.out.println(state);
+        try {
+            remaining = board.nbOfBillesRemaining();
+        }
+        catch (Exception e){
+
+        }
         for (Observer observer : listObserver) {
-            observer.update(state, board, bestScore, currentLevel);
+            observer.update(state, board, bestScore, currentLevel, remaining);
         }
     }
 }

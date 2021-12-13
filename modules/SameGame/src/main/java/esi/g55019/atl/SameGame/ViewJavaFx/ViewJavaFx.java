@@ -161,17 +161,17 @@ public class ViewJavaFx implements Observer {
      * @param bestScore int
      */
     @Override
-    public void update(State state, Board board, int bestScore, int level) {
+    public void update(State state, Board board, int bestScore, int level, int remaining) {
         switch (state){
             case CREATION_BOARD:
                 stopMusic();
                 playMusicPlaying(level);
                 updatingBoard(board);
-                updateTitle(board.getScore(), bestScore);
+                updateTitle(board.getScore(), bestScore, remaining);
                 break;
             case UPDATE_BOARD:
                 updatingBoard(board);
-                updateTitle(board.getScore(), bestScore);
+                updateTitle(board.getScore(), bestScore, remaining);
                 break;
             case IS_WIN:
                 stopMusic();
@@ -292,8 +292,9 @@ public class ViewJavaFx implements Observer {
      * @param score int
      * @param bestScore int
      */
-    private void updateTitle(int score, int bestScore){
-        title.setText("SameGame | Score : " + score + " | Meilleur score : " + bestScore);
+    private void updateTitle(int score, int bestScore, int remaining){
+        title.setText("SameGame | Score : " + score + " | Meilleur score : " + bestScore
+                + " | Billes restantes : " + remaining);
     }
 
 }
