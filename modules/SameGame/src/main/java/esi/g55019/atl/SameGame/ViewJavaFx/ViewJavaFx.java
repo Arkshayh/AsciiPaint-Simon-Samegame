@@ -98,7 +98,7 @@ public class ViewJavaFx implements Observer {
 
     private void setUpMusic(){
         musicPlaylist = new MusicFx();
-        File file = new File("modules\\SameGame\\src\\main\\java\\esi\\g55019\\atl\\SameGame\\ressources\\Music");
+        File file = new File(getClass().getResource("/Music").getFile());
         File[] listOfFile = file.listFiles();
         for (int i = 0; i < listOfFile.length; i++) {
             musicPlaylist.add(new Media(new File(listOfFile[i].getPath()).toURI().toString()), listOfFile[i].getName());
