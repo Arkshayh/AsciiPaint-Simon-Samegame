@@ -98,7 +98,9 @@ public class Controller {
                 default:
                    try {
                        factoryCommand = factory.giveAndGetCommand(maCommande);
-                       factoryCommand.execute();
+                       if(!factoryCommand.execute()){
+                           viewConsole.displayOOB();
+                       }
                        listeDeCommandeAUndo.add(factoryCommand);
                        listeDeCommandeARedo.clear();
 

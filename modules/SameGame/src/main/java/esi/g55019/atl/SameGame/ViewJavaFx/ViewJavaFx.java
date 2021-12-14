@@ -236,7 +236,7 @@ public class ViewJavaFx implements Observer {
      * Set up the victory sound and play it.
      */
     private void playMusicWin(){
-        musicPlaylist.playMusicLoop("victoryMusic.mp3");
+        musicPlaylist.playMusicLoop("VictoryMusic.mp3");
         musicPlaylist.playSound("victorySound.mp3");
         musicPlaylist.setVolume(menu.getSliderValue());
     }

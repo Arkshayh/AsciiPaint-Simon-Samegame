@@ -82,7 +82,7 @@ public class ViewConsole {
      */
     public void displayListCommand(){
         System.out.println("Entrer une commande : \n" +
-                "* Une position pour enlèver la bille à cet endroit.\n" +
+                "* Une position pour enlèver la bille à cet endroit. Exemple : 4 3\n" +
                 "* Redo : pour reéxecuter la commande précédente.\n" +
                 "* Undo : pour annuler la commande précédente.\n" +
                 "* GiveUp : pour abandonner la partie et fermer le programme.\n" +
@@ -94,5 +94,12 @@ public class ViewConsole {
      */
     public void replayMsg(){
         System.out.println("Voulez-vous rejouer ? (Y/N)");
+    }
+
+    /**
+     * display message OOB
+     */
+    public void displayOOB(){
+        System.out.println("\nLa position donnée est en dehors du plateau.\n");
     }
 }

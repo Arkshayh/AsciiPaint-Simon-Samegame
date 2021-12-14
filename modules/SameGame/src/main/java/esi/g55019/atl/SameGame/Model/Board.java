@@ -54,8 +54,40 @@ public class Board {
     }
 
     /**
+     * Constructor for test
+     */
+    public Board(){
+        this.row = 5;
+        this.column = 5;
+        this.score = 0;
+        this.plateau = new Bille[5][5];
+        for (int i = 0; i < plateau[0].length; i++) {
+            plateau[0][i] = new Bille(Color.BLUE);
+        }
+        for (int i = 0; i < plateau[0].length; i++) {
+            plateau[1][i] = new Bille(Color.RED);
+        }
+        for (int i = 0; i < plateau[0].length; i++) {
+            plateau[2][i] = new Bille(Color.GREEN);
+        }
+        for (int i = 0; i < plateau[0].length; i++) {
+            plateau[3][i] = new Bille(Color.YELLOW);
+        }
+        plateau[4][0] = new Bille(Color.BLUE);
+        plateau[4][1] = new Bille(Color.RED);
+        plateau[4][2] = new Bille(Color.GREEN);
+        plateau[4][3] = new Bille(Color.YELLOW);
+        plateau[4][4] = new Bille(Color.PURPLE);
+
+        for (int i = 0; i < plateau.length; i++) {
+            plateau[i][3] = new Bille(Color.YELLOW);
+        }
+
+    }
+
+    /**
      * This method will add a Bille with a random color in the board
-     * @param nbColor
+     * @param nbColor int
      */
     private void initialiseBoard(int nbColor){
         for (int i = 0; i < row; i++) {
@@ -83,13 +115,13 @@ public class Board {
      * @return boolean
      */
     public boolean  supprimerColorSetUp(Position position){
-        boolean [][] tabVérif = new boolean[row][column];
+        boolean [][] tabVerif = new boolean[row][column];
         List<Position> elementASupprimer = new ArrayList<>();
         if(plateau[position.getLigne()][position.getColonne()] == null){
             System.out.println("Cette bille a déjà été enlevée ! ");
             return false;
         }
-        algoRécu(position, plateau[position.getLigne()][position.getColonne()].getColor() ,tabVérif, elementASupprimer);
+        algoRécu(position, plateau[position.getLigne()][position.getColonne()].getColor() ,tabVerif, elementASupprimer);
         if(elementASupprimer.size() > 1){
             for (int i = 0; i < elementASupprimer.size(); i++) {
                 plateau[elementASupprimer.get(i).getLigne()][elementASupprimer.get(i).getColonne()] = null;
@@ -104,7 +136,8 @@ public class Board {
     }
 
     /**
-     * return a list of Position of the each ajacent Bille of the same color  of the given position
+     * return a list of Position of the each ajacent Bille of the same color  of the given position + itself
+     * So if they are 3 neighbor of the same color -> list.size = 4
      * @param position Position
      * @return List of Position
      */
@@ -355,6 +388,34 @@ public class Board {
             string.append("\n");
         }
         return string.toString();
+    }
+
+    /**
+     * Equals method for test, this method only compare the plateau
+     * @param other Bille[][]
+     * @return boolean
+     */
+    public boolean equalsForTest(Bille[][] other){
+        if(other.length != this.plateau.length || other[0].length != this.plateau[0].length){
+            return false;
+        }
+        for (int i = 0; i < this.plateau.length; i++) {
+            for (int j = 0; j < this.plateau[0].length; j++) {
+                if(other[i][j] == null && this.plateau[i][j] != null){
+                    return false;
+                }
+                if(other[i][j] != null && this.plateau[i][j] == null){
+                    return false;
+                }
+                if (other[i][j] == null && this.plateau[i][j] ==null){
+
+                }
+                else if(other[i][j].getColor().getColor() != this.plateau[i][j].getColor().getColor()){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
 
