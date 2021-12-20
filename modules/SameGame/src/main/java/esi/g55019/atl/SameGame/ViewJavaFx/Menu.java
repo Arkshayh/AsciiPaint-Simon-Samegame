@@ -33,12 +33,14 @@ public class Menu {
     private boolean displayErrorMsg = false;
     private Slider slider;
     private Label volume;
+    private Label timer;
 
     /**
      * Constructor
      * @param controllerJavaFx ControllerJavaFx
      */
     public Menu(ControllerJavaFx controllerJavaFx) {
+
         this.controllerJavaFx = controllerJavaFx;
         setUpMenu();
     }
@@ -111,6 +113,10 @@ public class Menu {
         vBox.getChildren().add(slider);
 
         disableButtons();
+
+        this.timer = new Label("Timer : ");
+        timer.setTextFill(Color.WHITE);
+        vBox.getChildren().add(timer);
     }
 
     /**
@@ -299,4 +305,11 @@ public class Menu {
         return slider.getValue();
     }
 
+    public Label getTimer() {
+        return timer;
+    }
+
+    public void setTimer(int time) {
+        this.timer.setText("Timer : " + time);
+    }
 }

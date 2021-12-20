@@ -2,9 +2,12 @@ package esi.g55019.atl.SameGame.Model;
 
 import esi.g55019.atl.SameGame.util.Observable;
 import esi.g55019.atl.SameGame.util.Observer;
+import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * This class represent the model of the app and the javafx app.
@@ -16,6 +19,9 @@ public class Model implements Observable {
     private Board board;
     private int bestScore = 0;
     private int currentLevel;
+    private Timer timer;
+    private int currentTime = 10;
+
 
     /**
      * Constructor
@@ -35,6 +41,41 @@ public class Model implements Observable {
         currentLevel = level;
         board = new Board(row, column, level);
         changeState(State.CREATION_BOARD);
+        setTimer();
+    }
+
+    private void setTimer(){
+        timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        giveUp();
+                        timer.cancel();
+                    }
+                });
+            }
+        };
+        timer.schedule(timerTask, 10000);
+
+        TimerTask timerTask2 = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(currentTime >= 0){
+                            changeState(State.UPDATE_TIMER);
+                        }
+                        currentTime--;
+                    }
+                });
+            }
+        };
+        timer.scheduleAtFixedRate(timerTask2,0,1000);
+
     }
 
     /**
@@ -74,6 +115,8 @@ public class Model implements Observable {
      */
     private void checkingFinish(){
         if(board.isFinish()){
+            timer.cancel();
+            currentTime = 10;
             updateBestScore();
             if(board.isWin()){
                 changeState(State.IS_WIN);
@@ -89,6 +132,8 @@ public class Model implements Observable {
      * and change the the state of the game to IS_LOSE
      */
     public void giveUp(){
+        timer.cancel();
+        currentTime =10;
         board.giveUp();
         changeState(State.UPDATE_BOARD);
         changeState(State.IS_LOSE);
@@ -178,7 +223,7 @@ public class Model implements Observable {
             remaining = board.nbOfBillesRemaining();
         }
         for (Observer observer : listObserver) {
-            observer.update(state, board, bestScore, currentLevel, remaining);
+            observer.update(state, board, bestScore, currentLevel, remaining, currentTime);
         }
     }
 }

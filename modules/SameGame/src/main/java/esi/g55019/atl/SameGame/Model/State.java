@@ -8,5 +8,6 @@ public enum State {
     CREATION_BOARD,
     UPDATE_BOARD,
     IS_WIN,
-    IS_LOSE
+    IS_LOSE,
+    UPDATE_TIMER
 }

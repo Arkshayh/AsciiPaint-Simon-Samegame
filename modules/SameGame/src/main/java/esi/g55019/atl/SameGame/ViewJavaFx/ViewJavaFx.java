@@ -161,7 +161,7 @@ public class ViewJavaFx implements Observer {
      * @param bestScore int
      */
     @Override
-    public void update(State state, Board board, int bestScore, int level, int remaining) {
+    public void update(State state, Board board, int bestScore, int level, int remaining, int time) {
         switch (state){
             case CREATION_BOARD:
                 stopMusic();
@@ -195,6 +195,8 @@ public class ViewJavaFx implements Observer {
                 menu.getGiveUp().setDisable(true);
                 menu.getRestart().setDisable(false);
                 break;
+            case UPDATE_TIMER:
+                menu.setTimer(time);
         }
     }
 
