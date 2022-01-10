@@ -39,6 +39,7 @@ public class BoardFx {
      * If null then the button will be black and will not have the setOnAction method
      */
     public void updateBoard() {
+        //@pbt ±
         buttonBoard = new Button[board.getRow()][board.getColumn()];
         Bille[][] plateauDeBille = board.getPlateau();
         for (int i = 0; i < plateauDeBille.length; i++) {

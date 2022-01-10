@@ -4,7 +4,8 @@ import esi.g55019.atl.SameGame.Model.Model;
 import esi.g55019.atl.SameGame.Model.Position;
 
 /**
- * This class represent a factory and will check if the string given of the user can be use to create a command.
+ * This class represent a factory and will check if the string given of the
+ * user can be use to create a command.
  */
 public class Factory {
     private Model model;

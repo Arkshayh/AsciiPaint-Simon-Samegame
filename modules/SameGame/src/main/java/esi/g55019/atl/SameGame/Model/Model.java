@@ -57,6 +57,7 @@ public class Model implements Observable {
      */
     public boolean play(Position pos){
         if(board.isInside(pos)){
+            //@pbt method names, english please
             if(board.getVoisinASupprimer(pos).size() != 1){
                 board.supprimerColorSetUp(pos);
                 board.faireTomberBille();
@@ -124,7 +125,8 @@ public class Model implements Observable {
      * @return Board
      */
     public Board getBoard() {
-        Board copieDefensive = new Board(board.getRow(), board.getColumn(),board.getPlateau(), board.getScore());
+        Board copieDefensive = new Board(board.getRow(),
+                board.getColumn(),board.getPlateau(), board.getScore());
         return copieDefensive;
     }
 

@@ -5,12 +5,14 @@ import esi.g55019.atl.SameGame.Model.Model;
 import esi.g55019.atl.SameGame.Model.Position;
 
 /**
- * This class implement Command. And represent a Command when the user want to remove a Bille.
+ * This class implement Command. And represent a Command when the user want to
+ * remove a Bille.
  */
 public class ClickBilleCommand implements Command{
     private Model model;
     private Board oldBoard;
     private Position position;
+    // @pbt save the score
 
     /**
      * Constructor

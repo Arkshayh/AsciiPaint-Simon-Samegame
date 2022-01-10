@@ -147,6 +147,7 @@ public class ViewJavaFx implements Observer {
         catch (Exception e){
 
         }
+        // @pbt new board each time :-(
         this.boardFx = new BoardFx(board, controller);
         GridPane monBoard = boardFx.getBoardPane();
         monBoard.setAlignment(Pos.CENTER);

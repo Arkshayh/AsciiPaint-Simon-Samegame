@@ -118,15 +118,20 @@ public class Board {
         boolean [][] tabVerif = new boolean[row][column];
         List<Position> elementASupprimer = new ArrayList<>();
         if(plateau[position.getLigne()][position.getColonne()] == null){
+            // @pbt no sysout in model
             System.out.println("Cette bille a déjà été enlevée ! ");
             return false;
         }
+        // @pbt english
+        // @pbt long lines
         algoRécu(position, plateau[position.getLigne()][position.getColonne()].getColor() ,tabVerif, elementASupprimer);
         if(elementASupprimer.size() > 1){
             for (int i = 0; i < elementASupprimer.size(); i++) {
                 plateau[elementASupprimer.get(i).getLigne()][elementASupprimer.get(i).getColonne()] = null;
             }
-            score = score + (elementASupprimer.size() * elementASupprimer.size()) - elementASupprimer.size();
+            score = score
+                    + (elementASupprimer.size() * elementASupprimer.size())
+                    - elementASupprimer.size();
             return true;
         }
         else{
@@ -178,6 +183,7 @@ public class Board {
      * @param pos Position
      * @return boolean
      */
+    // @pbt useless
     private boolean isNull(Position pos){
         return plateau[pos.getLigne()][pos.getColonne()] == null;
     }
