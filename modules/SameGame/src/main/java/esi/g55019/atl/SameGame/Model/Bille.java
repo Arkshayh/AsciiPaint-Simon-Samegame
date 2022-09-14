@@ -1,5 +1,7 @@
 package esi.g55019.atl.SameGame.Model;
 
+// @pbt package name lowercase
+
 /**
  * @author Cotton Ian g55019
  * this class represent a Bille
