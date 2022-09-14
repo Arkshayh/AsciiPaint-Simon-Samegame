@@ -4,6 +4,7 @@ package esi.g55019.atl.asciipaint.DPCommand;
  * this interface give the size of the 4 add command
  * @author Ian Cotton g55019
  */
+// @pbt class name CamelCase
 public enum typeOfCommande {
     ADD_CIRCLE(6),
     ADD_RECTANGLE(7),

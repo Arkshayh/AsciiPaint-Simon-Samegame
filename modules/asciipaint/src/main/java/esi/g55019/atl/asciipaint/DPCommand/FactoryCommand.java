@@ -7,6 +7,8 @@ import esi.g55019.atl.asciipaint.Point;
 
 import java.util.Arrays;
 
+// @pbt implementation of factory is shaky
+
 
 /**
  * The factory will checked if the user enter a correct command if it's not the case it will return an error
@@ -14,6 +16,7 @@ import java.util.Arrays;
  * @author Cotton Ian g55019
  */
 public class FactoryCommand {
+    // @pbt why factory must have paint ?
     private AsciiPaint paint;
     private String[] commandeIni;
     private String[] commandeCorrection;

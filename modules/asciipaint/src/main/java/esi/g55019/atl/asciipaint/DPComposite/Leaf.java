@@ -8,6 +8,7 @@ import esi.g55019.atl.asciipaint.Shape;
  * the Leaf class extends component
  * It's a shape.
  */
+// @pbt no need to compose shape. the shapes are the leafs
 public class Leaf extends Component{
     private Shape shape;
 
